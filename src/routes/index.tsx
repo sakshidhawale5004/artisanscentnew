@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { lazy, Suspense, useEffect, useState, useMemo } from "react";
+import { lazy, Suspense, useEffect, useState, useMemo, useRef } from "react";
 import {
   ArrowDown,
   ArrowRight,
@@ -60,6 +60,7 @@ function Index() {
   const [query, setQuery] = useState("");
   const [mounted, setMounted] = useState(false);
   const [checkout, setCheckout] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const close = () => {
     setPanel(null);
     setSelected(undefined);
@@ -68,6 +69,9 @@ function Index() {
   const total = products.reduce((sum, p) => sum + p.price * (bag[p.id] || 0), 0);
   useEffect(() => {
     setMounted(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
   }, []);
   useEffect(() => {
     if (!panel && !selected) return;
@@ -118,17 +122,18 @@ function Index() {
           {/* Video Background */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <video
+              ref={videoRef}
               src="/artisanvideo.mp4"
               autoPlay
               loop
               muted
               playsInline
+              preload="auto"
               className="w-full h-full object-cover scale-105"
             />
-            {/* Luminous White Shade Overlay for bright video visibility & dark green contrast */}
-            <div className="absolute inset-0 bg-white/70" />
-            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/40" />
-            <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-white/30" />
+            {/* Soft Luminous Light Overlay: sheer gradient so background video is clearly visible while text has optimal dark-green contrast */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/65 via-white/20 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/45 via-transparent to-black/5 pointer-events-none" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-20 pb-16 lg:pt-28 lg:pb-24">
@@ -166,10 +171,10 @@ function Index() {
                   <ShieldCheck size={18} />
                 </div>
                 <div>
-                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
+                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
                     Artisanal Purity
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#2c4e3b] mt-0.5 leading-snug font-medium">100% Rare Botanical Extracts</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-semibold drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">100% Rare Botanical Extracts</div>
                 </div>
               </div>
 
@@ -178,10 +183,10 @@ function Index() {
                   <Sparkles size={18} />
                 </div>
                 <div>
-                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
+                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
                     Haute Sillage
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#2c4e3b] mt-0.5 leading-snug font-medium">Long-Lasting Extrait Formulations</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-semibold drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">Long-Lasting Extrait Formulations</div>
                 </div>
               </div>
 
@@ -190,10 +195,10 @@ function Index() {
                   <Truck size={18} />
                 </div>
                 <div>
-                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
+                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
                     Pan-India Dispatch
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#2c4e3b] mt-0.5 leading-snug font-medium">Insured Doorstep Courier</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-semibold drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">Insured Doorstep Courier</div>
                 </div>
               </div>
 
@@ -202,10 +207,10 @@ function Index() {
                   <Lock size={18} />
                 </div>
                 <div>
-                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
+                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
                     Curated Sampling
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#2c4e3b] mt-0.5 leading-snug font-medium">Free Tester with Every Order</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-semibold drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">Free Tester with Every Order</div>
                 </div>
               </div>
             </div>
