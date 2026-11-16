@@ -53,7 +53,6 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const products = useProducts();
-  const [filter, setFilter] = useState("All Products");
   const [selected, setSelected] = useState<Product>();
   const { bag, addToBag, updateQty: update, totalItems } = useShoppingBag();
   const { saved, toggleSaved, wishlistCount } = useWishlist();
@@ -88,13 +87,8 @@ function Index() {
     setSelected(undefined);
     openCartDrawer(p);
   };
-  const filtered = useMemo(() => {
-    if (filter === "Perfumes") return products.filter((p) => p.category === "perfumes").slice(0, 5);
-    if (filter === "Oils") return products.filter((p) => p.category === "essence-oils").slice(0, 5);
-    if (filter === "Car Perfumes") return products.filter((p) => p.category === "car-perfumes").slice(0, 5);
-    if (filter === "Agarbatti") return products.filter((p) => p.category === "agarbatti").slice(0, 5);
-    if (filter === "Soaps") return products.filter((p) => p.category === "soaps").slice(0, 5);
-    // "All Products" - 5 category best sellers (1 iconic product from each category)
+  const bestSellers = useMemo(() => {
+    // 5 category best sellers (1 iconic product from each category)
     return [
       products.find((p) => p.id === "ivory-amber") || products.find((p) => p.category === "perfumes"),
       products.find((p) => p.id === "patchouli-oil") || products.find((p) => p.category === "essence-oils"),
@@ -102,7 +96,7 @@ function Index() {
       products.find((p) => p.id === "agarbatti-premium") || products.find((p) => p.category === "agarbatti"),
       products.find((p) => p.id === "soap-signature") || products.find((p) => p.category === "soaps"),
     ].filter((p): p is Product => Boolean(p));
-  }, [filter, products]);
+  }, [products]);
 
   return (
     <>
@@ -225,41 +219,15 @@ function Index() {
               <h2 className="section-title">Our Categories of Luxury</h2>
             </div>
             <a
-              href={
-                filter === "Perfumes" ? "/perfumes"
-                : filter === "Oils" ? "/essence-oils"
-                : filter === "Car Perfumes" ? "/car-perfumes"
-                : filter === "Agarbatti" ? "/agarbatti"
-                : filter === "Soaps" ? "/soaps"
-                : "/perfumes"
-              }
+              href="/products"
               className="inline-flex items-center gap-2 text-sm font-medium text-[#1b5e3f] hover:text-[#164a31] transition-colors"
             >
-              View all {filter !== "All Products" ? filter : "products"} <ArrowRight size={15} />
+              View all products <ArrowRight size={15} />
             </a>
           </div>
 
-          <div
-            className="collection-tabs reveal-fade reveal-delay-100"
-            role="tablist"
-            aria-label="Product category"
-          >
-            {["All Products", "Perfumes", "Oils", "Car Perfumes", "Agarbatti", "Soaps"].map((f) => (
-              <Button
-                key={f}
-                variant="tab"
-                role="tab"
-                aria-selected={filter === f}
-                data-active={filter === f}
-                onClick={() => setFilter(f)}
-              >
-                {f}
-              </Button>
-            ))}
-          </div>
-
           <div className="product-grid">
-            {filtered.slice(0, 5).map((p, idx) => {
+            {bestSellers.map((p, idx) => {
               const delayClass = [
                 "reveal-delay-100",
                 "reveal-delay-200",
@@ -280,34 +248,15 @@ function Index() {
             })}
           </div>
 
-          {/* View All Category Link */}
+          {/* View All Products Link */}
           <div className="flex justify-center mt-10 reveal-on-scroll">
             <a
-              href={
-                filter === "Perfumes" ? "/perfumes"
-                : filter === "Oils" ? "/essence-oils"
-                : filter === "Car Perfumes" ? "/car-perfumes"
-                : filter === "Agarbatti" ? "/agarbatti"
-                : filter === "Soaps" ? "/soaps"
-                : "/perfumes"
-              }
+              href="/products"
               className="inline-flex items-center gap-3 h-12 px-8 rounded-full border border-[#1b5e3f]/40 bg-white hover:bg-[#1b5e3f] hover:text-white text-[#1b5e3f] text-sm font-medium tracking-wide transition-all duration-300 shadow-sm hover:shadow-md"
             >
-              See all {filter !== "All Products" ? filter : "Perfumes"} <ArrowRight size={15} />
+              See all Products <ArrowRight size={15} />
             </a>
           </div>
-        </section>
-
-        <section className="ritual-strip reveal-fade">
-          <span>
-            <Sparkles size={16} strokeWidth={1} /> Handcrafted with Care
-          </span>
-          <span>
-            <ShoppingBag size={16} strokeWidth={1} /> Premium Quality
-          </span>
-          <span>
-            <Heart size={16} strokeWidth={1} /> Botanical Excellence
-          </span>
         </section>
 
         {/* Premium About Us Section */}
@@ -335,14 +284,14 @@ function Index() {
             </div>
 
             {/* Split Story Showcase */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-stretch">
               {/* Left Column: Premium About Section Image with Floating Badges */}
-              <div className="lg:col-span-6 relative reveal-on-scroll">
-                <div className="relative rounded-3xl overflow-hidden border-2 border-[#1b5e3f]/25 shadow-2xl bg-[#f5f5f0] group">
+              <div className="lg:col-span-6 relative reveal-on-scroll flex flex-col">
+                <div className="relative rounded-3xl overflow-hidden border-2 border-[#1b5e3f]/25 shadow-2xl bg-[#f5f5f0] group flex-1 min-h-[460px] sm:min-h-[560px] lg:min-h-[680px]">
                   <img
                     src={aboutSectionImage}
                     alt="Artisan Scents About Section - Premium Fragrances & Botanical Excellence"
-                    className="w-full h-[300px] sm:h-[440px] lg:h-[540px] object-cover transition-transform duration-1000 group-hover:scale-105"
+                    className="w-full h-full min-h-[460px] sm:min-h-[560px] lg:min-h-[680px] object-cover transition-transform duration-1000 group-hover:scale-105"
                     loading="lazy"
                   />
                   {/* Soft gradient vignetting */}

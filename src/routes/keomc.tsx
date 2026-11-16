@@ -83,6 +83,59 @@ function KEOMCPage() {
               highest standards of quality and authenticity.
             </p>
           </div>
+
+          {/* Visual Showcase: Distillation Facilities & Botanical Terroir */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mt-10 reveal-on-scroll">
+            <div className="group relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#1b5e3f]/20 bg-white shadow-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
+              <div className="relative overflow-hidden aspect-[4/3] sm:aspect-[16/11]">
+                <img
+                  src="/assets/project%20site/artisan%20scent%20(14).webp"
+                  alt="KEOMC Field Distillation Unit & Botanical Steam Laboratory"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#86efac]/40 text-[#86efac] text-[10px] sm:text-xs font-semibold tracking-wider uppercase">
+                    Distillation Facility
+                  </span>
+                </div>
+                <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white">
+                  <div className="font-display text-lg sm:text-2xl font-normal leading-tight">
+                    Field Distillation Units (FDU)
+                  </div>
+                  <p className="text-xs sm:text-sm text-[#e0deda] font-light mt-1.5 leading-relaxed">
+                    Traditional and scientific steam extraction apparatus capturing pure volatile essence oils on site.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="group relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#1b5e3f]/20 bg-white shadow-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
+              <div className="relative overflow-hidden aspect-[4/3] sm:aspect-[16/11]">
+                <img
+                  src="/assets/project%20site/artisan%20scent%20(33).webp"
+                  alt="KEOMC Botanical Plantations & Aromatic Cultivation Sites"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#d4af37]/50 text-[#f6e05e] text-[10px] sm:text-xs font-semibold tracking-wider uppercase">
+                    Botanical Terroir
+                  </span>
+                </div>
+                <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 text-white">
+                  <div className="font-display text-lg sm:text-2xl font-normal leading-tight">
+                    Aromatic &amp; Medicinal Plantations
+                  </div>
+                  <p className="text-xs sm:text-sm text-[#e0deda] font-light mt-1.5 leading-relaxed">
+                    Sustainably managed cultivation lands for Vetiver, Patchouli, Geranium, and aromatic flora.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Services Grid */}
