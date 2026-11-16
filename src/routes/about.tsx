@@ -32,8 +32,8 @@ export default function AboutPage() {
           {/* Authentic Brand Exhibition & Atelier Background */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <img
-              src="/assets/exibition/artisan scent (1).webp"
-              alt="Artisan Scents Corporate Presentation & Atelier Exhibition"
+              src="/Sage Green Spa Perfume Still Life (1).png"
+              alt="Artisan Scents Corporate Presentation — Sage Green Spa Perfume Still Life"
               className="w-full h-full object-cover scale-105"
             />
             {/* Luminous Soft White/Cream Overlay for bright botanical atmosphere and crisp dark green text */}
@@ -147,7 +147,7 @@ export default function AboutPage() {
             </div>
 
             {/* Authentic Brand & Atelier Showcase */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 reveal-on-scroll">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 reveal-on-scroll">
               <div className="relative rounded-2xl overflow-hidden border border-[#e8e2d8] shadow-md group">
                 <img
                   src="/assets/exibition/artisan scent (1).webp"
@@ -161,6 +161,23 @@ export default function AboutPage() {
                       The Atelier &amp; Exhibitions
                     </span>
                     <h4 className="font-display text-xl text-white">Artisan Fragrance Architecture</h4>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative rounded-2xl overflow-hidden border border-[#e8e2d8] shadow-md group">
+                <img
+                  src="/Sage Green Spa Perfume Still Life (1).png"
+                  alt="Sage Green Spa Perfume Still Life — Artisan Olfactory Aesthetics"
+                  className="w-full h-64 sm:h-80 object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-6">
+                  <div className="text-white">
+                    <span className="text-[10px] tracking-widest uppercase text-[#86efac] font-bold block mb-1">
+                      Spa &amp; Still Life Aesthetics
+                    </span>
+                    <h4 className="font-display text-xl text-white">Botanical Purity &amp; Luxury</h4>
                   </div>
                 </div>
               </div>

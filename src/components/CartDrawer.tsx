@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "@tanstack/react-router";
 import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, Check, Sparkles } from "lucide-react";
 import { useShoppingBag, addOrderToCRM } from "@/lib/store";
 import { useProducts, money, type Product } from "@/lib/products";
@@ -546,13 +547,13 @@ export function CartDrawer({ isOpen, onClose, lastAddedProduct }: CartDrawerProp
               </div>
 
               {/* Big Black Action Button with Payment Logos (Matching Screenshot 2) */}
-              <button
-                type="button"
-                onClick={() => setActiveTab("address")}
-                className="w-full h-14 bg-black hover:bg-neutral-900 active:scale-[0.99] text-white rounded-2xl flex items-center justify-between px-5 shadow-md transition-all cursor-pointer"
+              <Link
+                to="/checkout"
+                onClick={onClose}
+                className="w-full h-14 bg-black hover:bg-neutral-900 active:scale-[0.99] text-white rounded-2xl flex items-center justify-between px-5 shadow-md transition-all cursor-pointer no-underline"
               >
-                <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider">
-                  SELECT ADDRESS
+                <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-white">
+                  PROCEED TO CHECKOUT
                 </span>
 
                 {/* Payment Brand Badges */}
@@ -570,7 +571,7 @@ export function CartDrawer({ isOpen, onClose, lastAddedProduct }: CartDrawerProp
                     <span className="text-[#4285f4] font-black">G</span> Pay
                   </span>
                 </div>
-              </button>
+              </Link>
 
               {/* Reassurance text (Matching Screenshot 2) */}
               <div className="text-[11px] text-center text-[#555555] font-medium leading-tight">
