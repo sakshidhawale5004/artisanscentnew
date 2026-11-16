@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, Layers, PackageCheck, 
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ValueAssuranceStrip } from "@/components/ValueAssuranceStrip";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -68,6 +69,9 @@ export default function AboutPage() {
             </p>
           </div>
         </section>
+
+        {/* Value Assurance Trust Strip */}
+        <ValueAssuranceStrip />
 
         {/* About Company Section */}
         <section className="max-w-6xl mx-auto px-6 sm:px-8 py-20">

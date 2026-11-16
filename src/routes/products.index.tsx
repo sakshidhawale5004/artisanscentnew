@@ -7,6 +7,7 @@ import { useWishlist, useShoppingBag, openCartDrawer } from "@/lib/store";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
+import { ValueAssuranceStrip } from "@/components/ValueAssuranceStrip";
 
 export const Route = createFileRoute("/products/")({
   head: () => ({
@@ -111,45 +112,48 @@ export function AllProductsPage() {
 
       <main className="bg-[#fafaf8] text-[#333333] min-h-screen">
         {/* Hero Section */}
-        <section className="relative overflow-hidden border-b border-[#1b5e3f]/15 py-16 sm:py-24 px-4 sm:px-12 bg-[#05170e] text-white">
+        <section className="relative overflow-hidden text-[#072416] bg-[#faf9f5] border-b border-[#1b5e3f]/20 py-20 sm:py-28 px-4 sm:px-12">
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <img
               src="/assets/shopimages/perfume sectionimage.png"
               alt="Artisan Scent Complete Portfolio"
-              className="w-full h-full object-cover scale-105 opacity-40 blur-[1px]"
+              className="w-full h-full object-cover scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#04150c] via-[#04150c]/85 to-[#04150c]/60" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#05170e] via-transparent to-transparent" />
+            {/* Luminous Soft White/Cream Overlay for bright botanical atmosphere and crisp dark green text */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#faf9f5]/95 via-[#faf9f5]/85 to-[#faf9f5]/55" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#faf9f5] via-transparent to-[#faf9f5]/30" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto">
-            <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-[#86efac] font-medium mb-3">
-              <span className="w-6 h-[1px] bg-[#d4af37]" />
+            <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-[#1b5e3f] font-bold mb-4 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
+              <span className="w-6 h-[1.5px] bg-[#d4af37]" />
               <span>THE COMPLETE MAISON CATALOGUE</span>
-              <span className="w-6 h-[1px] bg-[#d4af37]" />
             </div>
-            <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-white leading-[1.12]">
+            <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.08] tracking-tight text-[#072416] drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
               All Creations &amp;
               <br />
-              <em className="text-[#86efac] font-serif italic">Sensory Formulations</em>
+              <em className="text-[#135d37] font-serif italic">Sensory Formulations</em>
             </h1>
-            <p className="reveal-on-scroll reveal-delay-200 mt-4 text-sm sm:text-base text-[#c4d6cb] font-light max-w-2xl leading-relaxed">
+            <p className="reveal-on-scroll reveal-delay-200 mt-5 text-sm sm:text-base text-[#333333] font-light max-w-2xl leading-relaxed">
               Explore our master collection spanning luxury extrait perfumes, pure steam-distilled essence oils, hanging ambient car diffusers, sacred temple agarbatti, and hand-milled botanical soaps.
             </p>
 
-            <div className="reveal-on-scroll reveal-delay-300 mt-6 flex flex-wrap items-center gap-3 text-xs text-[#86efac]">
-              <span className="px-3 py-1 rounded-full bg-[#1b5e3f]/40 border border-[#2d8659]/50">
+            <div className="reveal-on-scroll reveal-delay-300 mt-6 flex flex-wrap items-center gap-3 text-xs text-[#072416]">
+              <span className="px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1b5e3f]/25 font-semibold">
                 ✦ 28+ Artisanal Formulations
               </span>
-              <span className="px-3 py-1 rounded-full bg-[#1b5e3f]/40 border border-[#2d8659]/50">
+              <span className="px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1b5e3f]/25 font-semibold">
                 ✦ KEOMC Botanical Lab Extractions
               </span>
-              <span className="px-3 py-1 rounded-full bg-[#1b5e3f]/40 border border-[#2d8659]/50">
+              <span className="px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1b5e3f]/25 font-semibold">
                 ✦ 100% Authentic Indian Terroir
               </span>
             </div>
           </div>
         </section>
+
+        {/* Value Assurance Trust Strip */}
+        <ValueAssuranceStrip />
 
         {/* Category Navigation Pills */}
         <section className="bg-white border-b border-[#e8e2d8] sticky top-0 z-30 shadow-xs">

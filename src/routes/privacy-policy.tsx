@@ -29,21 +29,32 @@ export default function PrivacyPolicyPage() {
 
       <main className="bg-[#fafaf8] text-[#333333] min-h-screen">
         {/* Editorial Hero Banner */}
-        <section className="relative overflow-hidden border-b border-[#1b5e3f]/15 py-20 px-6 sm:px-12 bg-[#092014] text-white">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1b5e3f]/40 via-transparent to-transparent pointer-events-none" />
+        <section className="relative overflow-hidden text-[#072416] bg-[#faf9f5] border-b border-[#1b5e3f]/20 py-20 sm:py-24 px-6 sm:px-12">
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+            <img
+              src="/assets/shopimages/perfume sectionimage.png"
+              alt="Artisan Scent Legal & Compliance"
+              className="w-full h-full object-cover scale-105"
+            />
+            {/* Luminous Soft White/Cream Overlay for bright botanical atmosphere and crisp dark green text */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#faf9f5]/95 via-[#faf9f5]/85 to-[#faf9f5]/55" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#faf9f5] via-transparent to-[#faf9f5]/30" />
+          </div>
+
           <div className="relative z-10 max-w-4xl mx-auto text-center">
-            <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-[#86efac] font-medium mb-3">
-              <span className="w-5 h-[1px] bg-[#d4af37]" />
+            <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-[#1b5e3f] font-bold mb-4 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
+              <span className="w-6 h-[1.5px] bg-[#d4af37]" />
               <span>LEGAL &amp; COMPLIANCE</span>
-              <span className="w-5 h-[1px] bg-[#d4af37]" />
+              <span className="w-6 h-[1.5px] bg-[#d4af37]" />
             </div>
-            <h1 className="reveal-on-scroll font-display text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-white">
+            <h1 className="reveal-on-scroll font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.08] tracking-tight text-[#072416] drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
               Privacy Policy
             </h1>
-            <p className="reveal-on-scroll reveal-delay-100 mt-4 text-sm sm:text-base text-[#d0e5d9] font-light max-w-xl mx-auto leading-relaxed">
+            <p className="reveal-on-scroll reveal-delay-100 mt-5 text-sm sm:text-base text-[#333333] font-light max-w-xl mx-auto leading-relaxed">
               At Artisan Scent, your privacy is an inviolable trust. We are committed to safeguarding your personal information with absolute integrity.
             </p>
-            <div className="mt-5 text-xs text-[#d4af37] font-mono tracking-widest uppercase">
+            <div className="mt-5 inline-block px-4 py-1.5 rounded-full bg-white/80 border border-[#1b5e3f]/25 text-xs text-[#072416] font-mono tracking-widest uppercase">
               Last Updated · {lastUpdated}
             </div>
           </div>

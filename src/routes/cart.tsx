@@ -4,6 +4,7 @@ import { useShoppingBag, useWishlist, addOrderToCRM } from "@/lib/store";
 import { useProducts, money, type Product } from "@/lib/products";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ValueAssuranceStrip } from "@/components/ValueAssuranceStrip";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
@@ -98,71 +99,68 @@ function CartPage() {
             PROPERLY DESIGNED LUXURY HERO SECTION
             Matches the Haute Parfumerie brand design system
             ========================================================================= */}
-        <section className="relative overflow-hidden border-b border-[#1b5e3f]/20 py-16 sm:py-24 px-6 sm:px-12 bg-[#05170e] text-white">
-          {/* Ambient Lighting & Luxury Glows */}
-          <div className="absolute top-0 right-1/4 w-[420px] h-[420px] bg-[#1b5e3f]/30 blur-[130px] rounded-full pointer-events-none" />
-          <div className="absolute bottom-0 left-1/3 w-[360px] h-[360px] bg-[#d4af37]/15 blur-[120px] rounded-full pointer-events-none" />
-
-          {/* Textured Atmospheric Background Image */}
+        <section className="relative overflow-hidden text-[#072416] bg-[#faf9f5] border-b border-[#1b5e3f]/20 py-20 sm:py-28 px-6 sm:px-12">
+          {/* Background Image */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <img
               src="/assets/shopimages/perfume sectionimage.png"
               alt="Artisan Scent Shopping Atmosphere"
-              className="w-full h-full object-cover scale-105 opacity-25 blur-[1px]"
+              className="w-full h-full object-cover scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#04150c] via-[#04150c]/90 to-[#04150c]/65" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#05170e] via-transparent to-transparent" />
+            {/* Luminous Soft White/Cream Overlay for bright botanical atmosphere and crisp dark green text */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#faf9f5]/95 via-[#faf9f5]/85 to-[#faf9f5]/55" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#faf9f5] via-transparent to-[#faf9f5]/30" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto">
             {/* Breadcrumb Navigation */}
-            <nav className="flex items-center gap-2 text-xs text-[#86a894] mb-6" aria-label="Breadcrumb">
-              <a href="/" className="hover:text-white transition-colors">
+            <nav className="flex items-center gap-2 text-xs text-[#777777] mb-4" aria-label="Breadcrumb">
+              <a href="/" className="hover:text-[#1b5e3f] transition-colors">
                 Home
               </a>
-              <span className="text-[#436350]">›</span>
-              <a href="/products" className="hover:text-white transition-colors">
+              <span>/</span>
+              <a href="/products" className="hover:text-[#1b5e3f] transition-colors">
                 Shop
               </a>
-              <span className="text-[#436350]">›</span>
-              <span className="text-[#86efac] font-medium">Shopping Bag &amp; Cart</span>
+              <span>/</span>
+              <span className="text-[#1b5e3f] font-medium">Shopping Bag &amp; Cart</span>
             </nav>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
               {/* Left Column: Heading & Description */}
               <div className="lg:col-span-8">
-                <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#86efac] font-semibold mb-3">
-                  <span className="w-6 h-[1px] bg-[#d4af37]" />
-                  <ShoppingBag size={13} className="text-[#d4af37]" />
+                <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-bold mb-4 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
+                  <span className="w-6 h-[1.5px] bg-[#d4af37]" />
                   <span>MAISON ARTISAN SCENT · BESPOKE DISPATCH</span>
-                  <span className="w-6 h-[1px] bg-[#d4af37]" />
                 </div>
 
-                <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-white leading-[1.12]">
+                <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.08] tracking-tight text-[#072416] drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
                   Your Reserved
                   <br />
-                  <em className="text-[#86efac] font-serif italic">Shopping Bag &amp; Cart</em>
+                  <em className="text-[#135d37] font-serif italic">Shopping Bag &amp; Cart</em>
                 </h1>
 
-                <p className="mt-4 text-sm sm:text-base text-[#c4d6cb] font-light max-w-2xl leading-relaxed">
+                <p className="reveal-on-scroll reveal-delay-200 mt-5 text-sm sm:text-base text-[#333333] font-light max-w-2xl leading-relaxed">
                   Review your selected haute parfumerie flacons, rare botanical extracts, and artisanal home diffusers.
                   Prepared with bespoke gift packaging and insured courier transit across India.
                 </p>
 
                 {/* Status Badges */}
-                <div className="mt-6 flex flex-wrap items-center gap-2.5 text-xs">
-                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#1b5e3f]/40 border border-[#2d8659]/60 text-[#86efac]">
+                <div className="mt-6 flex flex-wrap items-center gap-2.5 text-xs text-[#072416]">
+                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1b5e3f]/25 font-semibold">
                     <Sparkles size={12} className="text-[#d4af37]" />
-                    {totalCartCount} {totalCartCount === 1 ? "Unit Selected" : "Units Selected"} (
-                    {cartProducts.length} {cartProducts.length === 1 ? "Item" : "Items"})
+                    <span>
+                      {totalCartCount} {totalCartCount === 1 ? "Unit Selected" : "Units Selected"} (
+                      {cartProducts.length} {cartProducts.length === 1 ? "Item" : "Items"})
+                    </span>
                   </span>
 
                   {cartProducts.length > 0 && (
                     <span
-                      className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border text-xs ${
+                      className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border text-xs font-semibold ${
                         isFreeShipping
-                          ? "bg-[#1b5e3f]/50 border-[#86efac]/50 text-[#86efac]"
-                          : "bg-[#d4af37]/20 border-[#d4af37]/50 text-[#fed7aa]"
+                          ? "bg-white/80 border-[#1b5e3f]/30 text-[#1b5e3f]"
+                          : "bg-white/80 border-[#d4af37]/40 text-[#92400e]"
                       }`}
                     >
                       {isFreeShipping ? (
@@ -173,7 +171,7 @@ function CartPage() {
                     </span>
                   )}
 
-                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#1b5e3f]/25 border border-[#2d8659]/40 text-[#c4d6cb]">
+                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1b5e3f]/25 text-[#072416] font-medium">
                     ✦ Complimentary Olfactory Samples Included
                   </span>
                 </div>
@@ -183,10 +181,10 @@ function CartPage() {
               <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end">
                 <Button
                   asChild
-                  className="h-12 px-6 bg-[#1b5e3f] hover:bg-[#237750] text-white border border-[#2d8659] rounded-full font-medium tracking-wide shadow-lg transition-all text-xs flex items-center justify-center gap-2"
+                  className="h-12 px-6 bg-[#1b5e3f] hover:bg-[#14472f] text-white border border-[#2d8659] rounded-full font-bold text-xs uppercase tracking-wider shadow-lg transition-all flex items-center justify-center gap-2"
                 >
                   <a href="/wishlist">
-                    <Heart size={15} className="text-[#d4af37] fill-[#d4af37]" />
+                    <Heart size={15} className="text-[#86efac]" />
                     <span>View Wishlist ({wishlistCount})</span>
                   </a>
                 </Button>
@@ -194,17 +192,20 @@ function CartPage() {
                 <Button
                   asChild
                   variant="outline"
-                  className="h-12 px-6 bg-white/5 hover:bg-white/10 text-white border-white/20 hover:border-[#d4af37] rounded-full font-medium tracking-wide transition-all text-xs flex items-center justify-center gap-2"
+                  className="h-12 px-6 bg-white/80 backdrop-blur-xs hover:bg-white text-[#222222] border-[#d5cebf] hover:border-[#1b5e3f] rounded-full font-semibold transition-all text-xs flex items-center justify-center gap-2"
                 >
                   <a href="/products">
                     <span>Explore Fragrance Catalogue</span>
-                    <ArrowRight size={14} className="text-[#86efac]" />
+                    <ArrowRight size={14} className="text-[#1b5e3f]" />
                   </a>
                 </Button>
               </div>
             </div>
           </div>
         </section>
+
+        {/* Value Assurance Trust Strip */}
+        <ValueAssuranceStrip />
 
         {/* Cart Main Content Area */}
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-16">

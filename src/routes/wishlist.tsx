@@ -4,6 +4,7 @@ import { useWishlist, useShoppingBag } from "@/lib/store";
 import { useProducts, money, type Product } from "@/lib/products";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ValueAssuranceStrip } from "@/components/ValueAssuranceStrip";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
@@ -78,29 +79,32 @@ function WishlistPage() {
       <Header currentPage="Wishlist" />
 
       <main className="min-h-screen bg-[#faf9f5] text-[#222222]">
-        {/* Minimal Hero / Header Section */}
-        <section className="pt-12 pb-8 sm:pt-16 sm:pb-10 px-6 sm:px-12 max-w-6xl mx-auto border-b border-[#e8e2d8]">
-          <nav className="flex items-center gap-2 text-xs text-[#777777] mb-4" aria-label="Breadcrumb">
-            <Link to="/" className="hover:text-[#1b5e3f] transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <span className="text-[#1b5e3f] font-medium">Wishlist</span>
-          </nav>
+        {/* Category Hero Banner */}
+        <section className="relative overflow-hidden text-[#072416] bg-[#faf9f5] border-b border-[#1b5e3f]/20 py-20 sm:py-28 px-6 sm:px-12">
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+            <img
+              src="/assets/shopimages/perfume sectionimage.png"
+              alt="Artisan Scent Curated Wishlist"
+              className="w-full h-full object-cover scale-105"
+            />
+            {/* Luminous Soft White/Cream Overlay for bright botanical atmosphere and crisp dark green text */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#faf9f5]/95 via-[#faf9f5]/85 to-[#faf9f5]/55" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#faf9f5] via-transparent to-[#faf9f5]/30" />
+          </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+          <div className="relative z-10 max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <div>
-              <div className="text-[10px] uppercase tracking-[0.25em] text-[#1b5e3f] font-bold mb-2 flex items-center gap-1.5">
-                <Heart size={12} className="text-[#d4af37] fill-[#d4af37]" />
-                <span>SAVED CREATIONS</span>
+              <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-bold mb-4 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
+                <span className="w-6 h-[1.5px] bg-[#d4af37]" />
+                <span>SAVED CREATIONS &amp; WISHLIST</span>
               </div>
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-[#072416]">
-                My Wishlist{" "}
-                <span className="text-xl sm:text-2xl font-light text-[#777777]">
-                  ({wishlistProducts.length})
-                </span>
+              <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.08] tracking-tight text-[#072416] drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
+                My Private
+                <br />
+                <em className="text-[#135d37] font-serif italic">Wishlist ({wishlistProducts.length})</em>
               </h1>
-              <p className="mt-2 text-xs sm:text-sm text-[#666666] font-light max-w-xl">
+              <p className="reveal-on-scroll reveal-delay-200 mt-5 text-sm sm:text-base text-[#333333] font-light max-w-xl leading-relaxed">
                 Your private curation of preferred extrait perfumes, essence oils, and botanical creations.
               </p>
             </div>
@@ -109,15 +113,15 @@ function WishlistPage() {
               <div className="flex items-center gap-3 shrink-0">
                 <Button
                   onClick={handleAddAllToBag}
-                  className="h-11 px-6 bg-[#1b5e3f] hover:bg-[#14472f] text-white rounded-full font-medium text-xs shadow-sm transition-all flex items-center gap-2"
+                  className="h-12 px-7 bg-[#1b5e3f] hover:bg-[#14472f] text-white rounded-full font-bold text-xs uppercase tracking-wider shadow-lg transition-all flex items-center gap-2 cursor-pointer"
                 >
-                  <ShoppingBag size={14} className="text-[#86efac]" />
+                  <ShoppingBag size={15} className="text-[#86efac]" />
                   <span>Add All to Bag</span>
                 </Button>
                 <Button
                   asChild
                   variant="outline"
-                  className="h-11 px-5 border-[#d5cebf] bg-white text-[#222222] hover:border-[#1b5e3f] rounded-full text-xs font-medium"
+                  className="h-12 px-6 border-[#d5cebf] bg-white/90 backdrop-blur-xs text-[#222222] hover:border-[#1b5e3f] rounded-full text-xs font-semibold"
                 >
                   <Link to="/cart">
                     <span>Bag ({totalItems})</span>
@@ -127,6 +131,9 @@ function WishlistPage() {
             )}
           </div>
         </section>
+
+        {/* Value Assurance Trust Strip */}
+        <ValueAssuranceStrip />
 
         {/* Content Container */}
         <div className="max-w-6xl mx-auto px-6 sm:px-12 py-12">

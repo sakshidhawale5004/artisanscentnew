@@ -7,6 +7,7 @@ import { useWishlist, useShoppingBag, openCartDrawer } from "@/lib/store";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
+import { ValueAssuranceStrip } from "@/components/ValueAssuranceStrip";
 
 export const Route = createFileRoute("/perfumes")({
   head: () => ({
@@ -59,35 +60,38 @@ function PerfumesPage() {
 
       <main className="bg-[#fafaf8] text-[#333333] min-h-screen">
         {/* Category Hero Banner */}
-        <section className="relative overflow-hidden border-b border-[#1b5e3f]/15 py-20 px-6 sm:px-12 bg-[#0d0c0b] text-white">
-          {/* Unsplash Background Image */}
+        <section className="relative overflow-hidden text-[#072416] bg-[#faf9f5] border-b border-[#1b5e3f]/20 py-20 sm:py-28 px-6 sm:px-12">
+          {/* Background Image */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <img
               src="/assets/shopimages/perfume sectionimage.png"
               alt="Luxury Perfumes Background"
               className="w-full h-full object-cover scale-105"
             />
-            {/* Deep Contrast Overlay for optimal text visibility */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0d0c0b]/90 via-transparent to-transparent" />
+            {/* Luminous Soft White/Cream Overlay for bright botanical atmosphere and crisp dark green text */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#faf9f5]/95 via-[#faf9f5]/85 to-[#faf9f5]/55" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#faf9f5] via-transparent to-[#faf9f5]/30" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto">
-            <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#86efac] font-medium mb-3">
-              <span className="w-5 h-[1px] bg-[#d4af37]" />
+            <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-bold mb-4 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
+              <span className="w-6 h-[1.5px] bg-[#d4af37]" />
               <span>HAUTE PARFUMERIE</span>
             </div>
-            <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-white">
+            <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.08] tracking-tight text-[#072416] drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
               Discover Your
               <br />
-              <em className="text-[#86efac] font-serif italic">Signature Scent</em>
+              <em className="text-[#135d37] font-serif italic">Signature Scent</em>
             </h1>
-            <p className="reveal-on-scroll reveal-delay-200 mt-4 text-sm sm:text-base text-[#e0deda] font-light max-w-xl leading-relaxed">
+            <p className="reveal-on-scroll reveal-delay-200 mt-5 text-sm sm:text-base text-[#333333] font-light max-w-xl leading-relaxed">
               Explore our curated collection of luxury perfumes, crafted for every mood, every
               moment. Hand-blended with high-concentration rare essences.
             </p>
           </div>
         </section>
+
+        {/* Value Assurance Trust Strip */}
+        <ValueAssuranceStrip />
 
         {/* Filter Bar & Controls */}
         <div className="reveal-fade max-w-7xl mx-auto px-6 sm:px-8 pt-10 pb-6 flex flex-wrap items-center justify-between gap-4 border-b border-[#e8e2d8]">

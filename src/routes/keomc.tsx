@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ValueAssuranceStrip } from "@/components/ValueAssuranceStrip";
 
 export const Route = createFileRoute("/keomc")({
   head: () => ({
@@ -42,29 +43,32 @@ function KEOMCPage() {
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto">
-            <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-bold mb-3">
+            <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-bold mb-4 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
               <span className="w-6 h-[1.5px] bg-[#d4af37]" />
               <span>HERITAGE BOTANICAL PARTNER</span>
             </div>
-            <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#072416] drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
+            <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.08] tracking-tight text-[#072416] drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
               KEOMC
               <br />
               <em className="text-[#135d37] font-serif italic">Botanical Excellence</em>
             </h1>
-            <div className="reveal-on-scroll reveal-delay-200 mt-4 flex flex-wrap items-center gap-2.5 text-xs">
+            <div className="reveal-on-scroll reveal-delay-200 mt-5 flex flex-wrap items-center gap-2.5 text-xs">
               <span className="px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1b5e3f]/25 text-[#072416] font-semibold">
                 Junnar &amp; Sangamner Distillation Facilities
               </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-white/60 border border-[#1b5e3f]/20 text-[#1b5e3f] font-medium">
+              <span className="px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1b5e3f]/25 text-[#072416] font-semibold">
                 ✦ Steam Distillation &amp; Terroir Stewardship
               </span>
             </div>
-            <p className="reveal-on-scroll reveal-delay-300 mt-4 text-sm sm:text-base text-[#333333] font-light max-w-xl leading-relaxed">
+            <p className="reveal-on-scroll reveal-delay-300 mt-5 text-sm sm:text-base text-[#333333] font-light max-w-xl leading-relaxed">
               Kulswami Essence Oil Manufacturing Company — Processing aromatic and medicinal plants
               with expertise in essential oil extraction and botanical stewardship.
             </p>
           </div>
         </section>
+
+        {/* Value Assurance Trust Strip */}
+        <ValueAssuranceStrip />
 
         {/* About KEOMC */}
         <section className="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
