@@ -32,14 +32,14 @@ export function ProductCard({
 
   return (
     <article
-      className={`reveal-on-scroll ${delayClass} group rounded-2xl overflow-hidden border border-[#e8e4dc] bg-white flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl hover:shadow-[#1b5e3f]/8 p-3 sm:p-3.5`}
+      className={`reveal-on-scroll ${delayClass} group rounded-2xl overflow-hidden border border-[#e8e4dc] bg-white flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl hover:shadow-[#1b5e3f]/8`}
     >
-      {/* Product Image Area */}
-      <div className="relative aspect-square w-full rounded-xl overflow-hidden p-4 flex items-center justify-center bg-[#faf8f5] border border-[#f0ede6]">
+      {/* Product Image Area - Full bleed edge-to-edge covering the product box */}
+      <div className="relative aspect-square w-full overflow-hidden bg-[#f7f5f0]">
         <Link
           to="/products/$productId"
           params={{ productId: p.id }}
-          className="w-full h-full flex items-center justify-center"
+          className="w-full h-full block"
         >
           <img
             src={p.image}
@@ -47,12 +47,12 @@ export function ProductCard({
             width={600}
             height={600}
             loading="lazy"
-            className="w-full h-full object-contain filter drop-shadow-sm transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </Link>
 
         {/* Top-Left Badges Stack (Matching Screenshot 2) */}
-        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start z-10 pointer-events-none">
+        <div className="absolute top-3 left-3 flex flex-col gap-1 items-start z-10 pointer-events-none">
           <span className="text-[10px] font-bold text-white bg-[#1b5e3f] px-2 py-0.5 rounded shadow-xs tracking-wider uppercase">
             {discountPercent}% OFF
           </span>
@@ -65,7 +65,7 @@ export function ProductCard({
         {onToggleSaved && (
           <button
             type="button"
-            className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/90 border border-[#e8e4dc] flex items-center justify-center text-[#777777] hover:text-rose-600 hover:border-rose-200 transition-all shadow-xs z-10"
+            className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-xs border border-[#e8e4dc] flex items-center justify-center text-[#777777] hover:text-rose-600 hover:border-rose-200 transition-all shadow-xs z-10 cursor-pointer"
             aria-label={`${isSaved ? "Unsave" : "Save"} ${p.name}`}
             onClick={(e) => {
               e.preventDefault();
@@ -81,15 +81,15 @@ export function ProductCard({
         )}
 
         {/* Bottom Center Gift / Sample Pill (Matching Screenshot 2) */}
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 pointer-events-none whitespace-nowrap">
-          <span className="bg-white/95 backdrop-blur-xs text-[#444444] text-[10px] font-medium py-0.5 px-3 rounded-full border border-[#e8e4dc] shadow-2xs">
+        <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-10 pointer-events-none whitespace-nowrap">
+          <span className="bg-white/95 backdrop-blur-xs text-[#333333] text-[10px] font-medium py-0.5 px-3 rounded-full border border-[#e8e4dc] shadow-2xs">
             {freeGiftLabel}
           </span>
         </div>
       </div>
 
       {/* Info Block */}
-      <div className="pt-3 pb-1 flex flex-col flex-1 justify-between">
+      <div className="p-4 sm:p-4.5 flex flex-col flex-1 justify-between bg-white">
         <div>
           {/* Star Rating & Review Count (Matching Screenshot 2) */}
           <div className="flex items-center gap-1 text-[#d4af37] text-xs">
