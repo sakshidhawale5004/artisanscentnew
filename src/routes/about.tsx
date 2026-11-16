@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, Layers, PackageCheck, Truck, Factory } from "lucide-react";
+import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, Layers, PackageCheck, Truck, Factory, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -203,9 +203,9 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+            <div className="flex flex-wrap justify-center gap-7">
               {/* 01. ESSENCE OILS */}
-              <div className="reveal-on-scroll group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl">
+              <div className="reveal-on-scroll group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="font-mono text-2xl font-semibold text-[#1b5e3f]">01.</span>
@@ -242,7 +242,7 @@ export default function AboutPage() {
               </div>
 
               {/* 02. HANDCRAFTED SOAPS */}
-              <div className="reveal-on-scroll reveal-delay-100 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl">
+              <div className="reveal-on-scroll reveal-delay-100 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="font-mono text-2xl font-semibold text-[#1b5e3f]">02.</span>
@@ -281,7 +281,7 @@ export default function AboutPage() {
               </div>
 
               {/* 03. SCENTED AGARBATTI */}
-              <div className="reveal-on-scroll reveal-delay-200 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl">
+              <div className="reveal-on-scroll reveal-delay-200 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="font-mono text-2xl font-semibold text-[#1b5e3f]">03.</span>
@@ -318,7 +318,7 @@ export default function AboutPage() {
               </div>
 
               {/* 04. CAR PERFUME */}
-              <div className="reveal-on-scroll reveal-delay-100 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl">
+              <div className="reveal-on-scroll reveal-delay-100 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="font-mono text-2xl font-semibold text-[#1b5e3f]">04.</span>
@@ -356,7 +356,7 @@ export default function AboutPage() {
               </div>
 
               {/* 05. LUXURY PERFUMES */}
-              <div className="reveal-on-scroll reveal-delay-200 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl md:col-span-2 lg:col-span-2">
+              <div className="reveal-on-scroll reveal-delay-200 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="font-mono text-2xl font-semibold text-[#1b5e3f]">05.</span>
@@ -364,11 +364,11 @@ export default function AboutPage() {
                       Haute Parfumerie
                     </span>
                   </div>
-                  <div className="relative aspect-16/9 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-4 border border-[#e8e2d8] shadow-2xs">
+                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-white mb-4 border border-[#e8e2d8] flex items-center justify-center p-3 shadow-2xs">
                     <img
                       src="/assets/body perform/Luxurious Ivory Amber Perfume Display.png"
                       alt="Artisan Scents Luxury Perfumes Collection"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
                   </div>
@@ -382,17 +382,19 @@ export default function AboutPage() {
                     personal wear, special occasions, and thoughtful gifting.
                   </p>
                 </div>
-                <div className="pt-4 border-t border-[#e8e2d8] flex items-center gap-6 flex-wrap">
+                <div className="pt-4 border-t border-[#e8e2d8] space-y-1.5">
                   <div className="text-xs font-semibold text-[#1b5e3f] uppercase tracking-wider">
                     Distinctive fragrance compositions
                   </div>
-                  <div className="text-xs text-[#666666]">Sophisticated scent profiles</div>
-                  <a
-                    href="/perfumes"
-                    className="ml-auto text-xs text-[#1b5e3f] font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all"
-                  >
-                    View Perfume Collection <ArrowRight size={13} />
-                  </a>
+                  <div className="flex items-center justify-between text-xs text-[#666666]">
+                    <span>Sophisticated scent profiles</span>
+                    <a
+                      href="/perfumes"
+                      className="text-[#1b5e3f] font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all"
+                    >
+                      View Perfumes <ArrowRight size={13} />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -418,74 +420,72 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Pillar 1 */}
-            <div className="reveal-on-scroll group bg-white rounded-2xl border border-[#e8e2d8] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-lg">
-              <div className="w-12 h-12 rounded-xl bg-[#1b5e3f]/10 text-[#1b5e3f] flex items-center justify-center mb-5">
-                <Sparkles size={22} />
+            <div className="reveal-on-scroll group bg-white rounded-2xl border border-[#e8e2d8] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-lg flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-[#1b5e3f]/10 text-[#1b5e3f] flex items-center justify-center mb-5">
+                  <Sparkles size={22} />
+                </div>
+                <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
+                  Fragrance Specifications
+                </h3>
+                <p className="text-xs text-[#666666] leading-relaxed font-light">
+                  Rigorous GC-MS gas chromatography testing, olfactory pyramid profiling, and IFRA adherence ensuring purest essence formulation.
+                </p>
               </div>
-              <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                Fragrance and Ingredient Specifications
-              </h3>
-              <p className="text-xs text-[#666666] leading-relaxed font-light">
-                Artisan Scents' luxury perfume category celebrates fragrance as an expression of
-                personality, style, and individuality. With an emphasis on sophisticated
-                presentation and distinctive scent experiences, these perfumes are suited to
-                personal wear, special occasions, and thoughtful gifting.
-              </p>
             </div>
 
             {/* Pillar 2 */}
-            <div className="reveal-on-scroll reveal-delay-100 group bg-white rounded-2xl border border-[#e8e2d8] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-lg">
-              <div className="w-12 h-12 rounded-xl bg-[#1b5e3f]/10 text-[#1b5e3f] flex items-center justify-center mb-5">
-                <ShieldCheck size={22} />
+            <div className="reveal-on-scroll reveal-delay-100 group bg-white rounded-2xl border border-[#e8e2d8] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-lg flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-[#1b5e3f]/10 text-[#1b5e3f] flex items-center justify-center mb-5">
+                  <ShieldCheck size={22} />
+                </div>
+                <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
+                  Material Verification
+                </h3>
+                <p className="text-xs text-[#666666] leading-relaxed font-light">
+                  Ethical provenance verification of wild-harvested botanicals, therapeutic carrier oils, and clean burning non-toxic incense bases.
+                </p>
               </div>
-              <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                Material Verification
-              </h3>
-              <p className="text-xs text-[#666666] leading-relaxed font-light">
-                Artisan Scents' luxury perfume category celebrates fragrance as an expression of
-                personality, style, and individuality. With an emphasis on sophisticated
-                presentation and distinctive scent experiences, these perfumes are suited to
-                personal wear, special occasions, and thoughtful gifting.
-              </p>
             </div>
 
             {/* Pillar 3 */}
-            <div className="reveal-on-scroll reveal-delay-200 group bg-white rounded-2xl border border-[#e8e2d8] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-lg">
-              <div className="w-12 h-12 rounded-xl bg-[#1b5e3f]/10 text-[#1b5e3f] flex items-center justify-center mb-5">
-                <PackageCheck size={22} />
+            <div className="reveal-on-scroll reveal-delay-200 group bg-white rounded-2xl border border-[#e8e2d8] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-lg flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-[#1b5e3f]/10 text-[#1b5e3f] flex items-center justify-center mb-5">
+                  <PackageCheck size={22} />
+                </div>
+                <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
+                  Product &amp; Packaging Checks
+                </h3>
+                <p className="text-xs text-[#666666] leading-relaxed font-light">
+                  Hermetic sealing inspection, amber UV-shielded glass flacons, precision car diffuser leak testing, and sensory shelf-life evaluation.
+                </p>
               </div>
-              <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                Product and Packaging Checks
-              </h3>
-              <p className="text-xs text-[#666666] leading-relaxed font-light">
-                Artisan Scents' luxury perfume category celebrates fragrance as an expression of
-                personality, style, and individuality. With an emphasis on sophisticated
-                presentation and distinctive scent experiences, these perfumes are suited to
-                personal wear, special occasions, and thoughtful gifting.
-              </p>
             </div>
 
             {/* Pillar 4 */}
-            <div className="reveal-on-scroll group bg-white rounded-2xl border border-[#e8e2d8] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-lg">
-              <div className="w-12 h-12 rounded-xl bg-[#1b5e3f]/10 text-[#1b5e3f] flex items-center justify-center mb-5">
-                <Truck size={22} />
+            <div className="reveal-on-scroll group bg-white rounded-2xl border border-[#e8e2d8] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-lg flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-[#1b5e3f]/10 text-[#1b5e3f] flex items-center justify-center mb-5">
+                  <Truck size={22} />
+                </div>
+                <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
+                  Sourcing &amp; Procurement
+                </h3>
+                <p className="text-xs text-[#666666] leading-relaxed font-light">
+                  Direct farm partnerships across Maharashtra and premier Indian growing belts, guaranteeing fresh seasonal harvests from field to still.
+                </p>
               </div>
-              <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                Sourcing &amp; Procurement
-              </h3>
-              <p className="text-xs text-[#666666] leading-relaxed font-light">
-                Artisan Scents' luxury perfume category celebrates fragrance as an expression of
-                personality, style, and individuality. With an emphasis on sophisticated
-                presentation and distinctive scent experiences, these perfumes are suited to
-                personal wear, special occasions, and thoughtful gifting.
-              </p>
             </div>
+          </div>
 
-            {/* Pillar 5 */}
-            <div className="reveal-on-scroll reveal-delay-100 group bg-white rounded-2xl border border-[#e8e2d8] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-lg md:col-span-2 lg:col-span-2">
-              <div className="relative aspect-16/9 sm:aspect-21/9 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-5 border border-[#e8e2d8] shadow-2xs">
+          {/* Manufacturing Units & Retail Outlets Showcase Box */}
+          <div className="mt-10 reveal-on-scroll group bg-white rounded-2xl border border-[#e8e2d8] p-6 sm:p-8 shadow-sm transition-all duration-300 hover:border-[#1b5e3f]/50 hover:shadow-lg">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-5 relative aspect-16/10 sm:aspect-4/3 w-full rounded-xl overflow-hidden bg-[#faf8f5] border border-[#e8e2d8] shadow-2xs">
                 <img
                   src="/assets/project%20site/artisan%20scent%20(14).webp"
                   alt="Artisan Scents Distillation & Manufacturing Operations"
@@ -493,15 +493,49 @@ export default function AboutPage() {
                   loading="lazy"
                 />
               </div>
-              <div className="w-12 h-12 rounded-xl bg-[#1b5e3f]/10 text-[#1b5e3f] flex items-center justify-center mb-5">
-                <Factory size={22} />
+
+              <div className="lg:col-span-7 flex flex-col justify-center">
+                <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#1b5e3f] font-semibold mb-3">
+                  <Factory size={16} className="text-[#d4af37]" />
+                  <span>DISTILLATION &amp; RETAIL FOOTPRINT</span>
+                </div>
+
+                <h3 className="font-display text-2xl sm:text-3xl text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
+                  Manufacturing Units &amp; Outlets
+                </h3>
+
+                <p className="text-sm text-[#555555] leading-relaxed font-light mb-6">
+                  Our manufacturing operations and steam distillation units are situated in <strong>Junnar</strong> and <strong>Sangamner</strong>, directly sourcing seasonal harvests. Our experience boutiques and retail outlets welcome patrons across <strong>Navi Mumbai (Airoli)</strong>, <strong>Dombivali</strong>, and <strong>Alandi</strong>.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-[#e8e2d8]">
+                  <div className="p-4 rounded-xl bg-[#faf9f5] border border-[#e8e2d8]">
+                    <div className="text-xs font-bold uppercase tracking-wider text-[#1b5e3f] mb-1 flex items-center gap-1.5">
+                      <Factory size={14} className="text-[#d4af37]" />
+                      <span>Manufacturing Units</span>
+                    </div>
+                    <div className="text-base font-display font-semibold text-[#1a1a1a]">
+                      Junnar · Sangamner
+                    </div>
+                    <div className="text-xs text-[#666666] mt-0.5 font-light">
+                      Steam distillation &amp; botanical extraction
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[#faf9f5] border border-[#e8e2d8]">
+                    <div className="text-xs font-bold uppercase tracking-wider text-[#1b5e3f] mb-1 flex items-center gap-1.5">
+                      <MapPin size={14} className="text-[#d4af37]" />
+                      <span>Retail Outlets</span>
+                    </div>
+                    <div className="text-base font-display font-semibold text-[#1a1a1a]">
+                      Navi Mumbai (Airoli) · Dombivali · Alandi
+                    </div>
+                    <div className="text-xs text-[#666666] mt-0.5 font-light">
+                      Experience boutiques &amp; olfactory counters
+                    </div>
+                  </div>
+                </div>
               </div>
-              <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                Manufacturing Units &amp; Outlets
-              </h3>
-              <p className="text-xs text-[#666666] leading-relaxed font-light">
-                Our manufacturing operations and steam distillation units are situated in <strong>Junnar</strong> and <strong>Sangamner</strong>, directly sourcing seasonal harvests. Our experience boutiques and retail outlets welcome patrons across <strong>Navi Mumbai (Airoli)</strong>, <strong>Dombivali</strong>, and <strong>Alandi</strong>.
-              </p>
             </div>
           </div>
         </section>

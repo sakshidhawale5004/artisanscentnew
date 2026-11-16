@@ -331,7 +331,7 @@ export function Header({
             </div>
             <div>
               <div className="luxury-brand-title">
-                ARTISAN <span className="text-[#d4af37]" style={{ color: "#d4af37" }}>SCENT</span>
+                ARTISAN SCENT
               </div>
               <div className="luxury-brand-subtitle">LUXURY FRAGRANCES</div>
             </div>
@@ -696,7 +696,7 @@ export function Header({
                 </div>
                 <div>
                   <div className="luxury-brand-title" style={{ fontSize: 16 }}>
-                    ARTISAN <span className="text-[#d4af37]" style={{ color: "#d4af37" }}>SCENT</span>
+                    ARTISAN SCENT
                   </div>
                   <div className="luxury-brand-subtitle" style={{ fontSize: 7 }}>LUXURY FRAGRANCES</div>
                 </div>

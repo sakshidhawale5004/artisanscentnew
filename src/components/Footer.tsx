@@ -132,7 +132,7 @@ export function Footer({
               />
               <div>
                 <span className="font-display tracking-widest text-2xl text-white block leading-none">
-                  ARTISAN <span className="text-[#d4af37]">SCENT</span>
+                  ARTISAN SCENT
                 </span>
                 <span className="text-[9px] uppercase tracking-[0.25em] text-[#86efac] font-medium block mt-1">
                   Haute Parfumerie &amp; Botanicals

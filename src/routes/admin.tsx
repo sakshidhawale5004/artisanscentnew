@@ -734,7 +734,7 @@ export function AdminHubPage() {
               />
               <div>
                 <div className="font-display tracking-widest text-base sm:text-lg text-white font-semibold leading-none">
-                  ARTISAN <span className="text-[#d4af37]">SCENT</span>
+                  ARTISAN SCENT
                 </div>
                 <div className="text-[9px] uppercase tracking-[0.2em] text-[#86efac] font-mono mt-0.5">
                   COMMERCE SUITE &amp; CRM v2.0

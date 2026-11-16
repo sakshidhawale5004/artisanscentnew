@@ -433,7 +433,7 @@ a {
   text-transform: uppercase;
 }
 .luxury-brand-title span {
-  color: #d4af37;
+  color: inherit;
 }
 .luxury-brand-subtitle {
   font-size: 8px;
