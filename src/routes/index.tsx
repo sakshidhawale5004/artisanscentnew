@@ -23,11 +23,11 @@ import heroPoster from "@/assets/hero-poster.jpg.asset.json";
 import { EntranceLoader } from "@/components/EntranceLoader";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ProductCard } from "@/components/ProductCard";
 import perfumeStory from "@/assets/images/perfume_story_editorial_1791888489737.jpg";
 import emeraldPerfume from "@/assets/images/hero_emerald_perfume_1791888469120.jpg";
 import aboutSectionImage from "@/assets/images/aboutsectionimagehomepage.jpg";
 
-const ScentSculpture = lazy(() => import("@/components/ScentSculpture"));
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -102,9 +102,6 @@ function Index() {
       products.find((p) => p.id === "soap-signature") || products.find((p) => p.category === "soaps"),
     ].filter((p): p is Product => Boolean(p));
   }, [filter, products]);
-  const signatureIcons = ["ivory-amber", "ocean-breeze", "car-arctic-mist", "vetiver-oil"]
-    .map((id) => products.find((p) => p.id === id))
-    .filter((p): p is Product => Boolean(p));
 
   return (
     <>
@@ -185,9 +182,9 @@ function Index() {
                 </div>
                 <div>
                   <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-white leading-tight">
-                    Premium Quality
+                    Artisanal Purity
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#b0aaa0] mt-0.5 leading-snug">100% Authentic Guaranteed</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#b0aaa0] mt-0.5 leading-snug">100% Rare Botanical Extracts</div>
                 </div>
               </div>
 
@@ -197,9 +194,9 @@ function Index() {
                 </div>
                 <div>
                   <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-white leading-tight">
-                    Long Lasting
+                    Haute Sillage
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#b0aaa0] mt-0.5 leading-snug">High Extrait Concentration</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#b0aaa0] mt-0.5 leading-snug">Long-Lasting Extrait Formulations</div>
                 </div>
               </div>
 
@@ -209,9 +206,9 @@ function Index() {
                 </div>
                 <div>
                   <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-white leading-tight">
-                    Free Shipping
+                    Pan-India Dispatch
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#b0aaa0] mt-0.5 leading-snug">On Orders Above ₹999</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#b0aaa0] mt-0.5 leading-snug">Insured Doorstep Courier</div>
                 </div>
               </div>
 
@@ -221,9 +218,9 @@ function Index() {
                 </div>
                 <div>
                   <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-white leading-tight">
-                    Secure Payment
+                    Curated Sampling
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#b0aaa0] mt-0.5 leading-snug">Safe & Encrypted Checkout</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#b0aaa0] mt-0.5 leading-snug">Free Tester with Every Order</div>
                 </div>
               </div>
             </div>
@@ -280,62 +277,14 @@ function Index() {
                 "reveal-delay-200",
               ][idx % 5];
               return (
-                <article key={p.id} className={`reveal-on-scroll ${delayClass}`}>
-                  <div
-                    className="product-image"
-                    style={{
-                      backgroundColor:
-                        p.category === "essence-oils"
-                          ? "#faf5f0"
-                          : p.category === "car-perfumes"
-                            ? "#f0f0f0"
-                            : p.category === "agarbatti"
-                              ? "#fef3c7"
-                              : "#f5e6d3",
-                    }}
-                  >
-                    <Link to="/products/$productId" params={{ productId: p.id }}>
-                      <img
-                        src={p.image}
-                        alt={`${p.name}`}
-                        width={1024}
-                        height={1024}
-                        loading="lazy"
-                        style={{ objectFit: "contain", padding: "20px" }}
-                      />
-                    </Link>
-                    <span className="product-badge">{p.badge}</span>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-2 top-2"
-                      aria-label={`${saved.includes(p.id) ? "Unsave" : "Save"} ${p.name}`}
-                      aria-pressed={saved.includes(p.id)}
-                      onClick={() => toggleSaved(p.id)}
-                    >
-                      <Heart className={saved.includes(p.id) ? "fill-foreground" : ""} />
-                    </Button>
-                  </div>
-                  <div className="product-info">
-                    <div>
-                      <Link
-                        to="/products/$productId"
-                        params={{ productId: p.id }}
-                        className="product-name"
-                      >
-                        {p.name}
-                      </Link>
-                      <p className="product-notes">{p.notes}</p>
-                      <div className="text-[9px] text-muted-foreground capitalize">
-                        {p.category.replace("-", " ")}
-                      </div>
-                    </div>
-                    <span className="product-price">{money(p.price)}</span>
-                  </div>
-                  <Button variant="editorial" className="mt-3 w-full" onClick={() => add(p)}>
-                    Add to bag <Plus size={14} />
-                  </Button>
-                </article>
+                <ProductCard
+                  key={p.id}
+                  product={p}
+                  isSaved={saved.includes(p.id)}
+                  onToggleSaved={toggleSaved}
+                  onAddToCart={add}
+                  delayClass={delayClass}
+                />
               );
             })}
           </div>
@@ -533,82 +482,6 @@ function Index() {
           </div>
         </section>
 
-        {/* Curated Masterpieces - The Signature Icons (Luxury Green) */}
-        <section className="relative overflow-hidden py-14 sm:py-24 px-4 sm:px-8 bg-gradient-to-b from-[#04150c] via-[#09291a] to-[#04150c] text-white border-y border-[#2d8659]/30">
-          {/* Ambient Emerald & Gold Radial Glows */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[850px] h-[450px] bg-[#1b5e3f]/25 blur-[140px] rounded-full pointer-events-none" />
-          <div className="absolute bottom-10 right-10 w-[500px] h-[350px] bg-[#d4af37]/12 blur-[120px] rounded-full pointer-events-none" />
-          <div className="absolute top-10 left-10 w-[450px] h-[300px] bg-[#34d399]/10 blur-[100px] rounded-full pointer-events-none" />
-
-          <div className="relative z-10 max-w-7xl mx-auto">
-            <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 reveal-on-scroll">
-              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-[#86efac] font-medium mb-3">
-                <span className="w-6 h-[1px] bg-[#d4af37]" />
-                <span>CURATED MASTERPIECES</span>
-                <span className="w-6 h-[1px] bg-[#d4af37]" />
-              </div>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-white">
-                The Signature Icons
-              </h2>
-              <p className="text-[#c1d3c8] text-sm mt-3 font-light leading-relaxed">
-                Four formulations that define the house — composed in small batches and pursued for
-                their depth, distinction, and enduring sillage.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-              {signatureIcons.map((p, idx) => (
-                <Link
-                  key={p.id}
-                  to="/products/$productId"
-                  params={{ productId: p.id }}
-                  className={`reveal-on-scroll reveal-delay-${(idx + 1) * 100} group relative rounded-2xl overflow-hidden border border-[#2d8659]/35 bg-gradient-to-b from-[#0b2b1c]/85 to-[#051a10]/95 backdrop-blur-md flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:border-[#d4af37]/70 hover:shadow-[0_20px_50px_rgba(27,94,63,0.35)] shadow-lg`}
-                >
-                  {/* Image Showcase area with soft pedestal glow */}
-                  <div className="relative h-40 sm:h-56 w-full overflow-hidden bg-gradient-to-b from-[#133d28]/60 via-[#0a2618]/50 to-transparent flex items-center justify-center p-3 sm:p-6 border-b border-[#2d8659]/20">
-                    <img
-                      src={p.image}
-                      alt={p.name}
-                      className="w-full h-full object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)] transition-transform duration-700 group-hover:scale-110"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#051a10]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <span className="absolute top-2 sm:top-3 left-2 sm:left-3 text-[8px] sm:text-[9px] uppercase tracking-widest text-[#d4af37] bg-[#04150c]/90 border border-[#d4af37]/40 font-semibold px-2 sm:px-2.5 py-0.5 rounded-full backdrop-blur-md shadow-md">
-                      {p.badge}
-                    </span>
-                  </div>
-
-                  {/* Info Block */}
-                  <div className="p-3 sm:p-5 flex flex-col flex-1 justify-between">
-                    <div>
-                      <h3 className="font-display text-sm sm:text-lg text-white group-hover:text-[#d4af37] transition-colors leading-snug line-clamp-1">
-                        {p.name}
-                      </h3>
-                      <p className="text-[10px] sm:text-xs text-[#a3b8ac] mt-1 font-light line-clamp-1">{p.notes}</p>
-                    </div>
-
-                    <div className="mt-3 sm:mt-4 flex items-center justify-between pt-2.5 sm:pt-3 border-t border-[#2d8659]/30">
-                      <span className="font-mono text-sm sm:text-base text-[#d4af37] font-semibold">{money(p.price)}</span>
-                      <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] text-[#86efac] group-hover:text-white uppercase tracking-wider font-medium transition-colors">
-                        Shop <ArrowRight size={11} className="transition-transform group-hover:translate-x-1" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            <div className="flex justify-center mt-10 sm:mt-12">
-              <a
-                href="/perfumes"
-                className="inline-flex items-center gap-2.5 sm:gap-3 h-11 sm:h-12 px-6 sm:px-8 rounded-full border border-[#d4af37] bg-[#d4af37]/10 hover:bg-[#d4af37] hover:text-[#05170e] text-[#d4af37] text-xs sm:text-sm font-semibold tracking-wide transition-all duration-300 shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:shadow-[0_0_35px_rgba(212,175,55,0.4)]"
-              >
-                Explore Full Collection <ArrowRight size={15} />
-              </a>
-            </div>
-          </div>
-        </section>
-
         {/* Connoisseur Advice */}
         <section className="section bg-[#fafaf8] text-[#333333] border-b border-[#2d8659]/15">
           <div className="max-w-7xl mx-auto px-6 sm:px-8">
@@ -699,43 +572,6 @@ function Index() {
               </div>
             </div>
           </div>
-        </section>
-
-        <section id="maison" className="maison reveal-on-scroll">
-          <div className="maison-canvas">
-            {mounted && (
-              <Suspense fallback={null}>
-                <ScentSculpture />
-              </Suspense>
-            )}
-          </div>
-          <div className="maison-copy reveal-on-scroll reveal-delay-150">
-            <div className="eyebrow text-[#d4af37] tracking-[0.25em] text-xs font-semibold">
-              THE ARTISAN SCENTS MISSION
-            </div>
-            <h2 className="section-title text-[#faf8f5] mt-2">
-              More than a fragrance.
-              <br />
-              <em className="text-[#86efac] italic font-serif">A way of life.</em>
-            </h2>
-            <p className="text-[#e2ded7] font-light leading-relaxed">
-              At Artisan Scents, we believe that fragrance is an invisible signature—an intimate
-              expression of who you are. We work with KEOMC's botanical expertise to source the
-              finest aromatic plants and essential oils, crafting products that turn fleeting
-              moments into lasting memories.
-            </p>
-            <Button
-              asChild
-              className="mt-3 h-11 px-7 rounded-full bg-[#d4af37] hover:bg-[#c5a028] text-[#071c12] font-semibold tracking-wide shadow-lg border border-[#f3e5ab]/40 transition-all pointer-events-auto"
-            >
-              <a href="/about" className="inline-flex items-center gap-2">
-                Discover our story <ArrowRight size={15} />
-              </a>
-            </Button>
-          </div>
-          <span className="maison-caption text-[#d4af37] font-mono tracking-widest text-[10px]">
-            HANDCRAFTED SINCE INCEPTION · 100% NATURAL
-          </span>
         </section>
 
         <section id="journal" className="section journal">

@@ -6,6 +6,7 @@ import { useProducts, money, type Product } from "@/lib/products";
 import { useWishlist, useShoppingBag } from "@/lib/store";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ProductCard } from "@/components/ProductCard";
 
 export const Route = createFileRoute("/agarbatti")({
   head: () => ({
@@ -148,76 +149,15 @@ function AgarbattiPage() {
                     ? "reveal-delay-150"
                     : "reveal-delay-250";
               return (
-                <article
+                <ProductCard
                   key={p.id}
-                  className={`reveal-on-scroll ${delayClass} group rounded-2xl overflow-hidden border border-[#e8e2d8] bg-white flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl hover:shadow-[#1b5e3f]/5`}
-                >
-                  <div className="relative aspect-square w-full p-8 flex items-center justify-center bg-[#fcfbf9] border-b border-[#e8e2d8]">
-                    <Link
-                      to="/products/$productId"
-                      params={{ productId: p.id }}
-                      className="w-full h-full flex items-center justify-center"
-                    >
-                      <img
-                        src={p.image}
-                        alt={p.name}
-                        width={600}
-                        height={600}
-                        loading="lazy"
-                        className="w-full h-full object-contain filter drop-shadow-md transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </Link>
-                    <span className="absolute top-3 left-3 text-[9px] uppercase tracking-widest text-[#1b5e3f] bg-white/95 border border-[#e8e2d8] font-semibold px-2.5 py-0.5 rounded-full shadow-sm">
-                      {p.badge}
-                    </span>
-                    <button
-                      className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 border border-[#e8e2d8] flex items-center justify-center text-[#666666] hover:text-[#1b5e3f] hover:border-[#1b5e3f]/30 transition shadow-sm"
-                      aria-label={`${saved.includes(p.id) ? "Unsave" : "Save"} ${p.name}`}
-                      onClick={() => toggleSaved(p.id)}
-                    >
-                      <Heart
-                        size={15}
-                        fill={saved.includes(p.id) ? "#d4af37" : "none"}
-                        className={saved.includes(p.id) ? "text-[#d4af37]" : ""}
-                      />
-                    </button>
-                  </div>
-
-                  <div className="p-5 flex flex-col flex-1 justify-between bg-white">
-                    <div>
-                      <div className="flex items-center gap-1 text-[#d4af37] text-xs mb-1.5">
-                        {"★★★★★"}
-                        <span className="text-[11px] text-[#888888] ml-1 font-light">(116)</span>
-                      </div>
-                      <Link
-                        to="/products/$productId"
-                        params={{ productId: p.id }}
-                        className="font-display text-lg text-[#1a1a1a] group-hover:text-[#1b5e3f] transition-colors block font-medium"
-                      >
-                        {p.name}
-                      </Link>
-                      <p className="text-xs text-[#666666] line-clamp-1 mt-1 font-light">
-                        {p.notes}
-                      </p>
-                      <div className="text-[10px] text-[#888888] uppercase tracking-wider mt-1">
-                        {p.size || "100 Sticks"} · Charcoal-Free
-                      </div>
-                    </div>
-
-                    <div className="mt-4 pt-4 border-t border-[#e8e2d8] flex items-center justify-between">
-                      <span className="font-mono text-base font-semibold text-[#1a1a1a]">
-                        {money(p.price)}
-                      </span>
-                      <Button
-                        size="sm"
-                        className="h-9 px-4 rounded-full bg-[#1b5e3f] hover:bg-[#164a31] text-white border border-[#1b5e3f]/30 text-xs font-medium"
-                        onClick={() => add(p)}
-                      >
-                        Add to Cart <Plus size={13} className="ml-1 text-[#86efac]" />
-                      </Button>
-                    </div>
-                  </div>
-                </article>
+                  product={p}
+                  isSaved={saved.includes(p.id)}
+                  onToggleSaved={toggleSaved}
+                  onAddToCart={add}
+                  delayClass={delayClass}
+                  freeGiftLabel="Incl. Free Olfactory Sample"
+                />
               );
             })}
           </div>

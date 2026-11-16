@@ -6,6 +6,7 @@ import { useProducts, money, type Product } from "@/lib/products";
 import { useWishlist, useShoppingBag } from "@/lib/store";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ProductCard } from "@/components/ProductCard";
 
 export const Route = createFileRoute("/products/")({
   head: () => ({
@@ -292,108 +293,15 @@ export function AllProductsPage() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7">
               {filteredProducts.map((p) => {
-                const isSaved = saved.includes(p.id);
-                const isFlashAdded = addedFlashId === p.id;
                 return (
-                  <article
+                  <ProductCard
                     key={p.id}
-                    className="group rounded-2xl overflow-hidden border border-[#e8e2d8] bg-white flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1b5e3f]/40 hover:shadow-xl hover:shadow-[#1b5e3f]/8"
-                  >
-                    {/* Bottle Display Area */}
-                    <div className="relative aspect-square w-full p-6 flex items-center justify-center bg-gradient-to-b from-[#faf9f6] via-[#f5f3ee] to-[#faf9f6] border-b border-[#e8e2d8]/80">
-                      <Link
-                        to="/products/$productId"
-                        params={{ productId: p.id }}
-                        className="w-full h-full flex items-center justify-center"
-                      >
-                        <img
-                          src={p.image}
-                          alt={p.name}
-                          width={500}
-                          height={500}
-                          loading="lazy"
-                          className="w-full h-full object-contain filter drop-shadow-md transition-transform duration-500 group-hover:scale-105"
-                        />
-                      </Link>
-
-                      {/* Badge */}
-                      <span className="absolute top-3 left-3 text-[9px] uppercase tracking-widest text-[#1b5e3f] bg-white/95 border border-[#1b5e3f]/20 font-semibold px-2.5 py-0.5 rounded-full shadow-xs">
-                        {p.badge || categoryLabels[p.category] || "Artisanal"}
-                      </span>
-
-                      {/* Wishlist Heart */}
-                      <button
-                        className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 border border-[#e8e2d8] flex items-center justify-center text-[#666666] hover:text-[#1b5e3f] hover:border-[#1b5e3f]/40 transition shadow-xs"
-                        aria-label={`Save ${p.name}`}
-                        onClick={() => toggleSaved(p.id)}
-                      >
-                        <Heart
-                          size={15}
-                          fill={isSaved ? "#d4af37" : "none"}
-                          className={isSaved ? "text-[#d4af37]" : ""}
-                        />
-                      </button>
-                    </div>
-
-                    {/* Product Meta */}
-                    <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between bg-white">
-                      <div>
-                        {/* Rating */}
-                        <div className="flex items-center gap-1 text-[#d4af37] text-xs mb-1">
-                          {"★★★★★"}
-                          <span className="text-[10px] text-[#888888] font-light ml-1">(4.9)</span>
-                          <span className="text-[10px] text-[#aaaaaa] mx-1">·</span>
-                          <span className="text-[10px] uppercase tracking-wider text-[#1b5e3f] font-medium">
-                            {p.category.replace("-", " ")}
-                          </span>
-                        </div>
-
-                        {/* Name */}
-                        <Link
-                          to="/products/$productId"
-                          params={{ productId: p.id }}
-                          className="font-display text-lg text-[#1a1a1a] group-hover:text-[#1b5e3f] transition-colors block font-medium leading-snug line-clamp-1"
-                        >
-                          {p.name}
-                        </Link>
-
-                        {/* Notes */}
-                        <p className="text-xs text-[#666666] line-clamp-1 mt-1 font-light">{p.notes}</p>
-                      </div>
-
-                      {/* Price & Action Bottom Strip */}
-                      <div className="mt-4 pt-3.5 border-t border-[#e8e2d8] flex items-center justify-between gap-2">
-                        <div>
-                          <div className="font-mono text-base font-semibold text-[#1a1a1a]">
-                            {money(p.price)}
-                          </div>
-                          <div className="text-[9px] text-[#888888]">
-                            {p.size || "Standard flacon"}
-                          </div>
-                        </div>
-
-                        <Button
-                          size="sm"
-                          onClick={() => add(p)}
-                          className={`h-9 px-3.5 rounded-full text-xs font-medium transition-all ${
-                            isFlashAdded
-                              ? "bg-[#1b5e3f] text-white"
-                              : "bg-[#1b5e3f] hover:bg-[#164a31] text-white shadow-sm"
-                          }`}
-                        >
-                          {isFlashAdded ? (
-                            <span className="flex items-center gap-1 text-[#86efac]">
-                              <Check size={12} /> Added
-                            </span>
-                          ) : (
-                            <span className="flex items-center gap-1">
-                              Add <ShoppingBag size={12} />
-                            </span>
-                          )}
-                        </Button>
-                      </div>
-                    </div>
-                  </article>
+                    product={p}
+                    isSaved={saved.includes(p.id)}
+                    onToggleSaved={toggleSaved}
+                    onAddToCart={add}
+                    freeGiftLabel="Incl. Free Olfactory Sample"
+                  />
                 );
               })}
             </div>
