@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useProducts, money, type Product } from "@/lib/products";
-import { useWishlist, useShoppingBag } from "@/lib/store";
+import { useWishlist, useShoppingBag, openCartDrawer } from "@/lib/store";
 import heroPoster from "@/assets/hero-poster.jpg.asset.json";
 import { EntranceLoader } from "@/components/EntranceLoader";
 import { Header } from "@/components/Header";
@@ -84,8 +84,7 @@ function Index() {
   const add = (p: Product) => {
     addToBag(p.id, 1);
     setSelected(undefined);
-    setPanel("bag");
-    setCheckout(false);
+    openCartDrawer(p);
   };
   const filtered = useMemo(() => {
     if (filter === "Perfumes") return products.filter((p) => p.category === "perfumes").slice(0, 5);

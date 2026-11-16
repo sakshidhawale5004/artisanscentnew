@@ -230,8 +230,10 @@ export function Footer({
       {/* Bottom Bar with Links & Copyright */}
       <div className="border-t border-white/10 bg-[#04110a] py-6 px-4 sm:px-8 text-xs text-[#7e9185]">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-center md:text-left text-[11px]">
-            © {new Date().getFullYear()} Artisan Scent. All rights reserved. Handcrafted with Botanical Dedication.
+          <div className="text-center md:text-left text-[11px] flex flex-wrap items-center gap-1.5 justify-center md:justify-start">
+            <span>© {new Date().getFullYear()} Artisan Scent. All rights reserved. Handcrafted with Botanical Dedication.</span>
+            <span className="hidden sm:inline text-white/30">·</span>
+            <span className="text-[#a4c9b3]">Made with <span className="text-[#86efac] font-semibold">Digital Coyotes</span></span>
           </div>
 
           <div className="text-[10px] uppercase tracking-[0.25em] text-[#d4af37] text-center font-mono">

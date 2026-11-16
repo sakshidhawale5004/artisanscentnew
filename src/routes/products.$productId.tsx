@@ -14,7 +14,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { products, useProducts, getStoredProducts, money, type Product } from "@/lib/products";
-import { useWishlist, useShoppingBag, addOrderToCRM } from "@/lib/store";
+import { useWishlist, useShoppingBag, addOrderToCRM, openCartDrawer } from "@/lib/store";
+import { triggerSprinkles } from "@/lib/sprinkles";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -97,10 +98,12 @@ function ProductDetailPage() {
 
   const closeBag = () => setPanel(null);
 
-  const addToBag = (p: Product, quantity = 1) => {
+  const addToBag = (p: Product, quantity = 1, e?: React.MouseEvent) => {
+    if (e) triggerSprinkles(e);
+    else triggerSprinkles();
     storeAddToBag(p.id, quantity);
     setAddedFlash(true);
-    setPanel("bag");
+    openCartDrawer(p);
     setTimeout(() => setAddedFlash(false), 1500);
   };
 
@@ -320,8 +323,8 @@ function ProductDetailPage() {
 
                   {/* Add to Bag Button */}
                   <Button
-                    className="flex-1 h-12 rounded-full bg-[#1b5e3f] hover:bg-[#164a31] text-white border border-[#1b5e3f]/40 font-semibold tracking-wide shadow-lg text-sm flex items-center justify-center gap-2 transition-all"
-                    onClick={() => addToBag(product, qty)}
+                    className="flex-1 h-12 rounded-full bg-[#1b5e3f] hover:bg-[#164a31] text-white border border-[#1b5e3f]/40 font-semibold tracking-wide shadow-lg text-sm flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    onClick={(e) => addToBag(product, qty, e)}
                   >
                     {addedFlash ? (
                       "✓ Added to Bag"
@@ -565,8 +568,8 @@ function ProductDetailPage() {
                           </button>
                           <Button
                             size="sm"
-                            className="h-8 px-3 rounded-full bg-[#1b5e3f] hover:bg-[#164a31] text-white border border-[#1b5e3f]/30 text-xs font-medium"
-                            onClick={() => addToBag(p)}
+                            className="h-8 px-3 rounded-full bg-[#1b5e3f] hover:bg-[#164a31] text-white border border-[#1b5e3f]/30 text-xs font-medium cursor-pointer"
+                            onClick={(e) => addToBag(p, 1, e)}
                           >
                             Add <Plus size={12} className="ml-0.5 text-[#86efac]" />
                           </Button>

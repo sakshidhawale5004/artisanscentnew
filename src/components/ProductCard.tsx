@@ -2,12 +2,13 @@ import { Link } from "@tanstack/react-router";
 import { Heart, ShoppingBag } from "lucide-react";
 import { money, type Product } from "@/lib/products";
 import { Button } from "@/components/ui/button";
+import { triggerSprinkles } from "@/lib/sprinkles";
 
 type ProductCardProps = {
   product: Product;
   isSaved?: boolean;
   onToggleSaved?: (id: string) => void;
-  onAddToCart?: (product: Product) => void;
+  onAddToCart?: (product: Product, event?: React.MouseEvent) => void;
   delayClass?: string;
   freeGiftLabel?: string;
 };
@@ -133,7 +134,8 @@ export function ProductCard({
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              onAddToCart(p);
+              triggerSprinkles(e);
+              onAddToCart(p, e);
             }}
           >
             <ShoppingBag size={14} />

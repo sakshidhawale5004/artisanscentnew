@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, Search, ShoppingBag, Heart, X, ChevronDown, ArrowRight, Trash2 } from "lucide-react";
-import { useWishlist, useShoppingBag } from "@/lib/store";
+import { useWishlist, useShoppingBag, OPEN_CART_EVENT } from "@/lib/store";
 import { useProducts, money, type Product } from "@/lib/products";
 import { Button } from "@/components/ui/button";
+import { CartDrawer } from "@/components/CartDrawer";
 
 type HeaderProps = {
   currentPage?: string;
@@ -78,6 +79,25 @@ export function Header({
   const { saved, toggleSaved, wishlistCount: storeWishlistCount } = useWishlist();
   const { bag, updateQty, removeItem, clearBag, totalItems: storeTotalItems, addToBag } = useShoppingBag();
   const products = useProducts();
+
+  // Unified Cart Drawer state matching Screenshot 2
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [lastAddedProduct, setLastAddedProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    const handleOpenCart = (e: Event) => {
+      const customEvent = e as CustomEvent<Product | undefined>;
+      if (customEvent.detail) {
+        setLastAddedProduct(customEvent.detail);
+      }
+      setIsCartOpen(true);
+    };
+
+    window.addEventListener(OPEN_CART_EVENT, handleOpenCart);
+    return () => {
+      window.removeEventListener(OPEN_CART_EVENT, handleOpenCart);
+    };
+  }, []);
 
   // Internal drawer state if parent doesn't override
   const [internalDrawer, setInternalDrawer] = useState<"bag" | "wishlist" | "search" | null>(null);
@@ -157,11 +177,7 @@ export function Header({
 
   const handleBagClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (onBagClick) {
-      onBagClick();
-    } else {
-      window.location.href = "/cart";
-    }
+    setIsCartOpen(true);
   };
 
   const cartProducts = products.filter((p) => (bag[p.id] || 0) > 0);
@@ -821,6 +837,13 @@ export function Header({
           </nav>
         </div>
       )}
+
+      {/* Slide-Over Cart Drawer matching Screenshot 2 */}
+      <CartDrawer
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        lastAddedProduct={lastAddedProduct}
+      />
     </>
   );
 }

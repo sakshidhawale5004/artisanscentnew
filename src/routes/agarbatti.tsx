@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ArrowRight, Heart, Plus, Search, ShoppingBag, X, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useProducts, money, type Product } from "@/lib/products";
-import { useWishlist, useShoppingBag } from "@/lib/store";
+import { useWishlist, useShoppingBag, openCartDrawer } from "@/lib/store";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
@@ -41,7 +41,7 @@ function AgarbattiPage() {
   const add = (p: Product) => {
     addToBag(p.id, 1);
     setSelected(undefined);
-    setPanel("bag");
+    openCartDrawer(p);
   };
 
   return (

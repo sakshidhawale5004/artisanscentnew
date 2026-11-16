@@ -71,6 +71,12 @@ export function useWishlist() {
 // ─── SHOPPING BAG ──────────────────────────────────────
 export const BAG_STORAGE_KEY = "artisanscent_cart";
 export const BAG_UPDATED_EVENT = "artisanscent:cart-updated";
+export const OPEN_CART_EVENT = "artisanscent:open-cart";
+
+export function openCartDrawer(lastAddedProduct?: any): void {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent(OPEN_CART_EVENT, { detail: lastAddedProduct }));
+}
 
 export function getStoredBag(): Record<string, number> {
   if (typeof window === "undefined") return {};

@@ -3,7 +3,7 @@ import { useState, useMemo } from "react";
 import { ArrowRight, Heart, Plus, Search, ShoppingBag, X, SlidersHorizontal, Sparkles, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useProducts, money, type Product } from "@/lib/products";
-import { useWishlist, useShoppingBag } from "@/lib/store";
+import { useWishlist, useShoppingBag, openCartDrawer } from "@/lib/store";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
@@ -54,7 +54,7 @@ export function AllProductsPage() {
     addToBag(p.id, 1);
     setAddedFlashId(p.id);
     setTimeout(() => setAddedFlashId(null), 1200);
-    setPanel("bag");
+    openCartDrawer(p);
   };
 
   // Filter & Sort
