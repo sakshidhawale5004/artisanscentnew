@@ -8,11 +8,11 @@ import { ValueAssuranceStrip } from "@/components/ValueAssuranceStrip";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Us | Corporate & Marketing Presentation | Artisan Scents" },
+      { title: "About Us | Our Story & Botanical Heritage | Artisan Scents" },
       {
         name: "description",
         content:
-          "Artisan Scents corporate and marketing presentation by Vaishali Chavan. Discover our diverse fragrance portfolio spanning luxury perfumes, essence oils, handcrafted soaps, agarbatti, and car diffusers.",
+          "Discover the artisanal heritage of Artisan Scents by founder Vaishali Chavan. Pure botanical compositions, rare essences, handcrafted extrait perfumes, therapeutic oils, luxury soaps, and sacred agarbatti.",
       },
     ],
   }),
@@ -23,7 +23,7 @@ export default function AboutPage() {
   return (
     <>
       <div className="announcement">
-        S C E N T S · A R T I S A N <span className="ml-3">✦</span> Corporate &amp; Marketing Presentation
+        S C E N T S · A R T I S A N <span className="ml-3">✦</span> Handcrafted Luxury Perfumery &amp; Pure Botanical Essences
       </div>
       <Header currentPage="About" />
 
@@ -34,7 +34,7 @@ export default function AboutPage() {
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <img
               src="/Sage Green Spa Perfume Still Life (1).png"
-              alt="Artisan Scents Corporate Presentation — Sage Green Spa Perfume Still Life"
+              alt="Artisan Scents Atelier — Sage Green Spa Perfume Still Life"
               className="w-full h-full object-cover scale-105"
             />
             {/* Luminous Soft White/Cream Overlay for bright botanical atmosphere and crisp dark green text */}
@@ -45,27 +45,29 @@ export default function AboutPage() {
           <div className="relative z-10 max-w-5xl mx-auto">
             <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#1b5e3f] font-bold mb-4">
               <span className="w-6 h-[1.5px] bg-[#d4af37]" />
-              <span>S C E N T S &nbsp;✦&nbsp; A R T I S A N</span>
+              <span>OUR STORY &amp; HERITAGE</span>
             </div>
 
             <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#072416] leading-[1.08] drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
-              Corporate &amp;
+              The Spirit of
               <br />
-              <em className="text-[#135d37] font-serif italic">Marketing Presentation</em>
+              <em className="text-[#135d37] font-serif italic">Artisanal Perfumery</em>
             </h1>
 
             <div className="reveal-on-scroll reveal-delay-200 mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-[#1b5e3f]/25 text-xs text-[#072416] tracking-widest font-semibold uppercase shadow-xs">
-                Presenter: <span className="text-[#135d37]">VAISHALI CHAVAN</span>
+                Founder: <span className="text-[#135d37]">VAISHALI CHAVAN</span>
               </div>
               <div className="text-xs text-[#1b5e3f] font-semibold tracking-wide bg-white/60 backdrop-blur-xs px-3.5 py-1.5 rounded-full border border-[#1b5e3f]/20">
-                ✦ Artisan Scents Official Brand Deck
+                ✦ Pure Botanical Heritage
+              </div>
+              <div className="text-xs text-[#1b5e3f] font-semibold tracking-wide bg-white/60 backdrop-blur-xs px-3.5 py-1.5 rounded-full border border-[#1b5e3f]/20">
+                ✦ Handcrafted in Maharashtra
               </div>
             </div>
 
             <p className="reveal-on-scroll reveal-delay-300 mt-5 text-sm sm:text-base text-[#333333] font-light max-w-2xl leading-relaxed">
-              Operating across a diverse portfolio of fragrance products and related solutions in the
-              fragrance and flavours sector. Building meaningful connections through the world of scent.
+              Rooted in botanical stewardship and artisanal dedication, Artisan Scents crafts evocative extrait perfumes, pure therapeutic essence oils, handcrafted soaps, and sacred agarbatti. Bringing together centuries-old distillation traditions with contemporary olfactory elegance.
             </p>
           </div>
         </section>
@@ -110,7 +112,7 @@ export default function AboutPage() {
 
               <div className="lg:col-span-4 bg-[#fcfbf9] rounded-2xl border border-[#e8e2d8] p-7 shadow-sm space-y-6">
                 <div className="text-xs uppercase tracking-widest text-[#1b5e3f] font-bold">
-                  Presentation Overview
+                  Brand Highlights
                 </div>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
@@ -142,7 +144,7 @@ export default function AboutPage() {
                       ✓
                     </span>
                     <div>
-                      <div className="text-sm font-semibold text-[#1a1a1a]">Presentation Lead</div>
+                      <div className="text-sm font-semibold text-[#1a1a1a]">Founder &amp; Artisan</div>
                       <div className="text-xs text-[#666666] mt-0.5">Vaishali Chavan</div>
                     </div>
                   </div>
@@ -234,11 +236,11 @@ export default function AboutPage() {
                       Aromatics
                     </span>
                   </div>
-                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-white mb-4 border border-[#e8e2d8] flex items-center justify-center p-3 shadow-2xs">
+                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-4 border border-[#e8e2d8] shadow-2xs">
                     <img
                       src="/assets/essence oil/Amber Patchouli Oil Bottle.png"
                       alt="Artisan Scents Pure Essence Oils"
-                      className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
                   </div>
@@ -271,11 +273,11 @@ export default function AboutPage() {
                       Personal Care
                     </span>
                   </div>
-                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-white mb-4 border border-[#e8e2d8] flex items-center justify-center p-3 shadow-2xs">
+                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-4 border border-[#e8e2d8] shadow-2xs">
                     <img
                       src="/assets/SOAP NEW/Artisan Signature Soap.png"
                       alt="Artisan Scents Handcrafted Luxury Soaps"
-                      className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
                   </div>
@@ -310,11 +312,11 @@ export default function AboutPage() {
                       Rituals
                     </span>
                   </div>
-                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-white mb-4 border border-[#e8e2d8] flex items-center justify-center p-3 shadow-2xs">
+                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-4 border border-[#e8e2d8] shadow-2xs">
                     <img
                       src="/assets/AGARBATTI NEW/Deluxe Incense Collection.png"
                       alt="Artisan Scents Scented Agarbatti"
-                      className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
                   </div>
@@ -347,11 +349,11 @@ export default function AboutPage() {
                       Automotive
                     </span>
                   </div>
-                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-white mb-4 border border-[#e8e2d8] flex items-center justify-center p-3 shadow-2xs">
+                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-4 border border-[#e8e2d8] shadow-2xs">
                     <img
                       src="/assets/car perfurm/Arctic Mist Luxury Car Fragrance.png"
                       alt="Artisan Scents Car Luxury Perfumes"
-                      className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
                   </div>
@@ -385,11 +387,11 @@ export default function AboutPage() {
                       Haute Parfumerie
                     </span>
                   </div>
-                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-white mb-4 border border-[#e8e2d8] flex items-center justify-center p-3 shadow-2xs">
+                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-4 border border-[#e8e2d8] shadow-2xs">
                     <img
                       src="/assets/body perform/Luxurious Ivory Amber Perfume Display.png"
                       alt="Artisan Scents Luxury Perfumes Collection"
-                      className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
                   </div>

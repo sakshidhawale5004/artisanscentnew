@@ -82,38 +82,38 @@ export function ProductCard({
       </div>
 
       {/* Info Block */}
-      <div className="p-4 sm:p-4.5 flex flex-col flex-1 justify-between bg-white">
+      <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between bg-white">
         <div>
           {/* Star Rating & Review Count (Matching Screenshot 2) */}
           <div className="flex items-center gap-1 text-[#d4af37] text-xs">
             <span className="tracking-tighter">★★★★★</span>
-            <span className="font-bold text-[#111111] text-[11px] ml-1">4.9</span>
-            <span className="text-[11px] text-[#888888] font-normal">({reviewCount})</span>
+            <span className="font-bold text-[#111111] text-xs ml-1">4.9</span>
+            <span className="text-xs text-[#888888] font-normal">({reviewCount})</span>
           </div>
 
-          {/* Product Title */}
+          {/* Product Title - Bigger, Bolder font for high-impact readability */}
           <Link
             to="/products/$productId"
             params={{ productId: p.id }}
-            className="font-display font-semibold text-base sm:text-lg text-[#111111] group-hover:text-[#1b5e3f] transition-colors block leading-tight mt-1 truncate"
+            className="font-display font-bold text-lg sm:text-xl md:text-[21px] text-[#111111] group-hover:text-[#1b5e3f] transition-colors block leading-snug mt-1.5 truncate"
           >
             {p.name}
           </Link>
 
           {/* Scent Notes / Subtitle */}
-          <p className="text-xs text-[#777777] line-clamp-1 mt-1 font-light">
+          <p className="text-xs sm:text-[13px] text-[#666666] line-clamp-1 mt-1 font-normal">
             {p.notes}
           </p>
 
           {/* Price Row: Current Price, Strikethrough Original, Green Discount Pill */}
-          <div className="flex items-center gap-2 mt-2">
-            <span className="font-mono text-base font-bold text-[#111111]">
+          <div className="flex items-center gap-2 mt-2.5">
+            <span className="font-mono text-lg sm:text-xl font-extrabold text-[#111111]">
               {money(p.price)}
             </span>
-            <span className="font-mono text-xs text-[#999999] line-through">
+            <span className="font-mono text-xs sm:text-sm text-[#999999] line-through">
               {money(originalPrice)}
             </span>
-            <span className="text-[10px] font-bold text-[#1b5e3f] bg-[#e8f5ef] px-1.5 py-0.5 rounded">
+            <span className="text-[10px] sm:text-[11px] font-extrabold text-[#1b5e3f] bg-[#e8f5ef] px-2 py-0.5 rounded tracking-wide">
               {discountPercent}% OFF
             </span>
           </div>
@@ -123,7 +123,7 @@ export function ProductCard({
         {onAddToCart && (
           <Button
             type="button"
-            className="w-full h-10 mt-3.5 rounded-full bg-[#1b5e3f] hover:bg-[#154a31] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
+            className="w-full h-11 mt-4 rounded-full bg-[#1b5e3f] hover:bg-[#154a31] text-white text-xs sm:text-[13px] font-extrabold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -131,7 +131,7 @@ export function ProductCard({
               onAddToCart(p, e);
             }}
           >
-            <ShoppingBag size={14} />
+            <ShoppingBag size={15} />
             <span>ADD TO CART</span>
           </Button>
         )}
