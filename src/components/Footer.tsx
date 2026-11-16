@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Check, ShieldCheck, Sparkles, Truck, Lock, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Check, ShieldCheck, Sparkles, Truck, Lock, Mail, MapPin, Phone, Factory } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type FooterLink = [label: string, href: string];
@@ -149,10 +149,21 @@ export function Footer({
                 <MapPin size={15} className="text-[#d4af37] shrink-0 mt-0.5" />
                 <div>
                   <span className="font-semibold text-white block text-[10px] uppercase tracking-wider mb-0.5">
-                    Visit us
+                    Outlets
                   </span>
                   <span className="text-[#a8b8ae] leading-relaxed block">
-                    Flat No. 602, Plot No. 1, Shiv Shankar Plaza 2, Sector 7, Airoli, Navi Mumbai 400708, India.
+                    Navi Mumbai (Airoli) · Dombivali · Alandi
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5 text-[11px]">
+                <Factory size={15} className="text-[#d4af37] shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold text-white block text-[10px] uppercase tracking-wider mb-0.5">
+                    Manufacturing Units
+                  </span>
+                  <span className="text-[#a8b8ae] leading-relaxed block">
+                    Junnar · Sangamner
                   </span>
                 </div>
               </div>

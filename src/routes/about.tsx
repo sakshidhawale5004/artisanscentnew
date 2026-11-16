@@ -412,13 +412,10 @@ export default function AboutPage() {
                 <Factory size={22} />
               </div>
               <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                PRODUCTION AND ASSEMBLY
+                MANUFACTURING UNITS &amp; OUTLETS
               </h3>
               <p className="text-xs text-[#666666] leading-relaxed font-light">
-                Artisan Scents' luxury perfume category celebrates fragrance as an expression of
-                personality, style, and individuality. With an emphasis on sophisticated
-                presentation and distinctive scent experiences, these perfumes are suited to
-                personal wear, special occasions, and thoughtful gifting.
+                Our manufacturing operations and steam distillation units are situated in <strong>Junnar</strong> and <strong>Sangamner</strong>, directly sourcing seasonal harvests. Our experience boutiques and retail outlets welcome patrons across <strong>Navi Mumbai (Airoli)</strong>, <strong>Dombivali</strong>, and <strong>Alandi</strong>.
               </p>
             </div>
           </div>

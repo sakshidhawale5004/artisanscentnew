@@ -15,6 +15,8 @@ import {
   Lock,
   X,
   MessageCircle,
+  Factory,
+  MapPin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useProducts, money, type Product } from "@/lib/products";
@@ -122,7 +124,7 @@ function Index() {
           {/* Video Background */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <video
-              src="/videos/aurel-hero.mp4"
+              src="/artisanvideo.mp4"
               autoPlay
               loop
               muted
@@ -436,23 +438,32 @@ function Index() {
                   </div>
                 </div>
 
-                {/* Metric Strip */}
-                <div className="mb-6 sm:mb-8 py-3 sm:py-4 px-3 sm:px-6 rounded-2xl bg-[#f0ede6]/70 border border-[#e8e2d8] grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 text-center">
-                  <div>
-                    <div className="font-display text-xl sm:text-2xl font-semibold text-[#1b5e3f]">100%</div>
-                    <div className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#666666] mt-0.5 font-medium">Botanical Purity</div>
+                {/* Manufacturing Units & Retail Outlets */}
+                <div className="mb-6 sm:mb-8 p-4 sm:p-5 rounded-2xl bg-white border border-[#e8e2d8] shadow-xs grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="border-b sm:border-b-0 sm:border-r border-[#e8e2d8] pb-3 sm:pb-0 sm:pr-4">
+                    <div className="text-[10px] font-bold uppercase tracking-widest text-[#1b5e3f] flex items-center gap-1.5 mb-1.5">
+                      <Factory size={13} className="text-[#d4af37]" />
+                      <span>Manufacturing Units</span>
+                    </div>
+                    <div className="text-sm font-display font-semibold text-[#111111]">
+                      Junnar · Sangamner
+                    </div>
+                    <div className="text-[11px] text-[#777777] font-light mt-0.5">
+                      Steam distillation &amp; botanical laboratories
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-display text-xl sm:text-2xl font-semibold text-[#1b5e3f]">35%+</div>
-                    <div className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#666666] mt-0.5 font-medium">Extrait Strength</div>
-                  </div>
-                  <div>
-                    <div className="font-display text-xl sm:text-2xl font-semibold text-[#1b5e3f]">60 Days</div>
-                    <div className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#666666] mt-0.5 font-medium">Diffuser Life</div>
-                  </div>
-                  <div>
-                    <div className="font-display text-xl sm:text-2xl font-semibold text-[#1b5e3f]">Zero</div>
-                    <div className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#666666] mt-0.5 font-medium">Harsh Chemicals</div>
+
+                  <div className="sm:pl-2">
+                    <div className="text-[10px] font-bold uppercase tracking-widest text-[#1b5e3f] flex items-center gap-1.5 mb-1.5">
+                      <MapPin size={13} className="text-[#d4af37]" />
+                      <span>Outlets</span>
+                    </div>
+                    <div className="text-sm font-display font-semibold text-[#111111]">
+                      Navi Mumbai (Airoli) · Dombivali · Alandi
+                    </div>
+                    <div className="text-[11px] text-[#777777] font-light mt-0.5">
+                      Experience boutiques &amp; olfactory counters
+                    </div>
                   </div>
                 </div>
 

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Mail, Phone, MapPin, MessageCircle, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle, ArrowRight, CheckCircle2, Factory } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { addInquiryToCRM } from "@/lib/store";
@@ -134,9 +134,9 @@ function ContactPage() {
               possibility. Our team in Navi Mumbai is here to guide you.
             </p>
             <div className="reveal-on-scroll reveal-delay-300 mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs text-[#86efac] tracking-wide font-medium">
-              <span>✧ Navi Mumbai Atelier</span>
+              <span>✧ Outlets: Airoli, Dombivali &amp; Alandi</span>
+              <span>✧ Manufacturing Units: Junnar &amp; Sangamner</span>
               <span>✧ Instant WhatsApp Support</span>
-              <span>✧ Bespoke Olfactory Consultations</span>
             </div>
           </div>
         </section>
@@ -200,11 +200,16 @@ function ContactPage() {
                   <span className="w-10 h-10 rounded-full bg-[#1b5e3f]/10 border border-[#1b5e3f]/25 flex items-center justify-center text-[#1b5e3f] shrink-0">
                     <MapPin size={18} />
                   </span>
-                  <span>
+                  <div>
                     <span className="block text-[10px] uppercase tracking-widest text-[#777777] font-semibold">
-                      Visit us
+                      Outlets
                     </span>
-                    <span className="text-[#333333] leading-relaxed block">{ADDRESS}</span>
+                    <span className="text-[#333333] font-semibold leading-relaxed block">
+                      Navi Mumbai (Airoli) · Dombivali · Alandi
+                    </span>
+                    <span className="text-xs text-[#666666] leading-relaxed block mt-1">
+                      {ADDRESS}
+                    </span>
                     <a
                       href={MAP_URL}
                       target="_blank"
@@ -213,7 +218,24 @@ function ContactPage() {
                     >
                       Find us on the map <ArrowRight size={13} />
                     </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <span className="w-10 h-10 rounded-full bg-[#1b5e3f]/10 border border-[#1b5e3f]/25 flex items-center justify-center text-[#1b5e3f] shrink-0">
+                    <Factory size={18} />
                   </span>
+                  <div>
+                    <span className="block text-[10px] uppercase tracking-widest text-[#777777] font-semibold">
+                      Manufacturing Units
+                    </span>
+                    <span className="text-[#333333] font-semibold leading-relaxed block">
+                      Junnar · Sangamner
+                    </span>
+                    <span className="text-xs text-[#666666] leading-relaxed block mt-1">
+                      Distillation stills &amp; botanical extraction facilities
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
