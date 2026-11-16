@@ -145,6 +145,43 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
+
+            {/* Authentic Brand & Atelier Showcase */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 reveal-on-scroll">
+              <div className="relative rounded-2xl overflow-hidden border border-[#e8e2d8] shadow-md group">
+                <img
+                  src="/assets/exibition/artisan scent (1).webp"
+                  alt="Artisan Scents Brand Exhibition & Fragrance Showcase"
+                  className="w-full h-64 sm:h-80 object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-6">
+                  <div className="text-white">
+                    <span className="text-[10px] tracking-widest uppercase text-[#86efac] font-bold block mb-1">
+                      The Atelier &amp; Exhibitions
+                    </span>
+                    <h4 className="font-display text-xl text-white">Artisan Fragrance Architecture</h4>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative rounded-2xl overflow-hidden border border-[#e8e2d8] shadow-md group">
+                <img
+                  src="/assets/project site/artisan scent (33).webp"
+                  alt="Artisan Scents Botanical Terroir & Sourcing Fields"
+                  className="w-full h-64 sm:h-80 object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end p-6">
+                  <div className="text-white">
+                    <span className="text-[10px] tracking-widest uppercase text-[#d4af37] font-bold block mb-1">
+                      Terroir &amp; Botanical Fields
+                    </span>
+                    <h4 className="font-display text-xl text-white">Ethical Botanical Stewardship</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -176,7 +213,15 @@ export default function AboutPage() {
                       Aromatics
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
+                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-white mb-4 border border-[#e8e2d8] flex items-center justify-center p-3 shadow-2xs">
+                    <img
+                      src="/assets/essence oil/Amber Patchouli Oil Bottle.png"
+                      alt="Artisan Scents Pure Essence Oils"
+                      className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
                     Essence Oils
                   </h3>
                   <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
@@ -205,7 +250,15 @@ export default function AboutPage() {
                       Personal Care
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
+                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-white mb-4 border border-[#e8e2d8] flex items-center justify-center p-3 shadow-2xs">
+                    <img
+                      src="/assets/SOAP NEW/Artisan Signature Soap.png"
+                      alt="Artisan Scents Handcrafted Luxury Soaps"
+                      className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
                     Handcrafted Luxury Soaps
                   </h3>
                   <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
@@ -236,7 +289,15 @@ export default function AboutPage() {
                       Rituals
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
+                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-white mb-4 border border-[#e8e2d8] flex items-center justify-center p-3 shadow-2xs">
+                    <img
+                      src="/assets/AGARBATTI NEW/Deluxe Incense Collection.png"
+                      alt="Artisan Scents Scented Agarbatti"
+                      className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
                     Scented Agarbatti
                   </h3>
                   <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
@@ -265,7 +326,15 @@ export default function AboutPage() {
                       Automotive
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
+                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-white mb-4 border border-[#e8e2d8] flex items-center justify-center p-3 shadow-2xs">
+                    <img
+                      src="/assets/car perfurm/Arctic Mist Luxury Car Fragrance.png"
+                      alt="Artisan Scents Car Luxury Perfumes"
+                      className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
                     Car Luxury Perfumes
                   </h3>
                   <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
@@ -295,7 +364,15 @@ export default function AboutPage() {
                       Haute Parfumerie
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
+                  <div className="relative aspect-16/9 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-4 border border-[#e8e2d8] shadow-2xs">
+                    <img
+                      src="/assets/body perform/Luxurious Ivory Amber Perfume Display.png"
+                      alt="Artisan Scents Luxury Perfumes Collection"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
                     Luxury Perfumes
                   </h3>
                   <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
@@ -408,6 +485,14 @@ export default function AboutPage() {
 
             {/* Pillar 5 */}
             <div className="reveal-on-scroll reveal-delay-100 group bg-white rounded-2xl border border-[#e8e2d8] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-lg md:col-span-2 lg:col-span-2">
+              <div className="relative aspect-16/9 sm:aspect-21/9 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-5 border border-[#e8e2d8] shadow-2xs">
+                <img
+                  src="/assets/project%20site/artisan%20scent%20(14).webp"
+                  alt="Artisan Scents Distillation & Manufacturing Operations"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
               <div className="w-12 h-12 rounded-xl bg-[#1b5e3f]/10 text-[#1b5e3f] flex items-center justify-center mb-5">
                 <Factory size={22} />
               </div>

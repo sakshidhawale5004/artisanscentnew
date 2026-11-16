@@ -250,24 +250,6 @@ export function Footer({
           <div className="text-[10px] uppercase tracking-[0.25em] text-[#d4af37] text-center font-mono">
             ✦ FRAGRANCE IS PERSONAL. MAKE IT YOURS. ✦
           </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-[11px] text-[#9eb3a6]">
-            <a href="/privacy-policy" className="hover:text-[#86efac] transition-colors">
-              Privacy Policy
-            </a>
-            <span>·</span>
-            <a href="/return-policy" className="hover:text-[#86efac] transition-colors">
-              Return Policy
-            </a>
-            <span>·</span>
-            <a href="/terms-and-conditions" className="hover:text-[#86efac] transition-colors">
-              Terms &amp; Conditions
-            </a>
-            <span>·</span>
-            <a href="/contact" className="hover:text-[#86efac] transition-colors">
-              Contact
-            </a>
-          </div>
         </div>
       </div>
     </footer>

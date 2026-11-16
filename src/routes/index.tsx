@@ -114,7 +114,7 @@ function Index() {
       />
       <main>
         {/* Luxury Hero Section */}
-        <section className="relative overflow-hidden text-white bg-[#0a0908] border-b border-[#2d8659]/20">
+        <section className="relative overflow-hidden text-[#0b3320] bg-[#faf9f5] border-b border-[#1b5e3f]/20">
           {/* Video Background */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <video
@@ -125,23 +125,23 @@ function Index() {
               playsInline
               className="w-full h-full object-cover scale-105"
             />
-            {/* Luminous Light Overlay - video stays bright & vibrant, text remains fully legible with targeted shadows */}
-            <div className="absolute inset-0 bg-black/20" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/30 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0908]/70 via-transparent to-black/20" />
+            {/* Luminous White Shade Overlay for bright video visibility & dark green contrast */}
+            <div className="absolute inset-0 bg-white/70" />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/40" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-white/30" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-20 pb-16 lg:pt-28 lg:pb-24">
             <div className="max-w-4xl flex flex-col items-start">
-              <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#86efac] font-bold mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                <span className="w-6 h-[1px] bg-[#d4af37]" />
+              <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-bold mb-4 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
+                <span className="w-6 h-[1.5px] bg-[#d4af37]" />
                 <span>LUXURY PERFUMES &amp; BOTANICAL ESSENCES</span>
               </div>
 
-              <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-6xl md:text-7xl font-normal leading-[1.08] tracking-tight text-white max-w-3xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+              <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-6xl md:text-7xl font-normal leading-[1.08] tracking-tight text-[#072416] max-w-3xl drop-shadow-[0_2px_10px_rgba(255,255,255,0.95)]">
                 Timeless Elegance in
                 <br />
-                <em className="text-[#86efac] italic font-serif drop-shadow-[0_4px_28px_rgba(46,196,134,0.4)]">
+                <em className="text-[#135d37] italic font-serif drop-shadow-[0_2px_12px_rgba(19,93,55,0.15)]">
                   every Drop
                 </em>
               </h1>
@@ -149,7 +149,7 @@ function Index() {
               <div className="reveal-on-scroll reveal-delay-200 mt-8 flex flex-wrap items-center gap-4">
                 <Button
                   asChild
-                  className="h-13 px-9 bg-[#1b5e3f] hover:bg-[#23734e] text-white border border-[#2d8659]/70 rounded-full font-bold text-xs uppercase tracking-widest shadow-2xl transition-all hover:scale-105 hover:shadow-[#1b5e3f]/40 cursor-pointer"
+                  className="h-13 px-9 bg-[#1b5e3f] hover:bg-[#14472f] text-white border border-[#2d8659]/80 rounded-full font-bold text-xs uppercase tracking-widest shadow-xl transition-all hover:scale-105 hover:shadow-[#1b5e3f]/30 cursor-pointer"
                 >
                   <a href="/perfumes" className="flex items-center gap-2.5">
                     <span>Explore Collection</span>
@@ -159,53 +159,53 @@ function Index() {
               </div>
             </div>
 
-            {/* Trust Badges Strip with High Contrast Text */}
-            <div className="mt-12 sm:mt-16 pt-7 sm:pt-8 border-t border-white/20 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-left reveal-on-scroll">
+            {/* Trust Badges Strip with High Contrast Dark Green Text */}
+            <div className="mt-12 sm:mt-16 pt-7 sm:pt-8 border-t border-[#1b5e3f]/25 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-left reveal-on-scroll">
               <div className="flex items-center gap-2.5 sm:gap-3 justify-start reveal-on-scroll reveal-delay-50">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f]/60 backdrop-blur-xs border border-[#2d8659]/70 flex items-center justify-center text-[#86efac] shrink-0 shadow-lg">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f] text-white flex items-center justify-center shrink-0 shadow-md">
                   <ShieldCheck size={18} />
                 </div>
                 <div>
-                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
                     Artisanal Purity
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#e0deda] mt-0.5 leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">100% Rare Botanical Extracts</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#2c4e3b] mt-0.5 leading-snug font-medium">100% Rare Botanical Extracts</div>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5 sm:gap-3 justify-start reveal-on-scroll reveal-delay-150">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f]/60 backdrop-blur-xs border border-[#2d8659]/70 flex items-center justify-center text-[#86efac] shrink-0 shadow-lg">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f] text-white flex items-center justify-center shrink-0 shadow-md">
                   <Sparkles size={18} />
                 </div>
                 <div>
-                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
                     Haute Sillage
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#e0deda] mt-0.5 leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">Long-Lasting Extrait Formulations</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#2c4e3b] mt-0.5 leading-snug font-medium">Long-Lasting Extrait Formulations</div>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5 sm:gap-3 justify-start reveal-on-scroll reveal-delay-250">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f]/60 backdrop-blur-xs border border-[#2d8659]/70 flex items-center justify-center text-[#86efac] shrink-0 shadow-lg">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f] text-white flex items-center justify-center shrink-0 shadow-md">
                   <Truck size={18} />
                 </div>
                 <div>
-                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
                     Pan-India Dispatch
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#e0deda] mt-0.5 leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">Insured Doorstep Courier</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#2c4e3b] mt-0.5 leading-snug font-medium">Insured Doorstep Courier</div>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5 sm:gap-3 justify-start reveal-on-scroll reveal-delay-350">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f]/60 backdrop-blur-xs border border-[#2d8659]/70 flex items-center justify-center text-[#86efac] shrink-0 shadow-lg">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f] text-white flex items-center justify-center shrink-0 shadow-md">
                   <Lock size={18} />
                 </div>
                 <div>
-                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
                     Curated Sampling
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#e0deda] mt-0.5 leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">Free Tester with Every Order</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#2c4e3b] mt-0.5 leading-snug font-medium">Free Tester with Every Order</div>
                 </div>
               </div>
             </div>
