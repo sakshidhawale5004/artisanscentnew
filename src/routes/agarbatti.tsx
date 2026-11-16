@@ -171,20 +171,20 @@ function AgarbattiPage() {
           <h2 className="section-title mb-8 reveal-on-scroll">How to Use Agarbatti</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="reveal-on-scroll reveal-delay-100 bg-white/5 p-6 rounded-lg border border-[#1b5e3f]/12">
-              <h3 className="font-display text-lg mb-2 text-[#333333]">🙏 Spiritual Rituals</h3>
+              <h3 className="font-display text-lg mb-2 text-[#333333]">Spiritual Rituals</h3>
               <p className="text-sm text-[#666666]">
                 Ideal for prayer spaces and meditation rooms. Light before your spiritual practice.
               </p>
             </div>
             <div className="reveal-on-scroll reveal-delay-200 bg-white/5 p-6 rounded-lg border border-[#1b5e3f]/12">
-              <h3 className="font-display text-lg mb-2 text-[#333333]">🏠 Home Ambience</h3>
+              <h3 className="font-display text-lg mb-2 text-[#333333]">Home Ambience</h3>
               <p className="text-sm text-[#666666]">
                 Create a welcoming atmosphere in any room. Perfect for creating a peaceful
                 sanctuary.
               </p>
             </div>
             <div className="reveal-on-scroll reveal-delay-300 bg-white/5 p-6 rounded-lg border border-[#1b5e3f]/12">
-              <h3 className="font-display text-lg mb-2 text-[#333333]">🌿 Natural & Pure</h3>
+              <h3 className="font-display text-lg mb-2 text-[#333333]">Natural &amp; Pure</h3>
               <p className="text-sm text-[#666666]">
                 Handcrafted from natural ingredients. No synthetic fragrances or harmful chemicals.
               </p>

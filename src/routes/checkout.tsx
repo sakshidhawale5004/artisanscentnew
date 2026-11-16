@@ -782,7 +782,7 @@ function CheckoutPage() {
 
                   {/* Reassurance Footer text matching Screenshot */}
                   <div className="text-[11px] text-center text-[#555555] font-medium pt-1">
-                    🔒 7-Day Hassle-Free Returns &amp; Pan-India Insured Coverage
+                    7-Day Hassle-Free Returns &amp; Pan-India Insured Coverage
                   </div>
                 </div>
               </div>

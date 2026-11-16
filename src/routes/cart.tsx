@@ -539,7 +539,7 @@ function CartPage() {
                   {/* Assurance footnote */}
                   <div className="mt-5 pt-5 border-t border-[#eeebe5] text-center">
                     <p className="text-[11px] text-[#777777] leading-relaxed">
-                      🔒 Direct artisan concierge fulfillment · Safe transactions · Hand-packed in Mumbai
+                      Direct artisan concierge fulfillment · Safe transactions · Hand-packed in Mumbai
                     </p>
                   </div>
                 </div>

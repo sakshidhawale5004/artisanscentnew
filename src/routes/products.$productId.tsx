@@ -11,6 +11,9 @@ import {
   Star,
   X,
   MessageCircle,
+  Truck,
+  RotateCcw,
+  ShieldCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { products, useProducts, getStoredProducts, money, type Product } from "@/lib/products";
@@ -387,18 +390,18 @@ function ProductDetailPage() {
 
               {/* Trust Badges Bar */}
               <div className="reveal-on-scroll reveal-delay-150 mt-8 pt-6 border-t border-[#e0e0e0] grid grid-cols-3 gap-3">
-                <div className="p-3 rounded-lg bg-[#f5f5f0] border border-[#e0e0e0]">
-                  <div className="text-lg mb-1">🚚</div>
+                <div className="p-3 rounded-lg bg-[#f5f5f0] border border-[#e0e0e0] flex flex-col items-center text-center">
+                  <Truck size={18} className="text-[#1b5e3f] mb-1.5" />
                   <div className="text-[10px] text-[#333333] font-semibold">Free Shipping</div>
                   <div className="text-[9px] text-[#666666]">Above ₹999</div>
                 </div>
-                <div className="p-3 rounded-lg bg-[#f5f5f0] border border-[#e0e0e0]">
-                  <div className="text-lg mb-1">↩</div>
+                <div className="p-3 rounded-lg bg-[#f5f5f0] border border-[#e0e0e0] flex flex-col items-center text-center">
+                  <RotateCcw size={18} className="text-[#1b5e3f] mb-1.5" />
                   <div className="text-[10px] text-[#333333] font-semibold">7-Day Returns</div>
-                  <div className="text-[9px] text-[#666666]">Easy & Hassle-free</div>
+                  <div className="text-[9px] text-[#666666]">Easy &amp; Hassle-free</div>
                 </div>
-                <div className="p-3 rounded-lg bg-[#f5f5f0] border border-[#e0e0e0]">
-                  <div className="text-lg mb-1">🛡️</div>
+                <div className="p-3 rounded-lg bg-[#f5f5f0] border border-[#e0e0e0] flex flex-col items-center text-center">
+                  <ShieldCheck size={18} className="text-[#1b5e3f] mb-1.5" />
                   <div className="text-[10px] text-[#333333] font-semibold">100% Authentic</div>
                   <div className="text-[9px] text-[#666666]">Original KEOMC</div>
                 </div>

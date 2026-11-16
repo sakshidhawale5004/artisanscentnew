@@ -170,21 +170,21 @@ function CarPerfumesPage() {
           <h2 className="section-title mb-8 reveal-on-scroll">Why Choose Artisan Car Perfumes?</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="reveal-on-scroll reveal-delay-100 bg-white p-6 rounded-lg border border-blue-200">
-              <h3 className="font-display text-lg mb-2">🎨 Stylish Design</h3>
+              <h3 className="font-display text-lg mb-2 text-[#1a1a1a]">Stylish Design</h3>
               <p className="text-sm text-muted-foreground">
                 Compact and beautiful diffuser formats that complement any vehicle interior
                 aesthetic.
               </p>
             </div>
             <div className="reveal-on-scroll reveal-delay-200 bg-white p-6 rounded-lg border border-blue-200">
-              <h3 className="font-display text-lg mb-2">⏱️ Long-Lasting</h3>
+              <h3 className="font-display text-lg mb-2 text-[#1a1a1a]">Long-Lasting</h3>
               <p className="text-sm text-muted-foreground">
                 Premium fragrance formulations provide continuous aroma for weeks of driving
                 pleasure.
               </p>
             </div>
             <div className="reveal-on-scroll reveal-delay-300 bg-white p-6 rounded-lg border border-blue-200">
-              <h3 className="font-display text-lg mb-2">🌿 Natural Ingredients</h3>
+              <h3 className="font-display text-lg mb-2 text-[#1a1a1a]">Natural Ingredients</h3>
               <p className="text-sm text-muted-foreground">
                 Crafted from natural aromatic essences and botanical extracts.
               </p>

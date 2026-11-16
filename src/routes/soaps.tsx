@@ -171,21 +171,21 @@ function SoapsPage() {
           <h2 className="section-title mb-8 reveal-on-scroll">The Craft of Cold-Process</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="reveal-on-scroll reveal-delay-100 bg-white/5 p-6 rounded-lg border border-[#1b5e3f]/12">
-              <h3 className="font-display text-lg mb-2 text-[#333333]">🌿 Pure Botanicals</h3>
+              <h3 className="font-display text-lg mb-2 text-[#333333]">Pure Botanicals</h3>
               <p className="text-sm text-[#666666]">
                 Formulated with plant-derived butters and pure essential oils — no harsh synthetic
                 lathering agents.
               </p>
             </div>
             <div className="reveal-on-scroll reveal-delay-200 bg-white/5 p-6 rounded-lg border border-[#1b5e3f]/12">
-              <h3 className="font-display text-lg mb-2 text-[#333333]">🤲 Hand-Poured</h3>
+              <h3 className="font-display text-lg mb-2 text-[#333333]">Hand-Poured</h3>
               <p className="text-sm text-[#666666]">
                 Each bar is cured slowly in small batches, preserving the integrity of every
                 fragrance note.
               </p>
             </div>
             <div className="reveal-on-scroll reveal-delay-300 bg-white/5 p-6 rounded-lg border border-[#1b5e3f]/12">
-              <h3 className="font-display text-lg mb-2 text-[#333333]">✦ Skin Kind</h3>
+              <h3 className="font-display text-lg mb-2 text-[#333333]">Skin Kind</h3>
               <p className="text-sm text-[#666666]">
                 Creamy, balanced lather that cleanses gently and leaves a soft, lingering scent.
               </p>
