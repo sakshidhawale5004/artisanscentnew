@@ -177,7 +177,7 @@ export default function AboutPage() {
                     </span>
                   </div>
                   <h3 className="font-display text-2xl text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                    ESSENCE OILS
+                    Essence Oils
                   </h3>
                   <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
                     Artisan Scents offers essence oils designed for fragrance applications across a
@@ -206,7 +206,7 @@ export default function AboutPage() {
                     </span>
                   </div>
                   <h3 className="font-display text-2xl text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                    HANDCRAFTED SOAPS
+                    Handcrafted Luxury Soaps
                   </h3>
                   <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
                     Discover soaps that combine everyday cleansing with an appealing fragrance
@@ -237,7 +237,7 @@ export default function AboutPage() {
                     </span>
                   </div>
                   <h3 className="font-display text-2xl text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                    SCENTED AGARBATTI
+                    Scented Agarbatti
                   </h3>
                   <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
                     Artisan Scents brings fragrance to traditional rituals and everyday moments
@@ -266,7 +266,7 @@ export default function AboutPage() {
                     </span>
                   </div>
                   <h3 className="font-display text-2xl text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                    CAR PERFUME
+                    Car Luxury Perfumes
                   </h3>
                   <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
                     Enhance your driving environment with car perfumes designed to bring a pleasant
@@ -296,7 +296,7 @@ export default function AboutPage() {
                     </span>
                   </div>
                   <h3 className="font-display text-2xl text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                    LUXURY PERFUMES
+                    Luxury Perfumes
                   </h3>
                   <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
                     Artisan Scents' luxury perfume category celebrates fragrance as an expression of
@@ -331,7 +331,7 @@ export default function AboutPage() {
               <span className="w-5 h-[1px] bg-[#d4af37]" />
             </div>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-[#1a1a1a]">
-              EVERY DETAIL SHAPES THE EXPERIENCE
+              Every Detail Shapes the Experience
             </h2>
             <p className="text-[#555555] text-sm sm:text-base mt-4 font-light leading-relaxed">
               Artisan Scents' luxury perfume category celebrates fragrance as an expression of
@@ -348,7 +348,7 @@ export default function AboutPage() {
                 <Sparkles size={22} />
               </div>
               <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                FRAGRANCE AND INGREDIENT SPECIFICATIONS
+                Fragrance and Ingredient Specifications
               </h3>
               <p className="text-xs text-[#666666] leading-relaxed font-light">
                 Artisan Scents' luxury perfume category celebrates fragrance as an expression of
@@ -364,7 +364,7 @@ export default function AboutPage() {
                 <ShieldCheck size={22} />
               </div>
               <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                MATERIAL VERIFICATION
+                Material Verification
               </h3>
               <p className="text-xs text-[#666666] leading-relaxed font-light">
                 Artisan Scents' luxury perfume category celebrates fragrance as an expression of
@@ -380,7 +380,7 @@ export default function AboutPage() {
                 <PackageCheck size={22} />
               </div>
               <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                PRODUCT AND PACKAGING CHECKS
+                Product and Packaging Checks
               </h3>
               <p className="text-xs text-[#666666] leading-relaxed font-light">
                 Artisan Scents' luxury perfume category celebrates fragrance as an expression of
@@ -396,7 +396,7 @@ export default function AboutPage() {
                 <Truck size={22} />
               </div>
               <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                SOURCING &amp; PROCUREMENT
+                Sourcing &amp; Procurement
               </h3>
               <p className="text-xs text-[#666666] leading-relaxed font-light">
                 Artisan Scents' luxury perfume category celebrates fragrance as an expression of
@@ -412,7 +412,7 @@ export default function AboutPage() {
                 <Factory size={22} />
               </div>
               <h3 className="font-display text-lg text-[#1a1a1a] mb-3 group-hover:text-[#1b5e3f] transition-colors">
-                MANUFACTURING UNITS &amp; OUTLETS
+                Manufacturing Units &amp; Outlets
               </h3>
               <p className="text-xs text-[#666666] leading-relaxed font-light">
                 Our manufacturing operations and steam distillation units are situated in <strong>Junnar</strong> and <strong>Sangamner</strong>, directly sourcing seasonal harvests. Our experience boutiques and retail outlets welcome patrons across <strong>Navi Mumbai (Airoli)</strong>, <strong>Dombivali</strong>, and <strong>Alandi</strong>.
@@ -447,7 +447,7 @@ export default function AboutPage() {
                 asChild
                 className="h-12 px-7 rounded-full border border-white/20 hover:border-white/40 bg-white/10 hover:bg-white/20 text-white text-sm font-medium tracking-wide backdrop-blur-md transition-all"
               >
-                <a href="/contact">Contact Atelier</a>
+                <a href="/contact">Contact</a>
               </Button>
             </div>
           </div>

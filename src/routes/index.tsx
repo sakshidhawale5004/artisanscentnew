@@ -125,10 +125,10 @@ function Index() {
               playsInline
               className="w-full h-full object-cover scale-105"
             />
-            {/* High-Contrast Luxury Overlays for crystal-clear readability */}
-            <div className="absolute inset-0 bg-black/60" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/45" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0908] via-transparent to-black/40" />
+            {/* Luminous Light Overlay - video stays bright & vibrant, text remains fully legible with targeted shadows */}
+            <div className="absolute inset-0 bg-black/20" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0908]/70 via-transparent to-black/20" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-20 pb-16 lg:pt-28 lg:pb-24">

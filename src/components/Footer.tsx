@@ -13,11 +13,11 @@ const shopLinks: FooterLink[] = [
 ];
 
 const maisonLinks: FooterLink[] = [
-  ["Our Story & About", "/about"],
+  ["About", "/about"],
   ["KEOMC Botanical Labs", "/keomc"],
   ["Exhibitions", "/exhibitions"],
   ["Project Sites", "/project-sites"],
-  ["Contact Concierge", "/contact"],
+  ["Contact", "/contact"],
 ];
 
 const policyLinks: FooterLink[] = [

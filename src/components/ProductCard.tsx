@@ -79,13 +79,6 @@ export function ProductCard({
             />
           </button>
         )}
-
-        {/* Bottom Center Gift / Sample Pill (Matching Screenshot 2) */}
-        <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-10 pointer-events-none whitespace-nowrap">
-          <span className="bg-white/95 backdrop-blur-xs text-[#333333] text-[10px] font-medium py-0.5 px-3 rounded-full border border-[#e8e4dc] shadow-2xs">
-            {freeGiftLabel}
-          </span>
-        </div>
       </div>
 
       {/* Info Block */}
