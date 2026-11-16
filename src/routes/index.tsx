@@ -131,97 +131,87 @@ function Index() {
               playsInline
               className="w-full h-full object-cover scale-105"
             />
-            {/* Light Overlays for optimal text visibility */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/40 to-black/30" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0908] via-transparent to-transparent" />
+            {/* High-Contrast Luxury Overlays for crystal-clear readability */}
+            <div className="absolute inset-0 bg-black/60" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/45" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0908] via-transparent to-black/40" />
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-16 pb-14 lg:pt-24 lg:pb-20">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-20 pb-16 lg:pt-28 lg:pb-24">
             <div className="max-w-4xl flex flex-col items-start">
-              <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#86efac] font-medium mb-4">
+              <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#86efac] font-bold mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                 <span className="w-6 h-[1px] bg-[#d4af37]" />
                 <span>LUXURY PERFUMES &amp; BOTANICAL ESSENCES</span>
               </div>
 
-              <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-6xl md:text-7xl font-normal leading-[1.08] tracking-tight text-white max-w-3xl">
+              <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-6xl md:text-7xl font-normal leading-[1.08] tracking-tight text-white max-w-3xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
                 Timeless Elegance in
                 <br />
-                <em className="text-[#86efac] italic font-serif">every Drop</em>
+                <em className="text-[#86efac] italic font-serif drop-shadow-[0_4px_28px_rgba(46,196,134,0.4)]">
+                  every Drop
+                </em>
               </h1>
 
-              <p className="reveal-on-scroll reveal-delay-200 mt-6 text-base sm:text-lg text-[#e0deda] font-light leading-relaxed max-w-2xl">
-                Luxury perfumes crafted for those who appreciate the extraordinary. Handcrafted
-                botanical compositions and rare essences born from artisanal dedication.
-              </p>
-
-              <div className="reveal-on-scroll reveal-delay-300 mt-8 flex flex-wrap items-center gap-4">
+              <div className="reveal-on-scroll reveal-delay-200 mt-8 flex flex-wrap items-center gap-4">
                 <Button
                   asChild
-                  className="h-12 px-8 bg-[#1b5e3f] hover:bg-[#23734e] text-white border border-[#2d8659]/50 rounded-full font-medium tracking-wide shadow-xl transition-all"
+                  className="h-13 px-9 bg-[#1b5e3f] hover:bg-[#23734e] text-white border border-[#2d8659]/70 rounded-full font-bold text-xs uppercase tracking-widest shadow-2xl transition-all hover:scale-105 hover:shadow-[#1b5e3f]/40 cursor-pointer"
                 >
-                  <a href="/perfumes" className="flex items-center gap-2">
-                    Explore Collection <ArrowRight size={16} className="text-[#86efac]" />
-                  </a>
-                </Button>
-
-                <Button
-                  asChild
-                  className="h-12 px-7 rounded-full border border-white/20 hover:border-white/40 bg-white/10 hover:bg-white/20 text-white text-sm font-medium tracking-wide backdrop-blur-md transition-all"
-                >
-                  <a href="/about" className="flex items-center gap-2.5">
-                    <Sparkles size={14} className="text-[#d4af37]" /> Our Story
+                  <a href="/perfumes" className="flex items-center gap-2.5">
+                    <span>Explore Collection</span>
+                    <ArrowRight size={16} className="text-[#86efac]" />
                   </a>
                 </Button>
               </div>
             </div>
 
             {/* Trust Badges Strip with High Contrast Text */}
-            <div className="mt-10 sm:mt-14 pt-6 sm:pt-8 border-t border-white/15 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 text-left reveal-on-scroll">
+            <div className="mt-12 sm:mt-16 pt-7 sm:pt-8 border-t border-white/20 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-left reveal-on-scroll">
               <div className="flex items-center gap-2.5 sm:gap-3 justify-start reveal-on-scroll reveal-delay-50">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f]/40 border border-[#2d8659]/50 flex items-center justify-center text-[#86efac] shrink-0">
-                  <ShieldCheck size={16} />
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f]/60 backdrop-blur-xs border border-[#2d8659]/70 flex items-center justify-center text-[#86efac] shrink-0 shadow-lg">
+                  <ShieldCheck size={18} />
                 </div>
                 <div>
-                  <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-white leading-tight">
+                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
                     Artisanal Purity
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#b0aaa0] mt-0.5 leading-snug">100% Rare Botanical Extracts</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#e0deda] mt-0.5 leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">100% Rare Botanical Extracts</div>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5 sm:gap-3 justify-start reveal-on-scroll reveal-delay-150">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f]/40 border border-[#2d8659]/50 flex items-center justify-center text-[#86efac] shrink-0">
-                  <Sparkles size={16} />
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f]/60 backdrop-blur-xs border border-[#2d8659]/70 flex items-center justify-center text-[#86efac] shrink-0 shadow-lg">
+                  <Sparkles size={18} />
                 </div>
                 <div>
-                  <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-white leading-tight">
+                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
                     Haute Sillage
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#b0aaa0] mt-0.5 leading-snug">Long-Lasting Extrait Formulations</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#e0deda] mt-0.5 leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">Long-Lasting Extrait Formulations</div>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5 sm:gap-3 justify-start reveal-on-scroll reveal-delay-250">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f]/40 border border-[#2d8659]/50 flex items-center justify-center text-[#86efac] shrink-0">
-                  <Truck size={16} />
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f]/60 backdrop-blur-xs border border-[#2d8659]/70 flex items-center justify-center text-[#86efac] shrink-0 shadow-lg">
+                  <Truck size={18} />
                 </div>
                 <div>
-                  <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-white leading-tight">
+                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
                     Pan-India Dispatch
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#b0aaa0] mt-0.5 leading-snug">Insured Doorstep Courier</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#e0deda] mt-0.5 leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">Insured Doorstep Courier</div>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5 sm:gap-3 justify-start reveal-on-scroll reveal-delay-350">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f]/40 border border-[#2d8659]/50 flex items-center justify-center text-[#86efac] shrink-0">
-                  <Lock size={16} />
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f]/60 backdrop-blur-xs border border-[#2d8659]/70 flex items-center justify-center text-[#86efac] shrink-0 shadow-lg">
+                  <Lock size={18} />
                 </div>
                 <div>
-                  <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-white leading-tight">
+                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
                     Curated Sampling
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#b0aaa0] mt-0.5 leading-snug">Free Tester with Every Order</div>
+                  <div className="text-[10px] sm:text-[11px] text-[#e0deda] mt-0.5 leading-snug drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">Free Tester with Every Order</div>
                 </div>
               </div>
             </div>
