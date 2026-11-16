@@ -228,33 +228,38 @@ export default function AboutPage() {
 
             <div className="flex flex-wrap justify-center gap-7">
               {/* 01. ESSENCE OILS */}
-              <div className="reveal-on-scroll group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
+              <div className="reveal-on-scroll group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-2xl font-semibold text-[#1b5e3f]">01.</span>
-                    <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] bg-white border border-[#e8e2d8] px-3 py-1 rounded-full font-semibold">
-                      Aromatics
-                    </span>
-                  </div>
-                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-4 border border-[#e8e2d8] shadow-2xs">
+                  {/* Category Image Area - Edge-to-edge with no inner margin or radius; square 1:1 ratio so product is never cropped */}
+                  <div className="relative aspect-square w-full overflow-hidden bg-[#faf8f5]">
                     <img
                       src="/assets/essence oil/Amber Patchouli Oil Bottle.png"
                       alt="Artisan Scents Pure Essence Oils"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
+                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
+                      <span className="font-mono text-base font-bold text-[#1b5e3f] bg-white/95 backdrop-blur-xs px-3.5 py-1 rounded-full border border-[#e8e2d8] shadow-xs">
+                        01.
+                      </span>
+                      <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] bg-white/95 backdrop-blur-xs border border-[#e8e2d8] px-3.5 py-1 rounded-full font-bold shadow-xs">
+                        Aromatics
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
-                    Essence Oils
-                  </h3>
-                  <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
-                    Artisan Scents offers essence oils designed for fragrance applications across a
-                    variety of suitable products and environments. With a focus on fragrance
-                    character and versatility, these oils serve as an option for businesses and
-                    customers seeking distinctive aromatic profiles for their specific requirements.
-                  </p>
+                  <div className="p-7 pb-0">
+                    <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
+                      Essence Oils
+                    </h3>
+                    <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
+                      Artisan Scents offers essence oils designed for fragrance applications across a
+                      variety of suitable products and environments. With a focus on fragrance
+                      character and versatility, these oils serve as an option for businesses and
+                      customers seeking distinctive aromatic profiles for their specific requirements.
+                    </p>
+                  </div>
                 </div>
-                <div className="pt-4 border-t border-[#e8e2d8] space-y-1.5">
+                <div className="p-7 pt-4 border-t border-[#e8e2d8] space-y-1.5">
                   <div className="text-xs font-semibold text-[#1b5e3f] uppercase tracking-wider">
                     Diverse fragrance profiles
                   </div>
@@ -265,32 +270,37 @@ export default function AboutPage() {
               </div>
 
               {/* 02. HANDCRAFTED SOAPS */}
-              <div className="reveal-on-scroll reveal-delay-100 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
+              <div className="reveal-on-scroll reveal-delay-100 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-2xl font-semibold text-[#1b5e3f]">02.</span>
-                    <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] bg-white border border-[#e8e2d8] px-3 py-1 rounded-full font-semibold">
-                      Personal Care
-                    </span>
-                  </div>
-                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-4 border border-[#e8e2d8] shadow-2xs">
+                  {/* Category Image Area - Edge-to-edge with no inner margin or radius; square 1:1 ratio so product is never cropped */}
+                  <div className="relative aspect-square w-full overflow-hidden bg-[#faf8f5]">
                     <img
                       src="/assets/SOAP NEW/Artisan Signature Soap.png"
                       alt="Artisan Scents Handcrafted Luxury Soaps"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
+                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
+                      <span className="font-mono text-base font-bold text-[#1b5e3f] bg-white/95 backdrop-blur-xs px-3.5 py-1 rounded-full border border-[#e8e2d8] shadow-xs">
+                        02.
+                      </span>
+                      <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] bg-white/95 backdrop-blur-xs border border-[#e8e2d8] px-3.5 py-1 rounded-full font-bold shadow-xs">
+                        Personal Care
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
-                    Handcrafted Luxury Soaps
-                  </h3>
-                  <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
-                    Discover soaps that combine everyday cleansing with an appealing fragrance
-                    experience. Designed to complement daily personal-care routines, our soap
-                    category brings together fragrance, presentation, and everyday usability.
-                  </p>
+                  <div className="p-7 pb-0">
+                    <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
+                      Handcrafted Luxury Soaps
+                    </h3>
+                    <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
+                      Discover soaps that combine everyday cleansing with an appealing fragrance
+                      experience. Designed to complement daily personal-care routines, our soap
+                      category brings together fragrance, presentation, and everyday usability.
+                    </p>
+                  </div>
                 </div>
-                <div className="pt-4 border-t border-[#e8e2d8] flex items-center gap-2 flex-wrap">
+                <div className="p-7 pt-4 border-t border-[#e8e2d8] flex items-center gap-2 flex-wrap">
                   <span className="text-xs px-2.5 py-1 rounded-full bg-white border border-[#e8e2d8] text-[#1b5e3f] font-medium">
                     Refreshing
                   </span>
@@ -304,33 +314,38 @@ export default function AboutPage() {
               </div>
 
               {/* 03. SCENTED AGARBATTI */}
-              <div className="reveal-on-scroll reveal-delay-200 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
+              <div className="reveal-on-scroll reveal-delay-200 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-2xl font-semibold text-[#1b5e3f]">03.</span>
-                    <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] bg-white border border-[#e8e2d8] px-3 py-1 rounded-full font-semibold">
-                      Rituals
-                    </span>
-                  </div>
-                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-4 border border-[#e8e2d8] shadow-2xs">
+                  {/* Category Image Area - Edge-to-edge with no inner margin or radius; square 1:1 ratio so product is never cropped */}
+                  <div className="relative aspect-square w-full overflow-hidden bg-[#faf8f5]">
                     <img
                       src="/assets/AGARBATTI NEW/Deluxe Incense Collection.png"
                       alt="Artisan Scents Scented Agarbatti"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
+                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
+                      <span className="font-mono text-base font-bold text-[#1b5e3f] bg-white/95 backdrop-blur-xs px-3.5 py-1 rounded-full border border-[#e8e2d8] shadow-xs">
+                        03.
+                      </span>
+                      <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] bg-white/95 backdrop-blur-xs border border-[#e8e2d8] px-3.5 py-1 rounded-full font-bold shadow-xs">
+                        Rituals
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
-                    Scented Agarbatti
-                  </h3>
-                  <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
-                    Artisan Scents brings fragrance to traditional rituals and everyday moments
-                    through its agarbatti range. Suitable for prayer spaces, meditation settings, and
-                    home ambience, these incense products help create an atmosphere of calm and
-                    familiarity.
-                  </p>
+                  <div className="p-7 pb-0">
+                    <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
+                      Scented Agarbatti
+                    </h3>
+                    <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
+                      Artisan Scents brings fragrance to traditional rituals and everyday moments
+                      through its agarbatti range. Suitable for prayer spaces, meditation settings, and
+                      home ambience, these incense products help create an atmosphere of calm and
+                      familiarity.
+                    </p>
+                  </div>
                 </div>
-                <div className="pt-4 border-t border-[#e8e2d8] space-y-1.5">
+                <div className="p-7 pt-4 border-t border-[#e8e2d8] space-y-1.5">
                   <div className="text-xs font-semibold text-[#1b5e3f] uppercase tracking-wider">
                     Fragrances inspired by Indian traditions
                   </div>
@@ -341,33 +356,38 @@ export default function AboutPage() {
               </div>
 
               {/* 04. CAR PERFUME */}
-              <div className="reveal-on-scroll reveal-delay-100 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
+              <div className="reveal-on-scroll reveal-delay-100 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-2xl font-semibold text-[#1b5e3f]">04.</span>
-                    <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] bg-white border border-[#e8e2d8] px-3 py-1 rounded-full font-semibold">
-                      Automotive
-                    </span>
-                  </div>
-                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-4 border border-[#e8e2d8] shadow-2xs">
+                  {/* Category Image Area - Edge-to-edge with no inner margin or radius; square 1:1 ratio so product is never cropped */}
+                  <div className="relative aspect-square w-full overflow-hidden bg-[#faf8f5]">
                     <img
                       src="/assets/car perfurm/Arctic Mist Luxury Car Fragrance.png"
                       alt="Artisan Scents Car Luxury Perfumes"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
+                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
+                      <span className="font-mono text-base font-bold text-[#1b5e3f] bg-white/95 backdrop-blur-xs px-3.5 py-1 rounded-full border border-[#e8e2d8] shadow-xs">
+                        04.
+                      </span>
+                      <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] bg-white/95 backdrop-blur-xs border border-[#e8e2d8] px-3.5 py-1 rounded-full font-bold shadow-xs">
+                        Automotive
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
-                    Car Luxury Perfumes
-                  </h3>
-                  <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
-                    Enhance your driving environment with car perfumes designed to bring a pleasant
-                    fragrance to vehicle interiors. Combining compact designs with an everyday
-                    lifestyle appeal, this category offers a simple way to personalise the in-car
-                    experience.
-                  </p>
+                  <div className="p-7 pb-0">
+                    <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
+                      Car Luxury Perfumes
+                    </h3>
+                    <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
+                      Enhance your driving environment with car perfumes designed to bring a pleasant
+                      fragrance to vehicle interiors. Combining compact designs with an everyday
+                      lifestyle appeal, this category offers a simple way to personalise the in-car
+                      experience.
+                    </p>
+                  </div>
                 </div>
-                <div className="pt-4 border-t border-[#e8e2d8] space-y-1">
+                <div className="p-7 pt-4 border-t border-[#e8e2d8] space-y-1">
                   <div className="text-xs text-[#1b5e3f] font-semibold">
                     • Designed for automotive fragrance use
                   </div>
@@ -379,33 +399,38 @@ export default function AboutPage() {
               </div>
 
               {/* 05. LUXURY PERFUMES */}
-              <div className="reveal-on-scroll reveal-delay-200 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
+              <div className="reveal-on-scroll reveal-delay-200 group rounded-2xl border border-[#e8e2d8] bg-[#fcfbf9] overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#1b5e3f]/50 hover:shadow-xl w-full md:w-[calc(50%-14px)] lg:w-[calc(33.333%-19px)] max-w-md">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-2xl font-semibold text-[#1b5e3f]">05.</span>
-                    <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] bg-white border border-[#e8e2d8] px-3 py-1 rounded-full font-semibold">
-                      Haute Parfumerie
-                    </span>
-                  </div>
-                  <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-[#faf8f5] mb-4 border border-[#e8e2d8] shadow-2xs">
+                  {/* Category Image Area - Edge-to-edge with no inner margin or radius; square 1:1 ratio so product is never cropped */}
+                  <div className="relative aspect-square w-full overflow-hidden bg-[#faf8f5]">
                     <img
                       src="/assets/body perform/Luxurious Ivory Amber Perfume Display.png"
                       alt="Artisan Scents Luxury Perfumes Collection"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
+                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10 pointer-events-none">
+                      <span className="font-mono text-base font-bold text-[#1b5e3f] bg-white/95 backdrop-blur-xs px-3.5 py-1 rounded-full border border-[#e8e2d8] shadow-xs">
+                        05.
+                      </span>
+                      <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] bg-white/95 backdrop-blur-xs border border-[#e8e2d8] px-3.5 py-1 rounded-full font-bold shadow-xs">
+                        Haute Parfumerie
+                      </span>
+                    </div>
                   </div>
-                  <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
-                    Luxury Perfumes
-                  </h3>
-                  <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
-                    Artisan Scents' luxury perfume category celebrates fragrance as an expression of
-                    personality, style, and individuality. With an emphasis on sophisticated
-                    presentation and distinctive scent experiences, these perfumes are suited to
-                    personal wear, special occasions, and thoughtful gifting.
-                  </p>
+                  <div className="p-7 pb-0">
+                    <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 group-hover:text-[#1b5e3f] transition-colors">
+                      Luxury Perfumes
+                    </h3>
+                    <p className="text-sm text-[#555555] font-light leading-relaxed mb-5">
+                      Artisan Scents' luxury perfume category celebrates fragrance as an expression of
+                      personality, style, and individuality. With an emphasis on sophisticated
+                      presentation and distinctive scent experiences, these perfumes are suited to
+                      personal wear, special occasions, and thoughtful gifting.
+                    </p>
+                  </div>
                 </div>
-                <div className="pt-4 border-t border-[#e8e2d8] space-y-1.5">
+                <div className="p-7 pt-4 border-t border-[#e8e2d8] space-y-1.5">
                   <div className="text-xs font-semibold text-[#1b5e3f] uppercase tracking-wider">
                     Distinctive fragrance compositions
                   </div>
