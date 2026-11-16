@@ -27,31 +27,39 @@ function KEOMCPage() {
       <Header currentPage="KEOMC" />
 
       <main className="bg-[#fafaf8] text-[#333333] min-h-screen">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden border-b border-[#1b5e3f]/15 py-14 sm:py-20 px-4 sm:px-12 bg-[#0d0c0b] text-white">
-          {/* Unsplash Background Image */}
+        {/* Hero Section with Luminous Botanical Daylight & Authentic Sourcing Imagery */}
+        <section className="relative overflow-hidden border-b border-[#1b5e3f]/20 py-20 sm:py-28 px-6 sm:px-12 bg-[#faf9f5] text-[#072416]">
+          {/* Authentic Terroir & Cultivation Field Background */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=2400&q=85"
-              alt="KEOMC Botanical Harvest Background"
+              src="/assets/project%20site/artisan%20scent%20(33).webp"
+              alt="KEOMC Botanical Harvest & Distillation Background"
               className="w-full h-full object-cover scale-105"
             />
-            {/* Deep Contrast Overlay for optimal text visibility */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0d0c0b]/90 via-transparent to-transparent" />
+            {/* Luminous Soft White/Cream Overlay for bright botanical atmosphere and crisp dark green text */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#faf9f5]/95 via-[#faf9f5]/85 to-[#faf9f5]/55" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#faf9f5] via-transparent to-[#faf9f5]/30" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto">
-            <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#86efac] font-medium mb-3">
-              <span className="w-5 h-[1px] bg-[#d4af37]" />
-              <span>HERITAGE PARTNER</span>
+            <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-bold mb-3">
+              <span className="w-6 h-[1.5px] bg-[#d4af37]" />
+              <span>HERITAGE BOTANICAL PARTNER</span>
             </div>
-            <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-white">
+            <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#072416] drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
               KEOMC
               <br />
-              <em className="text-[#86efac] font-serif italic">Botanical Excellence</em>
+              <em className="text-[#135d37] font-serif italic">Botanical Excellence</em>
             </h1>
-            <p className="reveal-on-scroll reveal-delay-200 mt-4 text-sm sm:text-base text-[#e0deda] font-light max-w-xl leading-relaxed">
+            <div className="reveal-on-scroll reveal-delay-200 mt-4 flex flex-wrap items-center gap-2.5 text-xs">
+              <span className="px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1b5e3f]/25 text-[#072416] font-semibold">
+                Junnar &amp; Sangamner Distillation Facilities
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-white/60 border border-[#1b5e3f]/20 text-[#1b5e3f] font-medium">
+                ✦ Steam Distillation &amp; Terroir Stewardship
+              </span>
+            </div>
+            <p className="reveal-on-scroll reveal-delay-300 mt-4 text-sm sm:text-base text-[#333333] font-light max-w-xl leading-relaxed">
               Kulswami Essence Oil Manufacturing Company — Processing aromatic and medicinal plants
               with expertise in essential oil extraction and botanical stewardship.
             </p>

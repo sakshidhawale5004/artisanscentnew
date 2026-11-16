@@ -163,55 +163,57 @@ function Index() {
                 </Button>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Trust Badges Strip with High Contrast Dark Green Text */}
-            <div className="mt-12 sm:mt-16 pt-7 sm:pt-8 border-t border-[#1b5e3f]/25 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-left reveal-on-scroll">
-              <div className="flex items-center gap-2.5 sm:gap-3 justify-start reveal-on-scroll reveal-delay-50">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f] text-white flex items-center justify-center shrink-0 shadow-md">
-                  <ShieldCheck size={18} />
-                </div>
-                <div>
-                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
-                    Artisanal Purity
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-semibold drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">100% Rare Botanical Extracts</div>
-                </div>
+        {/* Value Assurance Trust Strip (Below Hero Section) */}
+        <section className="bg-[#faf9f5] border-b border-[#1b5e3f]/15 py-5 sm:py-6 px-4 sm:px-8 shadow-xs">
+          <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-left">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#1b5e3f] text-white flex items-center justify-center shrink-0 shadow-md">
+                <ShieldCheck size={18} />
               </div>
-
-              <div className="flex items-center gap-2.5 sm:gap-3 justify-start reveal-on-scroll reveal-delay-150">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f] text-white flex items-center justify-center shrink-0 shadow-md">
-                  <Sparkles size={18} />
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
+                  Artisanal Purity
                 </div>
-                <div>
-                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
-                    Haute Sillage
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-semibold drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">Long-Lasting Extrait Formulations</div>
-                </div>
+                <div className="text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-medium">100% Rare Botanical Extracts</div>
               </div>
+            </div>
 
-              <div className="flex items-center gap-2.5 sm:gap-3 justify-start reveal-on-scroll reveal-delay-250">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f] text-white flex items-center justify-center shrink-0 shadow-md">
-                  <Truck size={18} />
-                </div>
-                <div>
-                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
-                    Pan-India Dispatch
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-semibold drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">Insured Doorstep Courier</div>
-                </div>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#1b5e3f] text-white flex items-center justify-center shrink-0 shadow-md">
+                <Sparkles size={18} />
               </div>
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
+                  Haute Sillage
+                </div>
+                <div className="text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-medium">Long-Lasting Extrait Formulations</div>
+              </div>
+            </div>
 
-              <div className="flex items-center gap-2.5 sm:gap-3 justify-start reveal-on-scroll reveal-delay-350">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1b5e3f] text-white flex items-center justify-center shrink-0 shadow-md">
-                  <Lock size={18} />
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#1b5e3f] text-white flex items-center justify-center shrink-0 shadow-md">
+                <Truck size={18} />
+              </div>
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
+                  Pan-India Dispatch
                 </div>
-                <div>
-                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">
-                    Curated Sampling
-                  </div>
-                  <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-semibold drop-shadow-[0_1px_4px_rgba(255,255,255,0.95)]">Free Tester with Every Order</div>
+                <div className="text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-medium">Insured Doorstep Courier</div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#1b5e3f] text-white flex items-center justify-center shrink-0 shadow-md">
+                <Lock size={18} />
+              </div>
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
+                  Curated Sampling
                 </div>
+                <div className="text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-medium">Free Tester with Every Order</div>
               </div>
             </div>
           </div>

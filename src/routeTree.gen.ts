@@ -15,6 +15,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AgarbattiRouteImport } from './routes/agarbatti'
 import { Route as CarPerfumesRouteImport } from './routes/car-perfumes'
 import { Route as CartRouteImport } from './routes/cart'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CrmRouteImport } from './routes/crm'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -59,6 +60,11 @@ const CarPerfumesRoute = CarPerfumesRouteImport.update({
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -144,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/agarbatti': typeof AgarbattiRoute
   '/car-perfumes': typeof CarPerfumesRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/crm': typeof CrmRoute
   '/dashboard': typeof DashboardRoute
@@ -167,6 +174,7 @@ export interface FileRoutesByTo {
   '/agarbatti': typeof AgarbattiRoute
   '/car-perfumes': typeof CarPerfumesRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/crm': typeof CrmRoute
   '/dashboard': typeof DashboardRoute
@@ -191,6 +199,7 @@ export interface FileRoutesById {
   '/agarbatti': typeof AgarbattiRoute
   '/car-perfumes': typeof CarPerfumesRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/contact': typeof ContactRoute
   '/crm': typeof CrmRoute
   '/dashboard': typeof DashboardRoute
@@ -216,6 +225,7 @@ export interface FileRouteTypes {
     | '/agarbatti'
     | '/car-perfumes'
     | '/cart'
+    | '/checkout'
     | '/contact'
     | '/crm'
     | '/dashboard'
@@ -239,6 +249,7 @@ export interface FileRouteTypes {
     | '/agarbatti'
     | '/car-perfumes'
     | '/cart'
+    | '/checkout'
     | '/contact'
     | '/crm'
     | '/dashboard'
@@ -262,6 +273,7 @@ export interface FileRouteTypes {
     | '/agarbatti'
     | '/car-perfumes'
     | '/cart'
+    | '/checkout'
     | '/contact'
     | '/crm'
     | '/dashboard'
@@ -286,6 +298,7 @@ export interface RootRouteChildren {
   AgarbattiRoute: typeof AgarbattiRoute
   CarPerfumesRoute: typeof CarPerfumesRoute
   CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
   ContactRoute: typeof ContactRoute
   CrmRoute: typeof CrmRoute
   DashboardRoute: typeof DashboardRoute
@@ -345,6 +358,13 @@ declare module '@tanstack/react-router' {
       path: '/cart'
       fullPath: '/cart'
       preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -462,6 +482,7 @@ const rootRouteChildren: RootRouteChildren = {
   AgarbattiRoute: AgarbattiRoute,
   CarPerfumesRoute: CarPerfumesRoute,
   CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
   ContactRoute: ContactRoute,
   CrmRoute: CrmRoute,
   DashboardRoute: DashboardRoute,

@@ -502,14 +502,26 @@ function CartPage() {
                     </div>
                   )}
 
-                  {/* Primary WhatsApp Concierge Checkout Button */}
+                  {/* Primary Proceed to Checkout Page Button */}
+                  <Button
+                    asChild
+                    className="w-full h-12 sm:h-13 bg-[#1b5e3f] hover:bg-[#14472f] text-white rounded-full font-semibold tracking-wide shadow-lg transition-all flex items-center justify-center gap-2 mb-2.5 text-xs sm:text-sm cursor-pointer"
+                  >
+                    <Link to="/checkout" className="flex items-center justify-center gap-2">
+                      <Lock size={15} className="text-[#86efac]" />
+                      <span>Proceed to Checkout</span>
+                      <ArrowRight size={15} />
+                    </Link>
+                  </Button>
+
+                  {/* Secondary WhatsApp Concierge Checkout Button */}
                   <Button
                     onClick={handleWhatsAppCheckout}
-                    className="w-full h-12 sm:h-13 bg-[#1b5e3f] hover:bg-[#164a31] text-white rounded-full font-semibold tracking-wide shadow-lg transition-all flex items-center justify-center gap-2 mb-3 text-xs sm:text-sm"
+                    variant="outline"
+                    className="w-full h-11 border border-[#1b5e3f]/40 text-[#1b5e3f] hover:bg-[#1b5e3f]/5 rounded-full font-medium tracking-wide transition-all flex items-center justify-center gap-2 mb-3 text-xs cursor-pointer"
                   >
-                    <MessageCircle size={17} className="text-[#86efac]" />
-                    <span>Proceed to WhatsApp Checkout</span>
-                    <ArrowRight size={15} />
+                    <MessageCircle size={15} className="text-[#1b5e3f]" />
+                    <span>Quick WhatsApp Checkout</span>
                   </Button>
 
                   {/* Secondary Continue Shopping Button */}

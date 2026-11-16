@@ -74,51 +74,6 @@ export function Footer({
       <div className="absolute top-0 left-1/4 w-[500px] h-[300px] bg-[#1b5e3f]/15 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[250px] bg-[#d4af37]/10 blur-[100px] rounded-full pointer-events-none" />
 
-      {/* Top Value Assurance Ribbon */}
-      <div className="border-b border-white/10 bg-[#071d12]/70 backdrop-blur-sm py-5 sm:py-6 px-4 sm:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-xs">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#1b5e3f]/40 border border-[#2d8659]/50 flex items-center justify-center text-[#86efac] shrink-0">
-              <ShieldCheck size={16} />
-            </div>
-            <div>
-              <div className="font-semibold text-white tracking-wide">100% Authentic Botanicals</div>
-              <div className="text-[11px] text-[#9fb3a6]">Pure unadulterated rare extracts</div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#1b5e3f]/40 border border-[#2d8659]/50 flex items-center justify-center text-[#86efac] shrink-0">
-              <Sparkles size={16} />
-            </div>
-            <div>
-              <div className="font-semibold text-white tracking-wide">Extrait Concentration</div>
-              <div className="text-[11px] text-[#9fb3a6]">Long-lasting 8–12h sillage</div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#1b5e3f]/40 border border-[#2d8659]/50 flex items-center justify-center text-[#86efac] shrink-0">
-              <Truck size={16} />
-            </div>
-            <div>
-              <div className="font-semibold text-white tracking-wide">Pan-India Delivery</div>
-              <div className="text-[11px] text-[#9fb3a6]">Free shipping on orders ₹999+</div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#1b5e3f]/40 border border-[#2d8659]/50 flex items-center justify-center text-[#86efac] shrink-0">
-              <Lock size={16} />
-            </div>
-            <div>
-              <div className="font-semibold text-white tracking-wide">Secure Checkout</div>
-              <div className="text-[11px] text-[#9fb3a6]">256-Bit encrypted transactions</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Footer Body */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10">

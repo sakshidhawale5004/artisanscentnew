@@ -27,42 +27,42 @@ export default function AboutPage() {
       <Header currentPage="About" />
 
       <main className="bg-[#fafaf8] text-[#333333] min-h-screen">
-        {/* Hero Section with High-Contrast Typography and Topic-Matched Unsplash Image */}
-        <section className="relative overflow-hidden border-b border-[#1b5e3f]/15 py-24 px-6 sm:px-12 bg-[#0d0c0b] text-white">
-          {/* Unsplash Background Image - Editorial Luxury Fragrance Flacon */}
+        {/* Hero Section with Luminous Luxury Daylight Aesthetic & Authentic Atelier Imagery */}
+        <section className="relative overflow-hidden border-b border-[#1b5e3f]/20 py-20 sm:py-28 px-6 sm:px-12 bg-[#faf9f5] text-[#072416]">
+          {/* Authentic Brand Exhibition & Atelier Background */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=2400&q=85"
-              alt="Artisan Scents Corporate Presentation"
+              src="/assets/exibition/artisan scent (1).webp"
+              alt="Artisan Scents Corporate Presentation & Atelier Exhibition"
               className="w-full h-full object-cover scale-105"
             />
-            {/* Deep Contrast Overlay for guaranteed text legibility */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0d0c0b]/90 via-transparent to-transparent" />
+            {/* Luminous Soft White/Cream Overlay for bright botanical atmosphere and crisp dark green text */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#faf9f5]/95 via-[#faf9f5]/85 to-[#faf9f5]/55" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#faf9f5] via-transparent to-[#faf9f5]/30" />
           </div>
 
           <div className="relative z-10 max-w-5xl mx-auto">
-            <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#86efac] font-medium mb-4">
-              <span className="w-6 h-[1px] bg-[#d4af37]" />
+            <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#1b5e3f] font-bold mb-4">
+              <span className="w-6 h-[1.5px] bg-[#d4af37]" />
               <span>S C E N T S &nbsp;✦&nbsp; A R T I S A N</span>
             </div>
 
-            <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight text-white leading-[1.08]">
+            <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight text-[#072416] leading-[1.08] drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
               Corporate &amp;
               <br />
-              <em className="text-[#86efac] font-serif italic">Marketing Presentation</em>
+              <em className="text-[#135d37] font-serif italic">Marketing Presentation</em>
             </h1>
 
-            <div className="reveal-on-scroll reveal-delay-200 mt-6 flex flex-wrap items-center gap-4">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs text-[#d4af37] tracking-widest font-semibold uppercase">
-                Presenter: VAISHALI CHAVAN
+            <div className="reveal-on-scroll reveal-delay-200 mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-[#1b5e3f]/25 text-xs text-[#072416] tracking-widest font-semibold uppercase shadow-xs">
+                Presenter: <span className="text-[#135d37]">VAISHALI CHAVAN</span>
               </div>
-              <div className="text-xs text-[#86efac] font-medium tracking-wide">
+              <div className="text-xs text-[#1b5e3f] font-semibold tracking-wide bg-white/60 backdrop-blur-xs px-3.5 py-1.5 rounded-full border border-[#1b5e3f]/20">
                 ✦ Artisan Scents Official Brand Deck
               </div>
             </div>
 
-            <p className="reveal-on-scroll reveal-delay-300 mt-5 text-sm sm:text-base text-[#e0deda] font-light max-w-2xl leading-relaxed">
+            <p className="reveal-on-scroll reveal-delay-300 mt-5 text-sm sm:text-base text-[#333333] font-light max-w-2xl leading-relaxed">
               Operating across a diverse portfolio of fragrance products and related solutions in the
               fragrance and flavours sector. Building meaningful connections through the world of scent.
             </p>
