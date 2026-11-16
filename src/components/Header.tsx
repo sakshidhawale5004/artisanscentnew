@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, Search, ShoppingBag, Heart, X, ChevronDown, ArrowRight, Trash2 } from "lucide-react";
 import { useWishlist, useShoppingBag } from "@/lib/store";
 import { useProducts, money, type Product } from "@/lib/products";
@@ -13,20 +13,48 @@ type HeaderProps = {
   wishlistCount?: number;
 };
 
-const navItems = [
-  { label: "Home", href: "/" },
+type CategoryNavItem = {
+  label: string;
+  href: string;
+  categoryKey: "perfumes" | "essence-oils" | "car-perfumes" | "agarbatti" | "soaps";
+  subtitle: string;
+};
+
+const categoryNavItems: CategoryNavItem[] = [
   {
-    label: "Shop",
-    href: "#",
-    children: [
-      { label: "All Products", href: "/products" },
-      { label: "Perfumes", href: "/perfumes" },
-      { label: "Essence Oils", href: "/essence-oils" },
-      { label: "Car Perfumes", href: "/car-perfumes" },
-      { label: "Agarbatti", href: "/agarbatti" },
-      { label: "Soaps", href: "/soaps" },
-    ],
+    label: "Perfumes",
+    href: "/perfumes",
+    categoryKey: "perfumes",
+    subtitle: "Haute Parfumerie",
   },
+  {
+    label: "Essence Oils",
+    href: "/essence-oils",
+    categoryKey: "essence-oils",
+    subtitle: "Pure Botanicals",
+  },
+  {
+    label: "Car Perfumes",
+    href: "/car-perfumes",
+    categoryKey: "car-perfumes",
+    subtitle: "Automotive Luxury",
+  },
+  {
+    label: "Agarbatti",
+    href: "/agarbatti",
+    categoryKey: "agarbatti",
+    subtitle: "Traditional Incense",
+  },
+  {
+    label: "Soaps",
+    href: "/soaps",
+    categoryKey: "soaps",
+    subtitle: "Artisan Bathing Bars",
+  },
+];
+
+const rightNavItems = [
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "KEOMC", href: "/keomc" },
   { label: "Contact", href: "/contact" },
@@ -41,8 +69,10 @@ export function Header({
   wishlistCount: propWishlistCount,
 }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [shopOpen, setShopOpen] = useState(false);
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+  const [mobileCategoryOpen, setMobileCategoryOpen] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Global store hooks for fallback modal/drawer
   const { saved, toggleSaved, wishlistCount: storeWishlistCount } = useWishlist();
@@ -56,14 +86,38 @@ export function Header({
   const effectiveTotalItems = propTotalItems !== undefined ? propTotalItems : storeTotalItems;
   const effectiveWishlistCount = propWishlistCount !== undefined ? propWishlistCount : storeWishlistCount;
 
+  const handleCategoryEnter = (key: string) => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setHoveredCategory(key);
+  };
+
+  const handleCategoryLeave = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = setTimeout(() => {
+      setHoveredCategory(null);
+    }, 160);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
+  // Close menus on route change
   useEffect(() => {
+    setHoveredCategory(null);
     setMobileOpen(false);
     setInternalDrawer(null);
   }, [currentPage]);
@@ -129,7 +183,7 @@ export function Header({
         className={`luxury-header${scrolled ? " luxury-header--scrolled" : ""}`}
         role="banner"
       >
-        {/* Left Side: Mobile Hamburger & Desktop Left Nav Links */}
+        {/* Left Side: Mobile Hamburger & Desktop 5 Category Dropdowns */}
         <div className="luxury-header-left">
           {/* Mobile Hamburger on the left */}
           <button
@@ -142,48 +196,108 @@ export function Header({
           </button>
 
           <nav className="luxury-nav hidden lg:flex" aria-label="Primary navigation left">
-            {navItems.slice(0, 2).map((item) =>
-              item.children ? (
-                <div key={item.label} className="luxury-dropdown-wrapper">
-                  <button
-                    type="button"
-                    className={`luxury-nav-link luxury-dropdown-trigger${currentPage === item.label ? " active" : ""}`}
-                    onClick={() => setShopOpen((o) => !o)}
-                    aria-expanded={shopOpen}
+            {categoryNavItems.map((cat, idx) => {
+              const catProducts = products.filter((p) => p.category === cat.categoryKey).slice(0, 3);
+              const isOpen = hoveredCategory === cat.categoryKey;
+              const isActive = currentPage === cat.label || currentPage === cat.categoryKey;
+              const alignClass =
+                idx === 0
+                  ? "left-0"
+                  : idx === 1
+                    ? "left-0 xl:-left-6"
+                    : idx === 2
+                      ? "left-1/2 -translate-x-1/2"
+                      : idx === 3
+                        ? "right-0 xl:-right-6"
+                        : "right-0";
+
+              return (
+                <div
+                  key={cat.categoryKey}
+                  className="luxury-dropdown-wrapper"
+                  onMouseEnter={() => handleCategoryEnter(cat.categoryKey)}
+                  onMouseLeave={handleCategoryLeave}
+                >
+                  <a
+                    href={cat.href}
+                    className={`luxury-nav-link luxury-dropdown-trigger${isActive ? " active" : ""}`}
+                    aria-expanded={isOpen}
                     aria-haspopup="true"
                   >
-                    {item.label}
+                    <span>{cat.label}</span>
                     <ChevronDown
-                      size={12}
-                      className={`luxury-chevron${shopOpen ? " rotated" : ""}`}
+                      size={11}
+                      strokeWidth={2.5}
+                      className={`luxury-chevron${isOpen ? " rotated" : ""}`}
                     />
-                  </button>
-                  {shopOpen && (
-                    <div className="luxury-dropdown" role="menu">
-                      {item.children.map((child) => (
-                        <a
-                          key={child.label}
-                          href={child.href}
-                          className="luxury-dropdown-item"
-                          role="menuitem"
-                          onClick={() => setShopOpen(false)}
-                        >
-                          {child.label}
-                        </a>
-                      ))}
+                  </a>
+
+                  {isOpen && (
+                    <div
+                      className={`luxury-category-dropdown ${alignClass} w-[420px] sm:w-[450px]`}
+                      role="menu"
+                      onMouseEnter={() => handleCategoryEnter(cat.categoryKey)}
+                      onMouseLeave={handleCategoryLeave}
+                    >
+                      {/* Dropdown Header */}
+                      <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#eeebe5]">
+                        <div>
+                          <span className="text-[10px] uppercase font-bold tracking-[0.18em] text-[#1b5e3f] block">
+                            {cat.label} Collection
+                          </span>
+                          <span className="text-[11px] text-[#777777] font-medium">
+                            {cat.subtitle}
+                          </span>
+                        </div>
+                        <span className="text-[10px] font-semibold text-[#888888] bg-[#f5f3ef] px-2.5 py-0.5 rounded-full">
+                          Featured
+                        </span>
+                      </div>
+
+                      {/* 3 Products Grid */}
+                      <div className="grid grid-cols-3 gap-2.5">
+                        {catProducts.map((p) => (
+                          <a
+                            key={p.id}
+                            href={`/products/${p.id}`}
+                            onClick={() => setHoveredCategory(null)}
+                            className="group flex flex-col p-2 rounded-xl bg-[#faf8f5] hover:bg-[#f3efe6] border border-[#eeebe5] hover:border-[#1b5e3f]/40 transition-all text-left shadow-2xs hover:shadow-xs"
+                          >
+                            <div className="w-full aspect-square rounded-lg bg-white overflow-hidden p-1.5 flex items-center justify-center border border-[#ece7de] mb-2 group-hover:scale-[1.04] transition-transform">
+                              <img
+                                src={p.image}
+                                alt={p.name}
+                                className="w-full h-full object-contain"
+                                loading="lazy"
+                              />
+                            </div>
+                            <h4 className="font-display font-bold text-xs text-[#111111] group-hover:text-[#1b5e3f] line-clamp-1 transition-colors leading-tight">
+                              {p.name}
+                            </h4>
+                            <p className="text-[10px] text-[#777777] font-medium line-clamp-1 mt-0.5">
+                              {p.notes.split("·")[0]?.trim() || p.notes}
+                            </p>
+                            <span className="font-mono text-xs font-bold text-[#1b5e3f] mt-1.5">
+                              {money(p.price)}
+                            </span>
+                          </a>
+                        ))}
+                      </div>
+
+                      {/* View More Button */}
+                      <a
+                        href={cat.href}
+                        onClick={() => setHoveredCategory(null)}
+                        className="mt-3.5 flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-[#1b5e3f] hover:bg-[#164a31] text-white text-xs font-bold tracking-wider uppercase transition-colors shadow-xs group"
+                      >
+                        <span>View More</span>
+                        <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
+                      </a>
                     </div>
                   )}
                 </div>
-              ) : (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className={`luxury-nav-link${currentPage === item.label ? " active" : ""}`}
-                >
-                  {item.label}
-                </a>
-              ),
-            )}
+              );
+            })}
           </nav>
         </div>
 
@@ -208,10 +322,10 @@ export function Header({
           </a>
         </div>
 
-        {/* Right Side: Desktop Right Nav Links & Action Icons */}
+        {/* Right Side: Desktop Right Nav Links (Home, About, KEOMC, Contact) & Action Icons */}
         <div className="luxury-header-right">
           <nav className="luxury-nav hidden lg:flex" aria-label="Primary navigation right">
-            {navItems.slice(2).map((item) => (
+            {rightNavItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
@@ -607,38 +721,103 @@ export function Header({
               </button>
             </div>
 
-            <ul className="luxury-mobile-links">
-              {navItems.map((item) => (
-                <li key={item.label}>
-                  {item.children ? (
-                    <>
-                      <span className="luxury-mobile-category">{item.label}</span>
-                      <ul className="luxury-mobile-sub">
-                        {item.children.map((child) => (
-                          <li key={child.label}>
-                            <a
-                              href={child.href}
-                              className="luxury-mobile-link luxury-mobile-link--sub"
-                              onClick={() => setMobileOpen(false)}
-                            >
-                              {child.label}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  ) : (
+            {/* Mobile Categories & Products Section */}
+            <div className="p-4 border-b border-[#eeebe5]">
+              <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#1b5e3f] block mb-2.5">
+                Categories
+              </span>
+              <div className="space-y-1.5">
+                {categoryNavItems.map((cat) => {
+                  const isExpanded = mobileCategoryOpen === cat.categoryKey;
+                  const catProducts = products.filter((p) => p.category === cat.categoryKey).slice(0, 3);
+                  return (
+                    <div key={cat.label} className="border-b border-[#f0ede6] pb-1.5 last:border-b-0">
+                      <div className="flex items-center justify-between py-1">
+                        <a
+                          href={cat.href}
+                          className={`text-sm font-semibold tracking-wide uppercase ${
+                            currentPage === cat.label || currentPage === cat.categoryKey
+                              ? "text-[#1b5e3f]"
+                              : "text-[#222222]"
+                          }`}
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {cat.label}
+                        </a>
+                        <button
+                          type="button"
+                          className="p-1.5 text-[#666666] hover:text-[#111111]"
+                          onClick={() => setMobileCategoryOpen(isExpanded ? null : cat.categoryKey)}
+                          aria-label={`Toggle ${cat.label} products`}
+                        >
+                          <ChevronDown
+                            size={16}
+                            className={`transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                          />
+                        </button>
+                      </div>
+
+                      {isExpanded && (
+                        <div className="mt-2 pb-2">
+                          <div className="grid grid-cols-3 gap-2">
+                            {catProducts.map((p) => (
+                              <a
+                                key={p.id}
+                                href={`/products/${p.id}`}
+                                className="flex flex-col p-1.5 rounded-lg bg-[#faf8f5] border border-[#eeebe5]"
+                                onClick={() => setMobileOpen(false)}
+                              >
+                                <img
+                                  src={p.image}
+                                  alt={p.name}
+                                  className="w-full aspect-square object-contain rounded bg-white p-1 mb-1"
+                                />
+                                <span className="text-[11px] font-semibold text-[#111111] truncate">
+                                  {p.name}
+                                </span>
+                                <span className="text-[10px] font-bold text-[#1b5e3f] mt-0.5">
+                                  {money(p.price)}
+                                </span>
+                              </a>
+                            ))}
+                          </div>
+                          <a
+                            href={cat.href}
+                            className="mt-2.5 flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-lg bg-[#1b5e3f] text-white text-xs font-bold uppercase tracking-wider"
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            <span>View More</span>
+                            <ArrowRight size={13} />
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Mobile Main Pages Section */}
+            <div className="p-4">
+              <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#888888] block mb-2.5">
+                Pages
+              </span>
+              <ul className="space-y-2">
+                {rightNavItems.map((item) => (
+                  <li key={item.label}>
                     <a
                       href={item.href}
-                      className="luxury-mobile-link"
+                      className={`text-sm font-semibold tracking-wide uppercase py-1 block ${
+                        currentPage === item.label ? "text-[#1b5e3f]" : "text-[#444444] hover:text-[#111111]"
+                      }`}
                       onClick={() => setMobileOpen(false)}
                     >
                       {item.label}
                     </a>
-                  )}
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </nav>
         </div>
       )}

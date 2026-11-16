@@ -49,7 +49,7 @@ function PerfumesPage() {
         Luxury Fragrances. Premium Expressions. <span className="ml-3">✦</span>
       </div>
       <Header
-        currentPage="Shop"
+        currentPage="Perfumes"
         onSearchClick={() => setPanel("search")}
         onBagClick={() => setPanel("bag")}
         totalItems={totalItems}

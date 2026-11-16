@@ -34,10 +34,15 @@ const carPerfume5 = "/assets/car perfurm/Mystic Musk Luxury Car Fragrance.png";
 const agarbatti1 = "/assets/AGARBATTI NEW/Premium Agarbatti Sticks.png";
 const agarbatti2 = "/assets/AGARBATTI NEW/Deluxe Incense Collection.png";
 const agarbatti3 = "/assets/AGARBATTI NEW/Artisanscent Incense Jar Pyramid.png";
+const agarbatti4 = "/assets/agarbatti/agarbatti (1).png";
+const agarbatti5 = "/assets/agarbatti/agarbatti (2).png";
 
 // Soaps
 const soap1 = "/assets/SOAP NEW/Artisan Signature Soap.png";
 const soap2 = "/assets/SOAP NEW/ARTISAN SCENT Aromatics Soap Ring.png";
+const soap3 = "/assets/soaps/soap.png";
+const soap4 = "/assets/soaps/Varad Aromatics Soap Ring.png";
+const soap5 = "/assets/soap_sectionimage.jpg";
 
 import { useState, useEffect } from "react";
 
@@ -86,7 +91,7 @@ export const products: Product[] = [
     size: "30 ml",
     sku: "2235102",
     image: bodyPerfume2,
-    badge: "Fresh",
+    badge: "Bestseller",
     description:
       "Invigorating coastal marine notes kissed by ocean sea spray and crisp sunlit citrus. Evoking the brisk freshness of morning ocean winds.",
   },
@@ -100,7 +105,7 @@ export const products: Product[] = [
     size: "30 ml",
     sku: "2235103",
     image: bodyPerfume3,
-    badge: "Signature",
+    badge: "Bestseller",
     description:
       "Bold, mysterious, and unapologetically distinct. Rich spiced amber layered over aged cedarwood and dark leather undertones.",
   },
@@ -114,7 +119,7 @@ export const products: Product[] = [
     size: "30 ml",
     sku: "2235104",
     image: bodyPerfume4,
-    badge: "Popular",
+    badge: "Bestseller",
     description:
       "A sharp, masculine oceanic surge pairing zesty Italian bergamot with crushed mint and a grounded, cedarwood base.",
   },
@@ -128,7 +133,7 @@ export const products: Product[] = [
     size: "30 ml",
     sku: "2235105",
     image: bodyPerfume5,
-    badge: "Exclusive",
+    badge: "Bestseller",
     description:
       "A sophisticated modern oud softened with delicate white petals and cream musk. Opulent yet wearable, bridging regal depth and modern grace.",
   },
@@ -240,7 +245,7 @@ export const products: Product[] = [
     category: "essence-oils",
     price: 599,
     image: essence1,
-    badge: "Premium Oil",
+    badge: "Bestseller",
     botanicalName: "Pogostemon cablin",
     size: "10 ml",
     description:
@@ -254,7 +259,7 @@ export const products: Product[] = [
     category: "essence-oils",
     price: 399,
     image: essence2,
-    badge: "Pure Essential",
+    badge: "Bestseller",
     botanicalName: "Rosmarinus officinalis",
     size: "10 ml",
     description:
@@ -268,7 +273,7 @@ export const products: Product[] = [
     category: "essence-oils",
     price: 275,
     image: essence3,
-    badge: "Natural",
+    badge: "Bestseller",
     botanicalName: "Cymbopogon winterianus",
     size: "10 ml",
     description:
@@ -282,7 +287,7 @@ export const products: Product[] = [
     category: "essence-oils",
     price: 550,
     image: essence4,
-    badge: "Premium Oil",
+    badge: "Bestseller",
     botanicalName: "Pelargonium graveolens",
     size: "10 ml",
     description: "Sweet floral aroma extensively used in cosmetics and personal care formulations.",
@@ -295,7 +300,7 @@ export const products: Product[] = [
     category: "essence-oils",
     price: 425,
     image: essence5,
-    badge: "Pure Essential",
+    badge: "Bestseller",
     botanicalName: "Cymbopogon martinii",
     size: "10 ml",
     description: "Rich in natural geraniol. Ideal cosmetic ingredient and excellent blending oil.",
@@ -381,7 +386,7 @@ export const products: Product[] = [
     size: "8 ml",
     sku: "5573102",
     image: carPerfume2,
-    badge: "Signature",
+    badge: "Bestseller",
     description:
       "Inspired by royal valley woodlands. Fresh alpine pine, crushed green needles, and sweet morning blossom for a serene, luxurious driving ambience.",
   },
@@ -395,7 +400,7 @@ export const products: Product[] = [
     size: "8 ml",
     sku: "5573103",
     image: carPerfume3,
-    badge: "Luxury",
+    badge: "Bestseller",
     description:
       "An opulent hanging diffuser releasing velvety agarwood, warm golden amber, and subtle spice to elevate your vehicle into a palace lounge.",
   },
@@ -409,7 +414,7 @@ export const products: Product[] = [
     size: "8 ml",
     sku: "5573104",
     image: carPerfume4,
-    badge: "Popular",
+    badge: "Bestseller",
     description:
       "Timeless warmth. Rich amber resin blended with heritage Mysore sandalwood to deliver a calming, premium atmosphere on every journey.",
   },
@@ -423,7 +428,7 @@ export const products: Product[] = [
     size: "8 ml",
     sku: "5573105",
     image: carPerfume5,
-    badge: "Delicate",
+    badge: "Bestseller",
     description:
       "Pure, delicate white musk and gentle blossoms create an aura of pristine cleanliness and comforting elegance in your cabin.",
   },
@@ -437,7 +442,7 @@ export const products: Product[] = [
     category: "agarbatti",
     price: 399,
     image: agarbatti1,
-    badge: "Handcrafted",
+    badge: "Bestseller",
     size: "Box",
     description:
       "Fragrances inspired by Indian traditions. Floral and woody scent profiles for prayer spaces and meditation.",
@@ -450,7 +455,7 @@ export const products: Product[] = [
     category: "agarbatti",
     price: 499,
     image: agarbatti2,
-    badge: "Premium",
+    badge: "Bestseller",
     size: "Box",
     description:
       "Premium incense products for rituals and everyday moments. Creates an atmosphere of calm and familiarity.",
@@ -463,10 +468,36 @@ export const products: Product[] = [
     category: "agarbatti",
     price: 599,
     image: agarbatti3,
-    badge: "Exclusive",
+    badge: "Bestseller",
     size: "Pyramid Pack",
     description:
       "Premium pyramid dhoop sticks in traditional style. Perfect for creating peaceful ambience in any space.",
+  },
+  {
+    id: "agarbatti-sacred-temple",
+    name: "Sacred Temple Flora Agarbatti",
+    notes: "Champa · Sandal · Sacred Amber",
+    family: "Traditional",
+    category: "agarbatti",
+    price: 449,
+    image: agarbatti4,
+    badge: "Bestseller",
+    size: "Box of 50",
+    description:
+      "Pure devotional incense hand-rolled with aromatic champaca flowers and crushed resin. Creates a serene sanctuary in any sacred space.",
+  },
+  {
+    id: "agarbatti-mysore-sandal",
+    name: "Royal Mysore Sandalwood Incense",
+    notes: "Mysore Sandal · Cedar · Vetiver Earth",
+    family: "Traditional",
+    category: "agarbatti",
+    price: 549,
+    image: agarbatti5,
+    badge: "Bestseller",
+    size: "Box of 40",
+    description:
+      "A regal classic crafted from genuine Mysore sandalwood paste and natural botanical extracts for long-burning fragrant calm.",
   },
 
   // SOAPS
@@ -478,7 +509,7 @@ export const products: Product[] = [
     category: "soaps",
     price: 249,
     image: soap1,
-    badge: "Handcrafted",
+    badge: "Bestseller",
     size: "100 g",
     description:
       "A cold-process bathing bar infused with pure botanical essence oils. Creamy lather and a soft, lingering fragrance for daily luxury.",
@@ -491,16 +522,55 @@ export const products: Product[] = [
     category: "soaps",
     price: 299,
     image: soap2,
-    badge: "Premium",
+    badge: "Bestseller",
     size: "125 g",
     description:
       "An aromatic artisan soap ring enriched with essential oils, crafted for a rich, fragrant cleanse and a refined shelf presence.",
+  },
+  {
+    id: "soap-lavender-botanical",
+    name: "Pure Lavender Botanical Soap",
+    notes: "Calming Lavender · Shea Butter · Chamomile",
+    family: "Personal Care",
+    category: "soaps",
+    price: 279,
+    image: soap3,
+    badge: "Bestseller",
+    size: "110 g",
+    description:
+      "Cold-crafted botanical soap bar enriched with relaxing lavender oil and rich plant butter for deep skin hydration and soothing fragrance.",
+  },
+  {
+    id: "soap-varad-aromatics",
+    name: "Varad Herbal Aromatics Soap Ring",
+    notes: "Herbal Green · Neem · Fresh Basil",
+    family: "Personal Care",
+    category: "soaps",
+    price: 319,
+    image: soap4,
+    badge: "Bestseller",
+    size: "125 g",
+    description:
+      "Clarifying artisan soap ring formulated with traditional herbal oils and gentle plant glycerin for an invigorating, purifying cleanse.",
+  },
+  {
+    id: "soap-nourishing-clay",
+    name: "Botanical Clay & Shea Bath Bar",
+    notes: "French Rose Clay · Sweet Almond · Shea",
+    family: "Personal Care",
+    category: "soaps",
+    price: 269,
+    image: soap5,
+    badge: "Bestseller",
+    size: "100 g",
+    description:
+      "Velvety cold-processed bathing bar enriched with mineral-rich botanical clay and nourishing shea butter for radiant, supple skin.",
   },
 ];
 
 export const money = (amount: number) => `₹${amount}`;
 
-export const PRODUCTS_STORAGE_KEY = "artisanscent_live_catalog_v5";
+export const PRODUCTS_STORAGE_KEY = "artisanscent_live_catalog_v7";
 export const PRODUCTS_UPDATED_EVENT = "artisanscent:products-updated";
 
 export function getStoredProducts(): Product[] {
@@ -513,6 +583,8 @@ export function getStoredProducts(): Product[] {
       localStorage.removeItem("artisanscent_live_catalog_v2");
       localStorage.removeItem("artisanscent_live_catalog_v3");
       localStorage.removeItem("artisanscent_live_catalog_v4");
+      localStorage.removeItem("artisanscent_live_catalog_v5");
+      localStorage.removeItem("artisanscent_live_catalog_v6");
       localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
       return products;
     }

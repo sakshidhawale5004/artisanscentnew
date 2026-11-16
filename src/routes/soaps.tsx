@@ -50,7 +50,7 @@ function SoapsPage() {
         <span className="ml-3">✦</span>
       </div>
       <Header
-        currentPage="Shop"
+        currentPage="Soaps"
         onSearchClick={() => setPanel("search")}
         onBagClick={() => setPanel("bag")}
         totalItems={totalItems}

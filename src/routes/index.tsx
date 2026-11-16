@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState, useMemo } from "react";
 import {
   ArrowDown,
   ArrowRight,
@@ -87,15 +87,21 @@ function Index() {
     setPanel("bag");
     setCheckout(false);
   };
-  const filtered = products.filter((p) => {
-    if (filter === "All Products") return true;
-    if (filter === "Perfumes") return p.category === "perfumes";
-    if (filter === "Oils") return p.category === "essence-oils";
-    if (filter === "Car Perfumes") return p.category === "car-perfumes";
-    if (filter === "Agarbatti") return p.category === "agarbatti";
-    if (filter === "Soaps") return p.category === "soaps";
-    return true;
-  });
+  const filtered = useMemo(() => {
+    if (filter === "Perfumes") return products.filter((p) => p.category === "perfumes").slice(0, 5);
+    if (filter === "Oils") return products.filter((p) => p.category === "essence-oils").slice(0, 5);
+    if (filter === "Car Perfumes") return products.filter((p) => p.category === "car-perfumes").slice(0, 5);
+    if (filter === "Agarbatti") return products.filter((p) => p.category === "agarbatti").slice(0, 5);
+    if (filter === "Soaps") return products.filter((p) => p.category === "soaps").slice(0, 5);
+    // "All Products" - 5 category best sellers (1 iconic product from each category)
+    return [
+      products.find((p) => p.id === "ivory-amber") || products.find((p) => p.category === "perfumes"),
+      products.find((p) => p.id === "patchouli-oil") || products.find((p) => p.category === "essence-oils"),
+      products.find((p) => p.id === "car-arctic-mist") || products.find((p) => p.category === "car-perfumes"),
+      products.find((p) => p.id === "agarbatti-premium") || products.find((p) => p.category === "agarbatti"),
+      products.find((p) => p.id === "soap-signature") || products.find((p) => p.category === "soaps"),
+    ].filter((p): p is Product => Boolean(p));
+  }, [filter, products]);
   const signatureIcons = ["ivory-amber", "ocean-breeze", "car-arctic-mist", "vetiver-oil"]
     .map((id) => products.find((p) => p.id === id))
     .filter((p): p is Product => Boolean(p));
@@ -265,13 +271,14 @@ function Index() {
           </div>
 
           <div className="product-grid">
-            {filtered.slice(0, 3).map((p, idx) => {
-              const delayClass =
-                idx % 3 === 0
-                  ? "reveal-delay-100"
-                  : idx % 3 === 1
-                    ? "reveal-delay-200"
-                    : "reveal-delay-300";
+            {filtered.slice(0, 5).map((p, idx) => {
+              const delayClass = [
+                "reveal-delay-100",
+                "reveal-delay-200",
+                "reveal-delay-300",
+                "reveal-delay-100",
+                "reveal-delay-200",
+              ][idx % 5];
               return (
                 <article key={p.id} className={`reveal-on-scroll ${delayClass}`}>
                   <div

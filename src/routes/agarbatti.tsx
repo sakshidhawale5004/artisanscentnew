@@ -49,7 +49,7 @@ function AgarbattiPage() {
         Handcrafted Incense · Traditional Rituals · Sacred Ambience <span className="ml-3">✦</span>
       </div>
       <Header
-        currentPage="Shop"
+        currentPage="Agarbatti"
         onSearchClick={() => setPanel("search")}
         onBagClick={() => setPanel("bag")}
         totalItems={totalItems}
