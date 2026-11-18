@@ -10,7 +10,7 @@ const bodyPerfume8 = "/assets/perfumes/Scarlet Spirit Luxury Perfume Bottle.png"
 const bodyPerfume9 = "/assets/perfumes/Artisan Pure Musk Perfume Bottle.png";
 const bodyPerfume10 = "/assets/perfumes/Artisan Scent Ice Wave Bottle.png";
 const bodyPerfume11 = "/assets/perfumes/Visionary Artisan Scent Perfume Bottle.png";
-const bodyPerfume12 = "/assets/perfumes/Royal Noir Perfume in Gold and Shadow.png";
+const bodyPerfume12 = "/assets/Royal Noir Artisan Scent Bottle.png";
 
 // Essence Oils
 const essence1 = "/assets/essence oil/Elegant Patchouli Oil Bottle.png";
@@ -26,7 +26,7 @@ const essence9 = "/assets/essence oil/Golden Vetiver Oil Bottle.png";
 // Car Perfumes (5 Fragrances)
 const carPerfume1 = "/assets/carperfumes/Arctic Mist Car Freshener Render.png";
 const carPerfume2 = "/assets/carperfumes/Royal Valley Teardrop Car Perfume.png";
-const carPerfume3 = "/assets/carperfumes/Regal Oud Car Diffuser.png";
+const carPerfume3 = "/assets/Regal Oud Wooden Car Freshener.png";
 const carPerfume4 = "/assets/carperfumes/Amber Heritage Car Freshener Bottle.png";
 const carPerfume5 = "/assets/carperfumes/Mystic Musk Hanging Air Freshener.png";
 
@@ -43,6 +43,11 @@ const soap3 = "/assets/soaps/Glossy Green Heart with Leaf Emblem.png";
 const soap4 = "/assets/soaps/Glossy Ivory Flower Soap with Gold AS Monogram.png";
 const soap5 = "/assets/soaps/Glossy Blue AS Leaf-Em embossed Soap.png";
 
+// Gifting (3 Luxury Gift Sets)
+const giftSet1 = "/assets/Artisan Scents Luxury Gift Set.png";
+const giftSet2 = "/assets/Artisan Scents Luxury Fragrance Gift Set.png";
+const giftSet3 = "/assets/Artisan Scents Luxury Perfume Collection.png";
+
 import { useState, useEffect } from "react";
 
 export type Product = {
@@ -50,7 +55,7 @@ export type Product = {
   name: string;
   notes: string;
   family: string;
-  category: "perfumes" | "essence-oils" | "car-perfumes" | "agarbatti" | "soaps";
+  category: "perfumes" | "essence-oils" | "car-perfumes" | "agarbatti" | "soaps" | "gifting";
   price: number;
   salePrice?: number | undefined;
   image: string;
@@ -552,11 +557,52 @@ export const products: Product[] = [
     description:
       "An invigorating coastal spa bar formulated with marine minerals, nutrient-dense sea kelp, and crisp mint for a restorative, energizing daily cleanse.",
   },
+
+  // GIFTING (3 Luxury Gift Sets)
+  {
+    id: "gift-luxury-set",
+    name: "Artisan Scents Luxury Gift Set",
+    notes: "Signature Extrait · Hanging Car Diffuser · Botanical Flower Soap",
+    family: "Luxury Gift Set",
+    category: "gifting",
+    price: 1499,
+    image: giftSet1,
+    badge: "Bestseller",
+    size: "4-Piece Bespoke Set",
+    description:
+      "An exquisite introductory presentation box featuring two luxury extrait flacons, an artisanal wooden hanging car diffuser, and a hand-sculpted pearlescent flower soap.",
+  },
+  {
+    id: "gift-fragrance-deluxe-set",
+    name: "Artisan Scents Grand Deluxe Gift Hamper",
+    notes: "Full Olfactory Collection · Extrait · Diffusers · Soaps · Essence Oils",
+    family: "Grand Hamper",
+    category: "gifting",
+    price: 2999,
+    image: giftSet2,
+    badge: "Grand Luxury",
+    size: "10-Piece Grand Hamper",
+    description:
+      "The ultimate royal olfactory indulgence: two extrait perfumes, dual hanging car diffusers, hand-rolled incense sticks, triple botanical bathing bars, and therapeutic essence oils in an embossed gold keepsake box.",
+  },
+  {
+    id: "gift-perfume-collection",
+    name: "Artisan Scents Luxury Perfume Collection",
+    notes: "Ivory Amber · Ocean Breeze · Crimson Charm · Lone Legend",
+    family: "Parfum Coffret",
+    category: "gifting",
+    price: 1999,
+    image: giftSet3,
+    badge: "Connoisseur Edition",
+    size: "4 × 30 ml Coffret",
+    description:
+      "A prestigious coffret of four 30ml extrait de parfum masterworks presented in a lavish gold-embossed presentation box. An unforgettable signature gift for fine fragrance enthusiasts.",
+  },
 ];
 
 export const money = (amount: number) => `₹${amount}`;
 
-export const PRODUCTS_STORAGE_KEY = "artisanscent_live_catalog_v9";
+export const PRODUCTS_STORAGE_KEY = "artisanscent_live_catalog_v10";
 export const PRODUCTS_UPDATED_EVENT = "artisanscent:products-updated";
 
 export function getStoredProducts(): Product[] {
@@ -573,6 +619,7 @@ export function getStoredProducts(): Product[] {
       localStorage.removeItem("artisanscent_live_catalog_v6");
       localStorage.removeItem("artisanscent_live_catalog_v7");
       localStorage.removeItem("artisanscent_live_catalog_v8");
+      localStorage.removeItem("artisanscent_live_catalog_v9");
       localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
       return products;
     }
@@ -591,6 +638,7 @@ export function getStoredProducts(): Product[] {
           p.id === "car-wooden"
       );
       const missingNewProducts =
+        !parsed.some((p: Product) => p.id === "gift-luxury-set") ||
         !parsed.some((p: Product) => p.id === "agarbatti-sandalwood") ||
         !parsed.some((p: Product) => p.id === "soap-green-heart");
       if (hasOldProducts || missingNewProducts) {

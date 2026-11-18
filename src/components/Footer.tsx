@@ -10,6 +10,7 @@ const shopLinks: FooterLink[] = [
   ["Car Diffusers", "/car-perfumes"],
   ["Sacred Agarbatti", "/agarbatti"],
   ["Handcrafted Soaps", "/soaps"],
+  ["Luxury Gifting", "/gifting"],
 ];
 
 const maisonLinks: FooterLink[] = [

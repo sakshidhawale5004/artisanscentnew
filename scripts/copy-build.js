@@ -46,6 +46,11 @@ const productIds = [
   "soap-green-heart",
   "soap-pearlescent-flower",
   "soap-turquoise-spa",
+
+  // Gifting
+  "gift-luxury-set",
+  "gift-fragrance-deluxe-set",
+  "gift-perfume-collection",
 ];
 
 const candidates = [

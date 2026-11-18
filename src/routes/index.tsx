@@ -17,6 +17,7 @@ import {
   MessageCircle,
   Factory,
   MapPin,
+  Gift,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useProducts, money, type Product } from "@/lib/products";
@@ -98,9 +99,13 @@ function Index() {
       products.find((p) => p.id === "ivory-amber") || products.find((p) => p.category === "perfumes"),
       products.find((p) => p.id === "patchouli-oil") || products.find((p) => p.category === "essence-oils"),
       products.find((p) => p.id === "car-arctic-mist") || products.find((p) => p.category === "car-perfumes"),
-      products.find((p) => p.id === "agarbatti-premium") || products.find((p) => p.category === "agarbatti"),
-      products.find((p) => p.id === "soap-signature") || products.find((p) => p.category === "soaps"),
+      products.find((p) => p.id === "agarbatti-sandalwood") || products.find((p) => p.category === "agarbatti"),
+      products.find((p) => p.id === "soap-pearlescent-flower") || products.find((p) => p.category === "soaps"),
     ].filter((p): p is Product => Boolean(p));
+  }, [products]);
+
+  const giftProducts = useMemo(() => {
+    return products.filter((p) => p.category === "gifting").slice(0, 3);
   }, [products]);
 
   return (
@@ -173,8 +178,8 @@ function Index() {
         <section id="collection" className="section">
           <div className="section-heading reveal-on-scroll">
             <div>
-              <div className="eyebrow text-muted-foreground">OUR COLLECTION</div>
-              <h2 className="section-title">Our Categories of Luxury</h2>
+              <div className="eyebrow text-muted-foreground">ICONIC SELECTIONS</div>
+              <h2 className="section-title">Our Bestsellers</h2>
             </div>
             <a
               href="/products"
@@ -247,7 +252,7 @@ function Index() {
               <div className="lg:col-span-6 relative reveal-on-scroll flex flex-col">
                 <div className="relative rounded-3xl overflow-hidden border-2 border-[#1b5e3f]/25 shadow-2xl bg-[#f5f5f0] group flex-1 min-h-[460px] sm:min-h-[560px] lg:min-h-[680px]">
                   <img
-                    src={aboutSectionImage}
+                    src="/assets/Artisan Scent Ivory Amber Portrait (1).png"
                     alt="Artisan Scents About Section - Premium Fragrances & Botanical Excellence"
                     className="w-full h-full min-h-[460px] sm:min-h-[560px] lg:min-h-[680px] object-cover transition-transform duration-1000 group-hover:scale-105"
                     loading="lazy"
@@ -287,7 +292,7 @@ function Index() {
               {/* Right Column: Narrative & Heritage Pillars */}
               <div className="lg:col-span-6 flex flex-col justify-center reveal-on-scroll reveal-delay-150">
                 <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-bold mb-3">
-                  <span>OUR STORY &amp; PHILOSOPHY</span>
+                  <span>ABOUT US &amp; PHILOSOPHY</span>
                 </div>
 
                 <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl text-[#1a1a1a] font-normal leading-snug mb-4 sm:mb-5">
@@ -371,7 +376,7 @@ function Index() {
                     className="h-11 sm:h-12 px-7 rounded-full bg-[#1b5e3f] hover:bg-[#164a31] text-white border border-[#2d8659]/50 font-medium tracking-wide shadow-lg transition-all justify-center"
                   >
                     <a href="/about" className="inline-flex items-center gap-2">
-                      Discover Our Story <ArrowRight size={16} />
+                      About Us <ArrowRight size={16} />
                     </a>
                   </Button>
 
@@ -463,7 +468,7 @@ function Index() {
                     className="h-11 px-7 rounded-full bg-[#1b5e3f] hover:bg-[#164a31] border border-[#1b5e3f]/40 text-white font-medium tracking-wide shadow-md"
                   >
                     <a href="/about" className="inline-flex items-center gap-2">
-                      Discover Our Story <ArrowRight size={15} />
+                      About Us <ArrowRight size={15} />
                     </a>
                   </Button>
                 </div>
@@ -483,7 +488,7 @@ function Index() {
 
         <section id="journal" className="section journal">
           <img
-            src="/assets/crafted-with.jpg"
+            src="/assets/ArtisanScent Golden Hour Collection.png"
             alt="Crafted with intention - Artisan Scents"
             width={1200}
             height={900}
@@ -506,6 +511,89 @@ function Index() {
             <Button variant="editorial" onClick={() => setPanel("story")}>
               Learn more <ArrowRight />
             </Button>
+          </div>
+        </section>
+
+        {/* Luxury Fragrance Gifting Showcase */}
+        <section id="gifting" className="section py-20 bg-gradient-to-b from-[#fafaf8] via-[#f6f4ee] to-[#fafaf8] text-[#1a1a1a] border-b border-[#1b5e3f]/15">
+          <div className="max-w-7xl mx-auto px-5 sm:px-8">
+            <div className="section-heading reveal-on-scroll">
+              <div>
+                <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-semibold mb-2">
+                  <Gift size={14} className="text-[#d4af37]" />
+                  <span>BESPOKE PRESENTATIONS</span>
+                </div>
+                <h2 className="section-title">Luxury Fragrance Gifting</h2>
+                <p className="mt-2 text-sm sm:text-base text-[#555555] font-light max-w-xl">
+                  Handcrafted coffrets, bespoke hampers, and gold-embossed keepsake boxes created for weddings, festive milestones, and connoisseurs.
+                </p>
+              </div>
+              <a
+                href="/gifting"
+                className="inline-flex items-center gap-2 text-sm font-medium text-[#1b5e3f] hover:text-[#164a31] transition-colors"
+              >
+                Explore Gifting Concierge <ArrowRight size={15} />
+              </a>
+            </div>
+
+            <div className="product-grid">
+              {giftProducts.map((p, idx) => {
+                const delayClass = [
+                  "reveal-delay-100",
+                  "reveal-delay-200",
+                  "reveal-delay-300",
+                ][idx % 3];
+                return (
+                  <ProductCard
+                    key={p.id}
+                    product={p}
+                    isSaved={saved.includes(p.id)}
+                    onToggleSaved={toggleSaved}
+                    onAddToCart={add}
+                    delayClass={delayClass}
+                  />
+                );
+              })}
+            </div>
+
+            {/* Gifting Banner / Concierge Link */}
+            <div className="mt-12 rounded-2xl border border-[#d4af37]/40 bg-gradient-to-r from-[#1b5e3f] to-[#0f3d28] p-8 sm:p-10 text-white shadow-xl reveal-on-scroll flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="max-w-xl text-center md:text-left">
+                <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-[#f6e05e] font-semibold mb-2">
+                  <Sparkles size={13} />
+                  <span>Corporate &amp; Wedding Concierge</span>
+                </div>
+                <h3 className="font-display text-2xl sm:text-3xl font-normal leading-snug">
+                  Personalized Fragrance Curation
+                </h3>
+                <p className="mt-2 text-white/80 text-sm font-light leading-relaxed">
+                  Custom ribbon branding, engraved glass bottles, handwritten calligraphy notes, and pan-India insured distribution.
+                </p>
+              </div>
+              <div className="shrink-0 flex flex-wrap gap-3">
+                <Button
+                  asChild
+                  className="h-11 px-6 rounded-full bg-[#d4af37] hover:bg-[#c29d2b] text-[#0f3d28] font-semibold tracking-wide shadow-md"
+                >
+                  <a href="/gifting">
+                    View Gift Collections <ArrowRight size={15} className="ml-1.5" />
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="h-11 px-6 rounded-full border-white/30 text-white hover:bg-white/10 hover:text-white"
+                >
+                  <a
+                    href="https://wa.me/918104506318?text=Hello%20Artisan%20Scents%2C%20I%20am%20interested%20in%20luxury%20gifting%20and%20custom%20hampers."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    WhatsApp Concierge
+                  </a>
+                </Button>
+              </div>
+            </div>
           </div>
         </section>
 

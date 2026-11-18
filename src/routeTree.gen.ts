@@ -21,6 +21,7 @@ import { Route as CrmRouteImport } from './routes/crm'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as EssenceOilsRouteImport } from './routes/essence-oils'
 import { Route as ExhibitionsRouteImport } from './routes/exhibitions'
+import { Route as GiftingRouteImport } from './routes/gifting'
 import { Route as KeomcRouteImport } from './routes/keomc'
 import { Route as PerfumesRouteImport } from './routes/perfumes'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
@@ -92,6 +93,11 @@ const ExhibitionsRoute = ExhibitionsRouteImport.update({
   path: '/exhibitions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GiftingRoute = GiftingRouteImport.update({
+  id: '/gifting',
+  path: '/gifting',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const KeomcRoute = KeomcRouteImport.update({
   id: '/keomc',
   path: '/keomc',
@@ -156,6 +162,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/essence-oils': typeof EssenceOilsRoute
   '/exhibitions': typeof ExhibitionsRoute
+  '/gifting': typeof GiftingRoute
   '/keomc': typeof KeomcRoute
   '/perfumes': typeof PerfumesRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -180,6 +187,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/essence-oils': typeof EssenceOilsRoute
   '/exhibitions': typeof ExhibitionsRoute
+  '/gifting': typeof GiftingRoute
   '/keomc': typeof KeomcRoute
   '/perfumes': typeof PerfumesRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -205,6 +213,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/essence-oils': typeof EssenceOilsRoute
   '/exhibitions': typeof ExhibitionsRoute
+  '/gifting': typeof GiftingRoute
   '/keomc': typeof KeomcRoute
   '/perfumes': typeof PerfumesRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -231,6 +240,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/essence-oils'
     | '/exhibitions'
+    | '/gifting'
     | '/keomc'
     | '/perfumes'
     | '/privacy-policy'
@@ -255,6 +265,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/essence-oils'
     | '/exhibitions'
+    | '/gifting'
     | '/keomc'
     | '/perfumes'
     | '/privacy-policy'
@@ -279,6 +290,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/essence-oils'
     | '/exhibitions'
+    | '/gifting'
     | '/keomc'
     | '/perfumes'
     | '/privacy-policy'
@@ -304,6 +316,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   EssenceOilsRoute: typeof EssenceOilsRoute
   ExhibitionsRoute: typeof ExhibitionsRoute
+  GiftingRoute: typeof GiftingRoute
   KeomcRoute: typeof KeomcRoute
   PerfumesRoute: typeof PerfumesRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
@@ -402,6 +415,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExhibitionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gifting': {
+      id: '/gifting'
+      path: '/gifting'
+      fullPath: '/gifting'
+      preLoaderRoute: typeof GiftingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/keomc': {
       id: '/keomc'
       path: '/keomc'
@@ -488,6 +508,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   EssenceOilsRoute: EssenceOilsRoute,
   ExhibitionsRoute: ExhibitionsRoute,
+  GiftingRoute: GiftingRoute,
   KeomcRoute: KeomcRoute,
   PerfumesRoute: PerfumesRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,

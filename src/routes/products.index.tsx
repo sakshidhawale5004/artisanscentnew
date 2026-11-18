@@ -30,6 +30,7 @@ const categoryLabels: Record<string, string> = {
   "car-perfumes": "Car Diffusers",
   agarbatti: "Sacred Agarbatti",
   soaps: "Handcrafted Soaps",
+  gifting: "Luxury Gifting",
 };
 
 export function AllProductsPage() {

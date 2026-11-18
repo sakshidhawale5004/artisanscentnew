@@ -56,6 +56,7 @@ const categoryNavItems: CategoryNavItem[] = [
 
 const rightNavItems = [
   { label: "Home", href: "/" },
+  { label: "Gifting", href: "/gifting" },
   { label: "About", href: "/about" },
   { label: "KEOMC", href: "/keomc" },
   { label: "Contact", href: "/contact" },

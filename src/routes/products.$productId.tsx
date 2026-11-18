@@ -42,6 +42,7 @@ const categoryBreadcrumb: Record<string, { label: string; href: string }> = {
   "car-perfumes": { label: "Car Perfumes", href: "/car-perfumes" },
   agarbatti: { label: "Agarbatti", href: "/agarbatti" },
   soaps: { label: "Soaps", href: "/soaps" },
+  gifting: { label: "Luxury Gifting", href: "/gifting" },
 };
 
 const categoryBg: Record<string, string> = {
@@ -50,6 +51,7 @@ const categoryBg: Record<string, string> = {
   "car-perfumes": "#f6f4f1",
   agarbatti: "#f7f5f2",
   soaps: "#f9f7f4",
+  gifting: "#faf8f5",
 };
 
 function StarRating({ rating = 4.5, count = 124 }: { rating?: number; count?: number }) {
