@@ -98,45 +98,44 @@ function AgarbattiPage() {
         <section className="max-w-7xl mx-auto px-6 sm:px-8 py-14">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Image Left */}
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#e8e2d8]">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <img
                 src="/assets/agarbatti_sectionimage.jpeg"
                 alt="Sacred Aromas for Mind & Spirit"
-                className="w-full h-[500px] object-cover"
+                className="w-full h-[420px] object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
             </div>
             {/* Info Right */}
             <div className="flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-semibold mb-3">
-                <span className="w-5 h-[1.5px] bg-[#d4af37]" />
-                <span>SACRED COLLECTION</span>
+              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-medium mb-4">
+                <span className="w-5 h-[1px] bg-[#d4af37]" />
+                <span>SACRED INCENSE COLLECTION</span>
               </div>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-[#111111] leading-tight mb-4">
+              <h2 className="font-display text-3xl sm:text-4xl font-normal tracking-tight text-[#1a1a1a] mb-4">
                 Sacred Aromas for<br />
-                <em className="text-[#1b5e3f] font-serif italic font-medium">Mind &amp; Spirit</em>
+                <em className="text-[#1b5e3f] font-serif italic">Mind &amp; Spirit</em>
               </h2>
-              <p className="text-[#2b2b2b] text-sm sm:text-base font-normal leading-relaxed mb-5">
+              <p className="text-[#555555] text-sm sm:text-base font-light leading-relaxed mb-4">
                 Artisan Scents agarbatti and pyramid dhoop sticks are deeply steeped in Indian botanical tradition. Handcrafted with pure bamboo cores, charcoal-free and formulated without synthetic fragrances — each stick burns cleanly, releasing layers of sacred aromatic smoke that quiet the mind and sanctify the space.
               </p>
-              <ul className="space-y-2.5 mb-6">
+              <ul className="space-y-2 mb-6">
                 {[
-                  'Handcrafted with pure bamboo core',
-                  '100% Charcoal-free & chemical-free',
-                  'Ideal for prayer, meditation & yoga',
-                  'Traditional Indian botanical formulations',
-                  'Available as sticks & pyramid dhoop',
+                  '✦ Handcrafted with pure bamboo core',
+                  '✦ 100% Charcoal-free & chemical-free formulation',
+                  '✦ Infused with pure botanical essence oils',
+                  '✦ Burns 45–60 minutes with minimal residual ash',
+                  '✦ Ideal for meditation, prayer, and space-clearing',
                 ].map((item) => (
-                  <li key={item} className="text-sm sm:text-[15px] text-[#1a1a1a] font-medium flex items-center gap-2.5">
-                    <span className="text-[#1b5e3f] font-bold">✦</span>
+                  <li key={item} className="text-sm text-[#444444] font-light flex items-start gap-2">
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
               <div className="flex items-center gap-3">
-                <div className="h-px flex-1 bg-[#dcd6cb]" />
-                <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] font-bold">Sacred · Handcrafted · Pure</span>
-                <div className="h-px flex-1 bg-[#dcd6cb]" />
+                <div className="h-px flex-1 bg-[#e8e2d8]" />
+                <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] font-semibold">Sacred Temple · Charcoal-Free</span>
+                <div className="h-px flex-1 bg-[#e8e2d8]" />
               </div>
             </div>
           </div>

@@ -97,48 +97,47 @@ function GiftingPage() {
         <section className="max-w-7xl mx-auto px-6 sm:px-8 py-14">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Image Left */}
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#e8e2d8] bg-[#faf8f5]">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <img
                 src="/assets/Artisan Scents Luxury Gift Set.png"
                 alt="Artisan Scents Bespoke Luxury Gift Set"
-                className="w-full h-[460px] object-cover p-4"
+                className="w-full h-[420px] object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
             </div>
 
             {/* Info Right */}
             <div className="flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-semibold mb-3">
-                <span className="w-5 h-[1.5px] bg-[#d4af37]" />
-                <span>THE ART OF GIFTING</span>
+              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-medium mb-4">
+                <span className="w-5 h-[1px] bg-[#d4af37]" />
+                <span>BESPOKE GIFTING COLLECTION</span>
               </div>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-[#111111] leading-tight mb-4">
+              <h2 className="font-display text-3xl sm:text-4xl font-normal tracking-tight text-[#1a1a1a] mb-4">
                 Memorable Fragrances,<br />
-                <em className="text-[#1b5e3f] font-serif italic font-medium">Impeccable Packaging</em>
+                <em className="text-[#1b5e3f] font-serif italic">Impeccable Packaging</em>
               </h2>
-              <p className="text-[#333333] text-sm sm:text-base font-normal leading-relaxed mb-5">
+              <p className="text-[#555555] text-sm sm:text-base font-light leading-relaxed mb-4">
                 Every Artisan Scents gift hamper is an artful union of Indian aromatic heritage and modern luxury.
                 From hand-blown flacons and cold-process soaps to artisanal hanging diffusers, each presentation is
                 housed in satin-lined, gold-foil embossed keepsake packaging tailored to leave an unforgettable impression.
               </p>
-              <ul className="space-y-2.5 mb-6">
+              <ul className="space-y-2 mb-6">
                 {[
-                  "Luxe rigid keepsake boxes with signature gold-foil hot stamping",
-                  "Bespoke pairings of extrait perfumes, soaps, diffusers & oils",
-                  "Personalised calligraphy gift cards and message sleeves",
-                  "Curated wedding favors, executive gifts & festive hampers",
-                  "Customized corporate branding and concierge support available",
+                  "✦ Luxe rigid keepsake boxes with signature gold-foil hot stamping",
+                  "✦ Bespoke pairings of extrait perfumes, soaps, diffusers & oils",
+                  "✦ Personalised calligraphy gift cards and message sleeves",
+                  "✦ Curated wedding favors, executive gifts & festive hampers",
+                  "✦ Custom corporate branding and concierge distribution available",
                 ].map((item) => (
-                  <li key={item} className="text-sm sm:text-[15px] text-[#1a1a1a] font-medium flex items-center gap-2.5">
-                    <span className="text-[#1b5e3f] font-bold">✦</span>
+                  <li key={item} className="text-sm text-[#444444] font-light flex items-start gap-2">
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
               <div className="flex items-center gap-3">
-                <div className="h-px flex-1 bg-[#dcd6cb]" />
-                <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] font-bold">Handcrafted · Regal · Memorable</span>
-                <div className="h-px flex-1 bg-[#dcd6cb]" />
+                <div className="h-px flex-1 bg-[#e8e2d8]" />
+                <span className="text-[10px] uppercase tracking-widest text-[#1b5e3f] font-semibold">Artisanal Gifting · Bespoke Concierge</span>
+                <div className="h-px flex-1 bg-[#e8e2d8]" />
               </div>
             </div>
           </div>
