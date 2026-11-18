@@ -65,7 +65,7 @@ function SoapsPage() {
           {/* Background Image */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1607006314644-245bfbc0be35?auto=format&fit=crop&w=2400&q=85"
+              src="/assets/shopimages/soap sectionimage.jpg"
               alt="Handcrafted Soaps Background"
               className="w-full h-full object-cover scale-105"
             />

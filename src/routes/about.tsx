@@ -229,7 +229,7 @@ export default function AboutPage() {
                   {/* Category Image Area - Edge-to-edge with no inner margin or radius; square 1:1 ratio so product is never cropped */}
                   <div className="relative aspect-square w-full overflow-hidden bg-[#faf8f5]">
                     <img
-                      src="/assets/essence oil/Amber Patchouli Oil Bottle.png"
+                      src="/assets/essence oil/Elegant Patchouli Oil Bottle.png"
                       alt="Artisan Scents Pure Essence Oils"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
@@ -357,7 +357,7 @@ export default function AboutPage() {
                   {/* Category Image Area - Edge-to-edge with no inner margin or radius; square 1:1 ratio so product is never cropped */}
                   <div className="relative aspect-square w-full overflow-hidden bg-[#faf8f5]">
                     <img
-                      src="/assets/carperfume/Arctic Mist Car Freshener in Frosty Bokeh.png"
+                      src="/assets/carperfumes/Arctic Mist Car Freshener Render.png"
                       alt="Artisan Scents Car Luxury Perfumes"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
@@ -400,7 +400,7 @@ export default function AboutPage() {
                   {/* Category Image Area - Edge-to-edge with no inner margin or radius; square 1:1 ratio so product is never cropped */}
                   <div className="relative aspect-square w-full overflow-hidden bg-[#faf8f5]">
                     <img
-                      src="/assets/perfumes/Ivory Amber Luxury Perfume Display.png"
+                      src="/assets/perfumes/Artisan Scent Ivory Amber Perfume.png"
                       alt="Artisan Scents Luxury Perfumes Collection"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"

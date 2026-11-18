@@ -38,8 +38,7 @@ const productIds = [
   "agarbatti-premium",
   "agarbatti-deluxe",
   "agarbatti-pyramid",
-  "agarbatti-sacred-temple",
-  "agarbatti-mysore-sandal",
+  "agarbatti-sandalwood",
 
   // Soaps
   "soap-signature",
@@ -60,21 +59,27 @@ const source = candidates.find((dir) => fs.existsSync(path.join(dir, "index.html
 if (source) {
   const indexHtml = fs.readFileSync(path.join(source, "index.html"), "utf-8");
 
-  // Create product pages for each product ID
-  const productsDir = path.join(source, "products");
-  fs.mkdirSync(productsDir, { recursive: true });
-
   const removedIds = [
+    "agarbatti-sacred-temple",
+    "agarbatti-mysore-sandal",
     "soap-lavender-botanical",
     "soap-varad-aromatics",
     "soap-nourishing-clay",
   ];
-  for (const id of removedIds) {
-    const rmDir = path.join(productsDir, id);
-    if (fs.existsSync(rmDir)) {
-      fs.rmSync(rmDir, { recursive: true, force: true });
+
+  // Clean removed product pages across all targets
+  for (const candidate of candidates) {
+    for (const id of removedIds) {
+      const rmDir = path.join(candidate, "products", id);
+      if (fs.existsSync(rmDir)) {
+        fs.rmSync(rmDir, { recursive: true, force: true });
+      }
     }
   }
+
+  // Create product pages for each product ID
+  const productsDir = path.join(source, "products");
+  fs.mkdirSync(productsDir, { recursive: true });
 
   for (const id of productIds) {
     const productDir = path.join(productsDir, id);

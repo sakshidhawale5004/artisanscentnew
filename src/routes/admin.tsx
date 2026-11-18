@@ -119,7 +119,7 @@ export function AdminHubPage() {
   const [formPrice, setFormPrice] = useState<number>(4999);
   const [formSalePrice, setFormSalePrice] = useState<number | undefined>(undefined);
   const [formRating, setFormRating] = useState<number>(4.9);
-  const [formImage, setFormImage] = useState("/assets/perfumes/Faceted Gold Perfume Bottle.png");
+  const [formImage, setFormImage] = useState("/assets/perfumes/Artisan Scent Ivory Amber Perfume.png");
   const [formNotes, setFormNotes] = useState("Amber · Sandalwood · Jasmine");
   const [formFamily, setFormFamily] = useState("Luxury");
   const [formSize, setFormSize] = useState("50 ml");
@@ -355,7 +355,7 @@ export function AdminHubPage() {
     setFormPrice(4999);
     setFormSalePrice(undefined);
     setFormRating(4.9);
-    setFormImage("/assets/perfumes/Faceted Gold Perfume Bottle.png");
+    setFormImage("/assets/perfumes/Artisan Scent Ivory Amber Perfume.png");
     setImageUploadMethod("file");
     setFormNotes("Amber · Sandalwood · Jasmine");
     setFormFamily("Luxury");
@@ -1918,37 +1918,37 @@ export function AdminHubPage() {
                       <button
                         type="button"
                         onClick={() =>
-                          setFormImage("/assets/perfumes/Faceted Gold Perfume Bottle.png")
+                          setFormImage("/assets/perfumes/Artisan Scent Ivory Amber Perfume.png")
                         }
                         className="hover:text-[#1b5e3f] underline whitespace-nowrap"
                       >
-                        Gold Flacon
+                        Ivory Amber
                       </button>
                       <span>·</span>
                       <button
                         type="button"
                         onClick={() =>
-                          setFormImage("/assets/perfumes/Glossy Black-to-Blue Perfume Bottle.png")
+                          setFormImage("/assets/perfumes/Artisan Scent Ocean Breeze Perfume.png")
                         }
                         className="hover:text-[#1b5e3f] underline whitespace-nowrap"
                       >
-                        Midnight Flacon
+                        Ocean Breeze
                       </button>
                       <span>·</span>
                       <button
                         type="button"
                         onClick={() =>
-                          setFormImage("/assets/essence oil/Amber Patchouli Oil Bottle.png")
+                          setFormImage("/assets/essence oil/Elegant Patchouli Oil Bottle.png")
                         }
                         className="hover:text-[#1b5e3f] underline whitespace-nowrap"
                       >
-                        Amber Oil
+                        Patchouli Oil
                       </button>
                       <span>·</span>
                       <button
                         type="button"
                         onClick={() =>
-                          setFormImage("/assets/car perfume/car perfume.png")
+                          setFormImage("/assets/carperfumes/Arctic Mist Car Freshener Render.png")
                         }
                         className="hover:text-[#1b5e3f] underline whitespace-nowrap"
                       >
@@ -1968,7 +1968,7 @@ export function AdminHubPage() {
                         className="w-12 h-12 rounded-lg object-contain bg-[#faf8f5] p-1 border border-[#eeebe5]"
                         onError={(e) => {
                           (e.currentTarget as any).src =
-                            "/assets/perfumes/Faceted Gold Perfume Bottle.png";
+                            "/assets/perfumes/Artisan Scent Ivory Amber Perfume.png";
                         }}
                       />
                       <div>

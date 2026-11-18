@@ -199,15 +199,15 @@ function EssenceOilsPage() {
           </div>
 
           {/* Educational Distillation Banner */}
-          <div className="reveal-on-scroll reveal-slow mt-16 rounded-2xl overflow-hidden border border-[#2d8659]/30 shadow-2xl bg-gradient-to-r from-[#181614] via-[#312d28] to-[#181614] p-8 sm:p-12">
+          <div className="reveal-on-scroll reveal-slow mt-16 rounded-2xl overflow-hidden border border-[#2d8659]/40 shadow-2xl bg-gradient-to-r from-[#181614] via-[#312d28] to-[#181614] p-8 sm:p-12">
             <div className="max-w-2xl">
-              <div className="text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-medium mb-2">
+              <div className="text-xs uppercase tracking-[0.25em] text-[#52b788] font-bold mb-2">
                 KEOMC BOTANICAL LABS
               </div>
-              <h3 className="font-display text-2xl sm:text-3xl text-[#333333]">
+              <h3 className="font-display text-2xl sm:text-3xl text-[#f5f5f0]">
                 Steam Distillation Craft
               </h3>
-              <p className="text-[#666666] text-sm font-light mt-2 leading-relaxed">
+              <p className="text-[#e2ded6] text-sm font-light mt-2 leading-relaxed">
                 Extracted in small copper stills at low thermal thresholds to safeguard fragile
                 monoterpenes and volatile aromatic rings. Available in 10ml amber bottles, 100ml,
                 500ml, and bulk 1L quantities.

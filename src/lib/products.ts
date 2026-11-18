@@ -1,48 +1,47 @@
 // Body Perfumes (12 New Fragrances)
-const bodyPerfume1 = "/assets/perfumes/Ivory Amber Luxury Perfume Display.png";
-const bodyPerfume2 = "/assets/perfumes/Ocean Breeze Perfume by the Sea.png";
-const bodyPerfume3 = "/assets/perfumes/Artisan Scent Luxury Perfume Still Life.png";
-const bodyPerfume4 = "/assets/perfumes/Ocean Breeze Artisan Scent Perfume.png";
-const bodyPerfume5 = "/assets/perfumes/Artisan Scent Ivory Oud Display.png";
-const bodyPerfume6 = "/assets/perfumes/Artisan Scent Wild Essence Advertisement.png";
-const bodyPerfume7 = "/assets/perfumes/Crimson Charm Luxury Perfume Ad.png";
-const bodyPerfume8 = "/assets/perfumes/Opulent Scarlet Spirit Perfume Advertisement.png";
-const bodyPerfume9 = "/assets/perfumes/Artisan Scent Pure Musk Still Life.png";
-const bodyPerfume10 = "/assets/perfumes/Ice Wave Artisan Fragrance.png";
-const bodyPerfume11 = "/assets/perfumes/Luxurious Artisan Scent Perfume Still Life.png";
+const bodyPerfume1 = "/assets/perfumes/Artisan Scent Ivory Amber Perfume.png";
+const bodyPerfume2 = "/assets/perfumes/Artisan Scent Ocean Breeze Perfume.png";
+const bodyPerfume3 = "/assets/perfumes/Artisan Scent Lone Legend Perfume.png";
+const bodyPerfume4 = "/assets/perfumes/Artisan Ocean Breeze Perfume Bottle.png";
+const bodyPerfume5 = "/assets/perfumes/Artisan Scent Ivory Oud Bottle.png";
+const bodyPerfume6 = "/assets/perfumes/Artisan Scent Wild Essence Bottle.png";
+const bodyPerfume7 = "/assets/perfumes/Crimson Charm Perfume Bottle.png";
+const bodyPerfume8 = "/assets/perfumes/Scarlet Spirit Luxury Perfume Bottle.png";
+const bodyPerfume9 = "/assets/perfumes/Artisan Pure Musk Perfume Bottle.png";
+const bodyPerfume10 = "/assets/perfumes/Artisan Scent Ice Wave Bottle.png";
+const bodyPerfume11 = "/assets/perfumes/Visionary Artisan Scent Perfume Bottle.png";
 const bodyPerfume12 = "/assets/perfumes/Royal Noir Perfume in Gold and Shadow.png";
 
 // Essence Oils
-const essence1 = "/assets/essence oil/Amber Patchouli Oil Bottle.png";
-const essence2 = "/assets/essence oil/Amber Rosemary Oil Bottle.png";
-const essence3 = "/assets/essence oil/Citronella Essential Oil Bottle Mockup.png";
-const essence4 = "/assets/essence oil/Geranium Oil Amber Bottle Studio Shot.png";
-const essence5 = "/assets/essence oil/Palmarosa Oil Amber Bottle.png";
-const essence6 = "/assets/essence oil/Premium Lavender Essential Oil Bottle.png";
-const essence7 = "/assets/essence oil/Premium Lemongrass Essential Oil Bottle.png";
-const essence8 = "/assets/essence oil/Premium Menthol Mint Oil Bottle.png";
-const essence9 = "/assets/essence oil/Vetiver Oil Amber Bottle Mockup.png";
+const essence1 = "/assets/essence oil/Elegant Patchouli Oil Bottle.png";
+const essence2 = "/assets/essence oil/Rosemary Oil Essence Bottle.png";
+const essence3 = "/assets/essence oil/Citronella Oil Essential Oil Bottle.png";
+const essence4 = "/assets/essence oil/Elegant Geranium Oil Bottle.png";
+const essence5 = "/assets/essence oil/Palmarosa Oil Golden Essence Bottle.png";
+const essence6 = "/assets/essence oil/Lavender Oil Essence Bottle.png";
+const essence7 = "/assets/essence oil/Lemongrass Oil Essence Bottle.png";
+const essence8 = "/assets/essence oil/Menthol Mint Oil Essence Bottle.png";
+const essence9 = "/assets/essence oil/Golden Vetiver Oil Bottle.png";
 
-// Car Perfumes (5 New Fragrances)
-const carPerfume1 = "/assets/carperfume/Arctic Mist Car Freshener in Frosty Bokeh.png";
-const carPerfume2 = "/assets/carperfume/Royal Valley Woodland Fragrance Pendant.png";
-const carPerfume3 = "/assets/carperfume/Regal Oud Car Diffuser.png";
-const carPerfume4 = "/assets/carperfume/Amber Heritage Winter Freshener.png";
-const carPerfume5 = "/assets/carperfume/Mystic Musk Winter Diffuser.png";
+// Car Perfumes (5 Fragrances)
+const carPerfume1 = "/assets/carperfumes/Arctic Mist Car Freshener Render.png";
+const carPerfume2 = "/assets/carperfumes/Royal Valley Teardrop Car Perfume.png";
+const carPerfume3 = "/assets/carperfumes/Regal Oud Car Diffuser.png";
+const carPerfume4 = "/assets/carperfumes/Amber Heritage Car Freshener Bottle.png";
+const carPerfume5 = "/assets/carperfumes/Mystic Musk Hanging Air Freshener.png";
 
 // Agarbatti
 const agarbatti1 = "/assets/AGARBATTI NEW/Premium Agarbatti Sticks.png";
 const agarbatti2 = "/assets/AGARBATTI NEW/Deluxe Incense Collection.png";
 const agarbatti3 = "/assets/AGARBATTI NEW/Artisanscent Incense Jar Pyramid.png";
-const agarbatti4 = "/assets/agarbatti/agarbatti (1).png";
-const agarbatti5 = "/assets/agarbatti/agarbatti (2).png";
+const agarbatti4 = "/assets/sandal agarbatti.png";
 
 // Soaps
 const soap1 = "/assets/SOAP NEW/Artisan Signature Soap.png";
 const soap2 = "/assets/SOAP NEW/ARTISAN SCENT Aromatics Soap Ring.png";
-const soap3 = "/assets/soaps/Luxury Green Heart Soap Spa Display.png";
-const soap4 = "/assets/soaps/Pearlescent Flower Soap Spa Advertisement.png";
-const soap5 = "/assets/soaps/Premium Turquoise Spa Soap.png";
+const soap3 = "/assets/soaps/Glossy Green Heart with Leaf Emblem.png";
+const soap4 = "/assets/soaps/Glossy Ivory Flower Soap with Gold AS Monogram.png";
+const soap5 = "/assets/soaps/Glossy Blue AS Leaf-Em embossed Soap.png";
 
 import { useState, useEffect } from "react";
 
@@ -474,9 +473,9 @@ export const products: Product[] = [
       "Premium pyramid dhoop sticks in traditional style. Perfect for creating peaceful ambience in any space.",
   },
   {
-    id: "agarbatti-sacred-temple",
-    name: "Sacred Temple Flora Agarbatti",
-    notes: "Champa · Sandal · Sacred Amber",
+    id: "agarbatti-sandalwood",
+    name: "Sandalwood Premium Agarbatti",
+    notes: "Pure Sandalwood · Sacred Amber · Forest Resin",
     family: "Traditional",
     category: "agarbatti",
     price: 449,
@@ -484,20 +483,7 @@ export const products: Product[] = [
     badge: "Bestseller",
     size: "Box of 50",
     description:
-      "Pure devotional incense hand-rolled with aromatic champaca flowers and crushed resin. Creates a serene sanctuary in any sacred space.",
-  },
-  {
-    id: "agarbatti-mysore-sandal",
-    name: "Royal Mysore Sandalwood Incense",
-    notes: "Mysore Sandal · Cedar · Vetiver Earth",
-    family: "Traditional",
-    category: "agarbatti",
-    price: 549,
-    image: agarbatti5,
-    badge: "Bestseller",
-    size: "Box of 40",
-    description:
-      "A regal classic crafted from genuine Mysore sandalwood paste and natural botanical extracts for long-burning fragrant calm.",
+      "Handcrafted artisanal sandalwood incense sticks composed with pure sandalwood paste and sacred aromatic resins for devotional serenity and lasting peace.",
   },
 
   // SOAPS
@@ -570,7 +556,7 @@ export const products: Product[] = [
 
 export const money = (amount: number) => `₹${amount}`;
 
-export const PRODUCTS_STORAGE_KEY = "artisanscent_live_catalog_v8";
+export const PRODUCTS_STORAGE_KEY = "artisanscent_live_catalog_v9";
 export const PRODUCTS_UPDATED_EVENT = "artisanscent:products-updated";
 
 export function getStoredProducts(): Product[] {
@@ -586,6 +572,7 @@ export function getStoredProducts(): Product[] {
       localStorage.removeItem("artisanscent_live_catalog_v5");
       localStorage.removeItem("artisanscent_live_catalog_v6");
       localStorage.removeItem("artisanscent_live_catalog_v7");
+      localStorage.removeItem("artisanscent_live_catalog_v8");
       localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
       return products;
     }
@@ -593,6 +580,8 @@ export function getStoredProducts(): Product[] {
     if (Array.isArray(parsed) && parsed.length > 0) {
       const hasOldProducts = parsed.some(
         (p: Product) =>
+          p.id === "agarbatti-sacred-temple" ||
+          p.id === "agarbatti-mysore-sandal" ||
           p.id === "soap-lavender-botanical" ||
           p.id === "soap-varad-aromatics" ||
           p.id === "soap-nourishing-clay" ||
@@ -601,8 +590,10 @@ export function getStoredProducts(): Product[] {
           p.id === "car-classic" ||
           p.id === "car-wooden"
       );
-      const missingNewSoaps = !parsed.some((p: Product) => p.id === "soap-green-heart");
-      if (hasOldProducts || missingNewSoaps) {
+      const missingNewProducts =
+        !parsed.some((p: Product) => p.id === "agarbatti-sandalwood") ||
+        !parsed.some((p: Product) => p.id === "soap-green-heart");
+      if (hasOldProducts || missingNewProducts) {
         localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
         return products;
       }
