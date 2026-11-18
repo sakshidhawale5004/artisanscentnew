@@ -210,15 +210,12 @@ function GiftingPage() {
                     Inquire via WhatsApp
                   </a>
                 </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="h-12 px-7 rounded-full border-white/30 text-white hover:bg-white/10 text-sm font-medium"
+                <a
+                  href="/contact"
+                  className="h-12 px-7 rounded-full border border-white/70 bg-transparent hover:bg-white/15 text-white inline-flex items-center gap-2 text-sm font-medium transition-all shadow-sm"
                 >
-                  <a href="/contact" className="inline-flex items-center gap-2">
-                    Contact Atelier <ArrowRight size={15} />
-                  </a>
-                </Button>
+                  Contact Atelier <ArrowRight size={15} />
+                </a>
               </div>
             </div>
           </div>

@@ -536,7 +536,7 @@ function Index() {
               </a>
             </div>
 
-            <div className="product-grid">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
               {giftProducts.map((p, idx) => {
                 const delayClass = [
                   "reveal-delay-100",
@@ -579,19 +579,15 @@ function Index() {
                     View Gift Collections <ArrowRight size={15} className="ml-1.5" />
                   </a>
                 </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="h-11 px-6 rounded-full border-white/30 text-white hover:bg-white/10 hover:text-white"
+                <a
+                  href="https://wa.me/918104506318?text=Hello%20Artisan%20Scents%2C%20I%20am%20interested%20in%20luxury%20gifting%20and%20custom%20hampers."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-11 px-6 rounded-full border border-white/70 bg-transparent hover:bg-white/15 text-white inline-flex items-center justify-center gap-2 text-sm font-medium tracking-wide transition-all shadow-sm"
                 >
-                  <a
-                    href="https://wa.me/918104506318?text=Hello%20Artisan%20Scents%2C%20I%20am%20interested%20in%20luxury%20gifting%20and%20custom%20hampers."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    WhatsApp Concierge
-                  </a>
-                </Button>
+                  <MessageCircle size={16} />
+                  <span>WhatsApp Concierge</span>
+                </a>
               </div>
             </div>
           </div>
