@@ -38,10 +38,15 @@ const productIds = [
   "agarbatti-premium",
   "agarbatti-deluxe",
   "agarbatti-pyramid",
+  "agarbatti-sacred-temple",
+  "agarbatti-mysore-sandal",
 
   // Soaps
   "soap-signature",
   "soap-varad-ring",
+  "soap-green-heart",
+  "soap-pearlescent-flower",
+  "soap-turquoise-spa",
 ];
 
 const candidates = [
@@ -58,6 +63,18 @@ if (source) {
   // Create product pages for each product ID
   const productsDir = path.join(source, "products");
   fs.mkdirSync(productsDir, { recursive: true });
+
+  const removedIds = [
+    "soap-lavender-botanical",
+    "soap-varad-aromatics",
+    "soap-nourishing-clay",
+  ];
+  for (const id of removedIds) {
+    const rmDir = path.join(productsDir, id);
+    if (fs.existsSync(rmDir)) {
+      fs.rmSync(rmDir, { recursive: true, force: true });
+    }
+  }
 
   for (const id of productIds) {
     const productDir = path.join(productsDir, id);

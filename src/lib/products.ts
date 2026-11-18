@@ -1,16 +1,16 @@
 // Body Perfumes (12 New Fragrances)
-const bodyPerfume1 = "/assets/body perform/Luxurious Ivory Amber Perfume Display.png";
-const bodyPerfume2 = "/assets/body perform/Ocean Breeze Luxury Perfume by the Sea.png";
-const bodyPerfume3 = "/assets/body perform/Lone Legend Amber Perfume Still Life.png";
-const bodyPerfume4 = "/assets/body perform/Ocean Breeze Luxury Perfume Ad.png";
-const bodyPerfume5 = "/assets/body perform/Ivory Oud Luxury Perfume Still Life.png";
-const bodyPerfume6 = "/assets/body perform/Wild Essence Botanical Perfume Display.png";
-const bodyPerfume7 = "/assets/body perform/Crimson Charm Luxury Perfume Still Life.png";
-const bodyPerfume8 = "/assets/body perform/Scarlet Spirit Luxury Perfume Bottle.png";
-const bodyPerfume9 = "/assets/body perform/Pure Musk Luxury Still Life.png";
-const bodyPerfume10 = "/assets/body perform/Ice Wave Luxury Perfume Still Life.png";
-const bodyPerfume11 = "/assets/body perform/Visionary Amber Body Perfume.png";
-const bodyPerfume12 = "/assets/body perform/Royal Noir Luxury Perfume Still Life.png";
+const bodyPerfume1 = "/assets/perfumes/Ivory Amber Luxury Perfume Display.png";
+const bodyPerfume2 = "/assets/perfumes/Ocean Breeze Perfume by the Sea.png";
+const bodyPerfume3 = "/assets/perfumes/Artisan Scent Luxury Perfume Still Life.png";
+const bodyPerfume4 = "/assets/perfumes/Ocean Breeze Artisan Scent Perfume.png";
+const bodyPerfume5 = "/assets/perfumes/Artisan Scent Ivory Oud Display.png";
+const bodyPerfume6 = "/assets/perfumes/Artisan Scent Wild Essence Advertisement.png";
+const bodyPerfume7 = "/assets/perfumes/Crimson Charm Luxury Perfume Ad.png";
+const bodyPerfume8 = "/assets/perfumes/Opulent Scarlet Spirit Perfume Advertisement.png";
+const bodyPerfume9 = "/assets/perfumes/Artisan Scent Pure Musk Still Life.png";
+const bodyPerfume10 = "/assets/perfumes/Ice Wave Artisan Fragrance.png";
+const bodyPerfume11 = "/assets/perfumes/Luxurious Artisan Scent Perfume Still Life.png";
+const bodyPerfume12 = "/assets/perfumes/Royal Noir Perfume in Gold and Shadow.png";
 
 // Essence Oils
 const essence1 = "/assets/essence oil/Amber Patchouli Oil Bottle.png";
@@ -24,11 +24,11 @@ const essence8 = "/assets/essence oil/Premium Menthol Mint Oil Bottle.png";
 const essence9 = "/assets/essence oil/Vetiver Oil Amber Bottle Mockup.png";
 
 // Car Perfumes (5 New Fragrances)
-const carPerfume1 = "/assets/car perfurm/Arctic Mist Luxury Car Fragrance.png";
-const carPerfume2 = "/assets/car perfurm/Royal Valley Car Fragrance Glow.png";
-const carPerfume3 = "/assets/car perfurm/Regal Oud Luxury Car Fragrance.png";
-const carPerfume4 = "/assets/car perfurm/Amber Heritage Car Perfume.png";
-const carPerfume5 = "/assets/car perfurm/Mystic Musk Luxury Car Fragrance.png";
+const carPerfume1 = "/assets/carperfume/Arctic Mist Car Freshener in Frosty Bokeh.png";
+const carPerfume2 = "/assets/carperfume/Royal Valley Woodland Fragrance Pendant.png";
+const carPerfume3 = "/assets/carperfume/Regal Oud Car Diffuser.png";
+const carPerfume4 = "/assets/carperfume/Amber Heritage Winter Freshener.png";
+const carPerfume5 = "/assets/carperfume/Mystic Musk Winter Diffuser.png";
 
 // Agarbatti
 const agarbatti1 = "/assets/AGARBATTI NEW/Premium Agarbatti Sticks.png";
@@ -40,9 +40,9 @@ const agarbatti5 = "/assets/agarbatti/agarbatti (2).png";
 // Soaps
 const soap1 = "/assets/SOAP NEW/Artisan Signature Soap.png";
 const soap2 = "/assets/SOAP NEW/ARTISAN SCENT Aromatics Soap Ring.png";
-const soap3 = "/assets/soaps/soap.png";
-const soap4 = "/assets/soaps/Varad Aromatics Soap Ring.png";
-const soap5 = "/assets/soap_sectionimage.jpg";
+const soap3 = "/assets/soaps/Luxury Green Heart Soap Spa Display.png";
+const soap4 = "/assets/soaps/Pearlescent Flower Soap Spa Advertisement.png";
+const soap5 = "/assets/soaps/Premium Turquoise Spa Soap.png";
 
 import { useState, useEffect } from "react";
 
@@ -528,49 +528,49 @@ export const products: Product[] = [
       "An aromatic artisan soap ring enriched with essential oils, crafted for a rich, fragrant cleanse and a refined shelf presence.",
   },
   {
-    id: "soap-lavender-botanical",
-    name: "Pure Lavender Botanical Soap",
-    notes: "Calming Lavender · Shea Butter · Chamomile",
+    id: "soap-green-heart",
+    name: "Luxury Green Heart Botanical Soap",
+    notes: "Wild Aloe · Herbal Green · Vetiver Dew",
     family: "Personal Care",
     category: "soaps",
-    price: 279,
+    price: 289,
     image: soap3,
-    badge: "Bestseller",
-    size: "110 g",
-    description:
-      "Cold-crafted botanical soap bar enriched with relaxing lavender oil and rich plant butter for deep skin hydration and soothing fragrance.",
-  },
-  {
-    id: "soap-varad-aromatics",
-    name: "Varad Herbal Aromatics Soap Ring",
-    notes: "Herbal Green · Neem · Fresh Basil",
-    family: "Personal Care",
-    category: "soaps",
-    price: 319,
-    image: soap4,
-    badge: "Bestseller",
-    size: "125 g",
-    description:
-      "Clarifying artisan soap ring formulated with traditional herbal oils and gentle plant glycerin for an invigorating, purifying cleanse.",
-  },
-  {
-    id: "soap-nourishing-clay",
-    name: "Botanical Clay & Shea Bath Bar",
-    notes: "French Rose Clay · Sweet Almond · Shea",
-    family: "Personal Care",
-    category: "soaps",
-    price: 269,
-    image: soap5,
     badge: "Bestseller",
     size: "100 g",
     description:
-      "Velvety cold-processed bathing bar enriched with mineral-rich botanical clay and nourishing shea butter for radiant, supple skin.",
+      "A soothing handcrafted heart-shaped botanical soap enriched with pure aloe extracts, nourishing plant oils, and calming herbal essence for a velvety, refreshing spa lather.",
+  },
+  {
+    id: "soap-pearlescent-flower",
+    name: "Pearlescent Flower Artisan Soap",
+    notes: "White Jasmine · Lotus Blossom · Sweet Almond",
+    family: "Personal Care",
+    category: "soaps",
+    price: 299,
+    image: soap4,
+    badge: "Bestseller",
+    size: "110 g",
+    description:
+      "An exquisitely sculpted floral bathing bar infused with fragrant night jasmine, lotus nectar, and sweet almond oil, leaving skin delicately scented, soft, and radiant.",
+  },
+  {
+    id: "soap-turquoise-spa",
+    name: "Premium Turquoise Spa Bath Bar",
+    notes: "Ocean Mineral · Sea Kelp · Crushed Mint",
+    family: "Personal Care",
+    category: "soaps",
+    price: 279,
+    image: soap5,
+    badge: "Bestseller",
+    size: "105 g",
+    description:
+      "An invigorating coastal spa bar formulated with marine minerals, nutrient-dense sea kelp, and crisp mint for a restorative, energizing daily cleanse.",
   },
 ];
 
 export const money = (amount: number) => `₹${amount}`;
 
-export const PRODUCTS_STORAGE_KEY = "artisanscent_live_catalog_v7";
+export const PRODUCTS_STORAGE_KEY = "artisanscent_live_catalog_v8";
 export const PRODUCTS_UPDATED_EVENT = "artisanscent:products-updated";
 
 export function getStoredProducts(): Product[] {
@@ -585,6 +585,7 @@ export function getStoredProducts(): Product[] {
       localStorage.removeItem("artisanscent_live_catalog_v4");
       localStorage.removeItem("artisanscent_live_catalog_v5");
       localStorage.removeItem("artisanscent_live_catalog_v6");
+      localStorage.removeItem("artisanscent_live_catalog_v7");
       localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
       return products;
     }
@@ -592,34 +593,23 @@ export function getStoredProducts(): Product[] {
     if (Array.isArray(parsed) && parsed.length > 0) {
       const hasOldProducts = parsed.some(
         (p: Product) =>
+          p.id === "soap-lavender-botanical" ||
+          p.id === "soap-varad-aromatics" ||
+          p.id === "soap-nourishing-clay" ||
           p.id === "gold-faceted" ||
           p.id === "midnight-mystery" ||
           p.id === "car-classic" ||
           p.id === "car-wooden"
       );
-      if (hasOldProducts) {
+      const missingNewSoaps = !parsed.some((p: Product) => p.id === "soap-green-heart");
+      if (hasOldProducts || missingNewSoaps) {
         localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
         return products;
       }
       return parsed.map((p: Product) => {
-        if (p.id === "agarbatti-premium" && (p.image.includes("agarbatti (1)") || !p.image.includes("AGARBATTI NEW"))) {
-          return { ...p, image: agarbatti1 };
-        }
-        if (p.id === "agarbatti-deluxe" && (p.image.includes("agarbatti (2)") || !p.image.includes("AGARBATTI NEW"))) {
-          return { ...p, image: agarbatti2 };
-        }
-        if (p.id === "agarbatti-pyramid" && (p.image.includes("Pyramid of Premium") || !p.image.includes("AGARBATTI NEW"))) {
-          return { ...p, image: agarbatti3 };
-        }
-        if (p.id === "soap-signature" && (p.image.includes("soaps/soap") || !p.image.includes("SOAP NEW"))) {
-          return { ...p, image: soap1 };
-        }
-        if (p.id === "soap-varad-ring") {
-          return {
-            ...p,
-            name: "Artisan Scent Aromatics Soap Ring",
-            image: soap2,
-          };
+        const fresh = products.find((prod) => prod.id === p.id);
+        if (fresh) {
+          return { ...p, image: fresh.image };
         }
         return p;
       });
