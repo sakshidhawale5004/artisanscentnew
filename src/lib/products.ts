@@ -46,7 +46,7 @@ const soap5 = "/assets/soaps/Glossy Blue AS Leaf-Em embossed Soap.png";
 // Gifting (3 Luxury Gift Sets)
 const giftSet1 = "/assets/Artisan Scents Luxury Gift Set.png";
 const giftSet2 = "/assets/Artisan Scents Luxury Fragrance Gift Set.png";
-const giftSet3 = "/assets/Artisan Scents Luxury Perfume Collection-1672x941.jpeg";
+const giftSet3 = "/assets/Artisan Scents Luxury Perfume Collection-1672x941-1331x1181.jpeg";
 
 import { useState, useEffect } from "react";
 
@@ -602,7 +602,7 @@ export const products: Product[] = [
 
 export const money = (amount: number) => `₹${amount}`;
 
-export const PRODUCTS_STORAGE_KEY = "artisanscent_live_catalog_v11";
+export const PRODUCTS_STORAGE_KEY = "artisanscent_live_catalog_v12";
 export const PRODUCTS_UPDATED_EVENT = "artisanscent:products-updated";
 
 export function getStoredProducts(): Product[] {
@@ -621,6 +621,7 @@ export function getStoredProducts(): Product[] {
       localStorage.removeItem("artisanscent_live_catalog_v8");
       localStorage.removeItem("artisanscent_live_catalog_v9");
       localStorage.removeItem("artisanscent_live_catalog_v10");
+      localStorage.removeItem("artisanscent_live_catalog_v11");
       localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
       return products;
     }
