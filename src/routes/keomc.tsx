@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Building2, ShieldCheck, QrCode } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -276,6 +276,105 @@ function KEOMCPage() {
                   <p className="font-light text-[#333333]">{plant}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Corporate Banking & Settlement Credentials */}
+        <section className="bg-white py-12 sm:py-16 border-t border-[#1b5e3f]/15">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8">
+            <div className="max-w-3xl mb-8">
+              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-semibold mb-2">
+                <ShieldCheck size={14} />
+                <span>OFFICIAL CORPORATE CREDENTIALS</span>
+              </div>
+              <h2 className="font-display text-3xl sm:text-4xl text-[#111111] font-normal">
+                Institutional Banking &amp; Wholesale Settlement
+              </h2>
+              <p className="text-xs sm:text-sm text-[#666666] font-light mt-2 leading-relaxed">
+                For commercial botanical procurement, essential oil bulk distillation orders, and institutional transactions,
+                all settlements are officially processed via our verified Bank of Baroda corporate current account.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+              {/* Bank Account Overview Card */}
+              <div className="p-6 sm:p-7 rounded-2xl bg-[#faf9f6] border border-[#e8e2d8] space-y-4 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-[#fff7ed] border border-[#ffedd5] flex items-center justify-center text-[#ea580c]">
+                      <Building2 size={20} />
+                    </div>
+                    <div>
+                      <h3 className="font-display text-lg sm:text-xl text-[#111111]">
+                        Bank of Baroda (Airoli Branch)
+                      </h3>
+                      <div className="text-[11px] text-[#666666]">
+                        Airoli, Navi Mumbai - 400708 (Branch Code: 0891)
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 text-xs font-mono">
+                    <div className="flex justify-between py-1 border-b border-[#ece7de]">
+                      <span className="text-[#777777] font-sans">Beneficiary Entity:</span>
+                      <strong className="text-[#111111] text-right font-sans">KULSWAMI ESSENCE OIL MANUFACTURING COMPANY</strong>
+                    </div>
+                    <div className="flex justify-between py-1 border-b border-[#ece7de]">
+                      <span className="text-[#777777] font-sans">Current A/C:</span>
+                      <strong className="text-[#1b5e3f] text-sm">32020200001980</strong>
+                    </div>
+                    <div className="flex justify-between py-1 border-b border-[#ece7de]">
+                      <span className="text-[#777777] font-sans">IFSC Code:</span>
+                      <strong className="text-[#1b5e3f]">BARB0AIROLI</strong>
+                    </div>
+                    <div className="flex justify-between py-1">
+                      <span className="text-[#777777] font-sans">MICR Code:</span>
+                      <span className="text-[#555555]">400012125</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-[#ece7de] text-[11px] text-[#555555]">
+                  <span>Supported Modes: RTGS · NEFT · IMPS · Corporate Net Banking</span>
+                </div>
+              </div>
+
+              {/* bob World Merchant UPI Card */}
+              <div className="p-6 sm:p-7 rounded-2xl bg-[#faf9f6] border border-[#e8e2d8] space-y-4 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-[#f0fdf4] border border-[#dcfce7] flex items-center justify-center text-[#1b5e3f]">
+                      <QrCode size={20} />
+                    </div>
+                    <div>
+                      <h3 className="font-display text-lg sm:text-xl text-[#111111]">
+                        bob World Merchant UPI Gateway
+                      </h3>
+                      <div className="text-[11px] text-[#666666]">
+                        Unified Payments Interface 2.0
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white p-3.5 rounded-xl border border-[#e0d9cd] space-y-1 text-xs">
+                    <div className="text-[10px] uppercase font-bold text-[#777777] tracking-wider">
+                      Official UPI ID / VPA
+                    </div>
+                    <div className="font-mono font-bold text-sm text-[#072416] select-all">
+                      kulsw98202980@barodampay
+                    </div>
+                    <div className="text-[11px] text-[#666666] pt-1 font-light">
+                      Accepted via Google Pay, PhonePe, Paytm, BHIM, and bob World Pay.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-[#ece7de] text-[11px] text-[#555555] flex items-center justify-between">
+                  <span>Pan-India Merchant Settlement</span>
+                  <span className="text-[#1b5e3f] font-semibold">Airoli, Navi Mumbai</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>

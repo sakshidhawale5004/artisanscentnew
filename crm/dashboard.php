@@ -131,6 +131,44 @@ foreach ($orders as $o) {
     </div>
   </div>
 
+  <!-- Payment Gateway & Settlements Status Strip -->
+  <div class="rounded-2xl bg-gradient-to-r from-[#05170e] via-[#092618] to-[#0d3b25] text-white p-5 sm:p-6 shadow-md border border-[#2d8659]/50">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-[#1b5e3f]/40 border border-[#86efac]/30 flex items-center justify-center font-bold text-lg text-[#86efac] shrink-0">
+          BOB
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] uppercase font-bold tracking-widest text-[#d4af37]">
+              Verified Payment Gateway
+            </span>
+            <span class="px-2 py-0.5 rounded-full text-[9px] font-extrabold bg-[#1b5e3f] text-[#86efac] border border-[#2d8659]">
+              LIVE &amp; ACTIVE
+            </span>
+          </div>
+          <h3 class="font-display text-lg sm:text-xl text-white font-normal mt-0.5">
+            Bank of Baroda · KULSWAMI ESSENCE OIL MANUFACTURING CO.
+          </h3>
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#a3b8ac] font-mono mt-1">
+            <span>A/C: <strong class="text-white">32020200001980</strong> (Current)</span>
+            <span>IFSC: <strong class="text-white">BARB0AIROLI</strong></span>
+            <span>UPI: <strong class="text-[#86efac]">kulsw98202980@barodampay</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <a
+          href="payments.php"
+          class="h-9 px-4 rounded-full bg-[#1b5e3f] hover:bg-[#237750] text-white text-xs font-medium border border-[#2d8659] shadow-sm flex items-center gap-1.5 transition-colors"
+        >
+          <span>Open Payment Hub &amp; QR Generator →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- Non-Duplicated Overview Section: Fulfillment Funnel & Portfolio Distribution -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
     <!-- Card 1: Logistics & Fulfillment Funnel -->

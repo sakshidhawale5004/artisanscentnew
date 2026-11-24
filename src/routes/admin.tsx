@@ -28,6 +28,11 @@ import {
   Camera,
   RefreshCw,
   MessageCircle,
+  QrCode,
+  CreditCard,
+  Copy,
+  Check,
+  Building2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -96,7 +101,22 @@ export function AdminHubPage() {
   const [authError, setAuthError] = useState<string>("");
 
   // Navigation View Tab
-  const [activeTab, setActiveTab] = useState<"dashboard" | "products" | "orders" | "customers" | "inquiries">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "products" | "orders" | "customers" | "inquiries" | "payments">("dashboard");
+
+  // Payment Gateway Custom QR Generator & Cheque Modal State
+  const [paymentCustomAmount, setPaymentCustomAmount] = useState<number>(4999);
+  const [paymentCustomRef, setPaymentCustomRef] = useState<string>("Artisan Order");
+  const [isChequeModalOpen, setIsChequeModalOpen] = useState<boolean>(false);
+  const [paymentCopiedField, setPaymentCopiedField] = useState<string | null>(null);
+
+  const copyPaymentField = (text: string, label: string) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setPaymentCopiedField(label);
+      showFeedback(`Copied ${label} to clipboard.`);
+      setTimeout(() => setPaymentCopiedField(null), 2500);
+    }
+  };
 
   // CRM State
   const [productList, setProductList] = useState<ExtendedProduct[]>([]);
@@ -785,6 +805,14 @@ export function AdminHubPage() {
             >
               Inquiries ({inquiriesList.length})
             </button>
+            <button
+              onClick={() => setActiveTab("payments")}
+              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
+                activeTab === "payments" ? "bg-[#1b5e3f] text-white shadow-xs" : "text-[#a3b8ac] hover:text-white"
+              }`}
+            >
+              Payment Gateway
+            </button>
           </nav>
 
           {/* Right Action: Storefront Link & Logout */}
@@ -810,7 +838,7 @@ export function AdminHubPage() {
 
         {/* Mobile Navigation bar */}
         <div className="flex md:hidden items-center gap-1 mt-3 pt-3 border-t border-[#1b5e3f]/40 overflow-x-auto no-scrollbar">
-          {(["dashboard", "products", "orders", "customers", "inquiries"] as const).map((tab) => (
+          {(["dashboard", "products", "orders", "customers", "inquiries", "payments"] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -818,7 +846,7 @@ export function AdminHubPage() {
                 activeTab === tab ? "bg-[#1b5e3f] text-white" : "text-[#a3b8ac]"
               }`}
             >
-              {tab}
+              {tab === "payments" ? "Payment Gateway" : tab}
             </button>
           ))}
         </div>
@@ -920,6 +948,45 @@ export function AdminHubPage() {
                 </div>
                 <div className="text-[11px] text-[#777777] font-light mt-1">
                   Across {productList.length} active formulations
+                </div>
+              </div>
+            </div>
+
+            {/* Payment Gateway & Settlements Status Strip */}
+            <div className="rounded-2xl bg-gradient-to-r from-[#05170e] via-[#092618] to-[#0d3b25] text-white p-5 sm:p-6 shadow-md border border-[#2d8659]/50">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-[#1b5e3f]/40 border border-[#86efac]/30 flex items-center justify-center shrink-0">
+                    <Building2 className="text-[#86efac]" size={24} />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] uppercase font-bold tracking-widest text-[#d4af37]">
+                        Verified Payment Gateway
+                      </span>
+                      <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold bg-[#1b5e3f] text-[#86efac] border border-[#2d8659]">
+                        LIVE &amp; ACTIVE
+                      </span>
+                    </div>
+                    <h3 className="font-display text-lg sm:text-xl text-white font-normal mt-0.5">
+                      Bank of Baroda · KULSWAMI ESSENCE OIL MANUFACTURING CO.
+                    </h3>
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#a3b8ac] font-mono mt-1">
+                      <span>A/C: <strong className="text-white">32020200001980</strong> (Current)</span>
+                      <span>IFSC: <strong className="text-white">BARB0AIROLI</strong></span>
+                      <span>UPI: <strong className="text-[#86efac]">kulsw98202980@barodampay</strong></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  <Button
+                    onClick={() => setActiveTab("payments")}
+                    className="h-9 px-4 rounded-full bg-[#1b5e3f] hover:bg-[#237750] text-white text-xs font-medium border border-[#2d8659] shadow-sm flex items-center gap-1.5"
+                  >
+                    <QrCode size={14} />
+                    <span>Open Payment Hub &amp; QR Generator</span>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -1691,6 +1758,432 @@ export function AdminHubPage() {
             </div>
           </div>
         )}
+
+        {/* ======================= PAYMENT GATEWAY TAB ======================= */}
+        {activeTab === "payments" && (
+          <div className="space-y-8 animate-in fade-in duration-200">
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#1b5e3f] font-bold mb-1">
+                  <ShieldCheck size={14} />
+                  <span>Verified Banking &amp; Merchant Gateway</span>
+                </div>
+                <h1 className="font-display text-3xl text-[#111111] font-normal">
+                  Payment Gateway &amp; Banking Hub
+                </h1>
+                <p className="text-xs text-[#666666] font-light mt-0.5">
+                  Official Bank of Baroda corporate current account, bob World Merchant UPI Scan &amp; Pay, and dynamic order QR generator.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2.5">
+                <Button
+                  onClick={() => setIsChequeModalOpen(true)}
+                  variant="outline"
+                  size="sm"
+                  className="rounded-full border-[#dcd6cb] bg-white hover:bg-[#f2efe9] text-[#222222] h-9 px-4 text-xs gap-1.5"
+                >
+                  <Eye size={13} /> View Bank Cheque Proof
+                </Button>
+                <a
+                  href="/assets/payment/bob_upi_qr.png"
+                  download="bob_world_merchant_qr.png"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-[#1b5e3f] hover:bg-[#164a31] text-white h-9 px-4 text-xs font-medium shadow-xs"
+                >
+                  <Download size={13} /> Download Standee QR
+                </a>
+              </div>
+            </div>
+
+            {/* Grid 1: Bank of Baroda Details & UPI QR Standee */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              {/* Left Column: Official Bank Account Card (7 cols) */}
+              <div className="lg:col-span-7 bg-white rounded-3xl border border-[#e4ded5] p-6 sm:p-7 shadow-xs space-y-5">
+                <div className="flex items-center justify-between border-b border-[#f0ede6] pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#fff7ed] border border-[#ffedd5] flex items-center justify-center text-[#ea580c]">
+                      <Building2 size={20} />
+                    </div>
+                    <div>
+                      <h3 className="font-display text-xl text-[#111111]">
+                        Bank of Baroda (बैंक ऑफ़ बड़ौदा)
+                      </h3>
+                      <div className="text-[11px] text-[#666666]">
+                        Airoli Branch · CBS Current Account
+                      </div>
+                    </div>
+                  </div>
+                  <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#e8f5f0] text-[#1b5e3f] border border-[#1b5e3f]/20 uppercase">
+                    Active &amp; Verified
+                  </span>
+                </div>
+
+                {/* Account Details Table */}
+                <div className="space-y-3 text-xs">
+                  {/* Account Name */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-[#faf8f5] border border-[#e8e2d8] gap-1">
+                    <span className="text-[#777777] font-medium">Account Beneficiary:</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-[#111111] select-all">
+                        KULSWAMI ESSENCE OIL MANUFACTURING COMPANY
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => copyPaymentField("KULSWAMI ESSENCE OIL MANUFACTURING COMPANY", "Beneficiary Name")}
+                        className="p-1 hover:bg-white rounded text-[#1b5e3f]"
+                        title="Copy"
+                      >
+                        {paymentCopiedField === "Beneficiary Name" ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Account Number */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-[#faf8f5] border border-[#e8e2d8] gap-1">
+                    <span className="text-[#777777] font-medium">Account Number:</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-extrabold text-base text-[#072416] select-all">
+                        32020200001980
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => copyPaymentField("32020200001980", "Account Number")}
+                        className="px-2.5 py-1 bg-white border border-[#d5cfc2] hover:border-[#1b5e3f] rounded-lg text-xs font-semibold text-[#1b5e3f] flex items-center gap-1 shadow-2xs"
+                      >
+                        {paymentCopiedField === "Account Number" ? (
+                          <>
+                            <Check size={12} className="text-emerald-600" /> Copied
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={12} /> Copy
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* IFSC Code */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-[#faf8f5] border border-[#e8e2d8] gap-1">
+                    <span className="text-[#777777] font-medium">RTGS / NEFT IFSC Code:</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-bold text-sm text-[#072416] select-all">
+                        BARB0AIROLI
+                      </span>
+                      <span className="text-[10px] text-[#777777] font-light">(5th digit is zero 0)</span>
+                      <button
+                        type="button"
+                        onClick={() => copyPaymentField("BARB0AIROLI", "IFSC Code")}
+                        className="px-2.5 py-1 bg-white border border-[#d5cfc2] hover:border-[#1b5e3f] rounded-lg text-xs font-semibold text-[#1b5e3f] flex items-center gap-1 shadow-2xs"
+                      >
+                        {paymentCopiedField === "IFSC Code" ? (
+                          <>
+                            <Check size={12} className="text-emerald-600" /> Copied
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={12} /> Copy
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Account Type & Branch */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="p-3 rounded-xl bg-[#faf8f5] border border-[#e8e2d8]">
+                      <div className="text-[10px] uppercase font-bold text-[#777777]">Account Type</div>
+                      <div className="font-semibold text-xs text-[#111111] mt-0.5">
+                        चालू खाता / CURRENT ACCOUNT (CBS)
+                      </div>
+                    </div>
+                    <div className="p-3 rounded-xl bg-[#faf8f5] border border-[#e8e2d8]">
+                      <div className="text-[10px] uppercase font-bold text-[#777777]">Branch Details</div>
+                      <div className="font-medium text-xs text-[#111111] mt-0.5">
+                        Airoli Branch, Navi Mumbai - 400708
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* MICR & CTS Reference */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="p-3 rounded-xl bg-[#faf8f5] border border-[#e8e2d8]">
+                      <div className="text-[10px] uppercase font-bold text-[#777777]">MICR Code</div>
+                      <div className="font-mono font-semibold text-xs text-[#111111] mt-0.5">400012125</div>
+                    </div>
+                    <div className="p-3 rounded-xl bg-[#faf8f5] border border-[#e8e2d8]">
+                      <div className="text-[10px] uppercase font-bold text-[#777777]">CTS Cheque No.</div>
+                      <div className="font-mono font-semibold text-xs text-[#111111] mt-0.5">000001 (CTS-2010)</div>
+                    </div>
+                    <div className="p-3 rounded-xl bg-[#faf8f5] border border-[#e8e2d8]">
+                      <div className="text-[10px] uppercase font-bold text-[#777777]">Branch Code</div>
+                      <div className="font-mono font-semibold text-xs text-[#111111] mt-0.5">0891 (Airoli)</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bank Cheque Visual Preview Strip */}
+                <div className="pt-2 border-t border-[#f0ede6]">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-[#111111]">
+                      Official Verified Bank Cheque
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setIsChequeModalOpen(true)}
+                      className="text-xs text-[#1b5e3f] font-semibold hover:underline flex items-center gap-1"
+                    >
+                      <Eye size={13} /> View Full Cheque
+                    </button>
+                  </div>
+                  <div
+                    onClick={() => setIsChequeModalOpen(true)}
+                    className="mt-2.5 rounded-2xl border border-[#d8d2c5] overflow-hidden cursor-pointer group relative bg-black/5"
+                  >
+                    <img
+                      src="/assets/payment/bob_cheque.jpg"
+                      alt="Bank of Baroda Verified Cheque"
+                      className="w-full h-36 object-cover object-center group-hover:scale-102 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                      <span className="px-3.5 py-1.5 rounded-full bg-white/95 text-xs font-semibold text-[#072416] shadow-md flex items-center gap-1.5">
+                        <Eye size={13} /> Click to Enlarge Verification Document
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: bob World Merchant UPI QR Standee (5 cols) */}
+              <div className="lg:col-span-5 bg-white rounded-3xl border border-[#e4ded5] p-6 sm:p-7 shadow-xs space-y-5">
+                <div className="flex items-center justify-between border-b border-[#f0ede6] pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#f0fdf4] border border-[#dcfce7] flex items-center justify-center text-[#1b5e3f]">
+                      <QrCode size={20} />
+                    </div>
+                    <div>
+                      <h3 className="font-display text-xl text-[#111111]">
+                        bob World Merchant UPI
+                      </h3>
+                      <div className="text-[11px] text-[#666666]">
+                        Official Scan &amp; Pay Standee
+                      </div>
+                    </div>
+                  </div>
+                  <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#e8f5f0] text-[#1b5e3f] border border-[#1b5e3f]/20 uppercase">
+                    UPI 2.0
+                  </span>
+                </div>
+
+                {/* Standee Image */}
+                <div className="text-center">
+                  <div className="inline-block relative p-2 bg-[#faf8f5] rounded-2xl border border-[#e5dfd5] shadow-xs">
+                    <img
+                      src="/assets/payment/bob_upi_qr.png"
+                      alt="bob World Merchant UPI Standee"
+                      className="w-52 h-auto mx-auto rounded-xl object-contain shadow-xs"
+                    />
+                  </div>
+                </div>
+
+                {/* UPI VPA Details */}
+                <div className="bg-[#faf8f5] border border-[#e5dfd5] rounded-2xl p-4 space-y-3">
+                  <div>
+                    <div className="text-[10px] uppercase font-bold text-[#777777] tracking-wider">
+                      Official UPI ID / VPA
+                    </div>
+                    <div className="flex items-center justify-between gap-2 mt-1">
+                      <span className="font-mono text-sm font-extrabold text-[#072416] select-all">
+                        kulsw98202980@barodampay
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => copyPaymentField("kulsw98202980@barodampay", "UPI ID")}
+                        className="px-3 py-1.5 bg-white border border-[#d5cfc2] hover:border-[#1b5e3f] rounded-lg text-xs font-semibold text-[#1b5e3f] flex items-center gap-1 shadow-2xs"
+                      >
+                        {paymentCopiedField === "UPI ID" ? (
+                          <>
+                            <Check size={12} className="text-emerald-600" /> Copied
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={12} /> Copy
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="pt-2 border-t border-[#eeebe5] text-[11px] text-[#555555]">
+                    <div className="font-semibold text-[#111111]">Supported UPI Applications:</div>
+                    <div className="text-[11px] text-[#666666] mt-0.5">
+                      Google Pay, PhonePe, Paytm, BHIM, bob World Pay, BharatPe, CRED, WhatsApp Pay.
+                    </div>
+                  </div>
+
+                  <div className="pt-1 flex gap-2">
+                    <a
+                      href="/assets/payment/bob_upi_qr.png"
+                      download="bob_world_merchant_qr.png"
+                      className="flex-1 py-2 rounded-xl bg-black hover:bg-neutral-800 text-white text-xs font-semibold text-center flex items-center justify-center gap-1.5 transition-colors"
+                    >
+                      <Download size={13} />
+                      <span>Download QR</span>
+                    </a>
+                    <a
+                      href="upi://pay?pa=kulsw98202980@barodampay&pn=KULSWAMI%20ESSENCE%20OIL%20MANUFACTURING%20COMPANY&cu=INR"
+                      className="px-3.5 py-2 rounded-xl bg-[#1b5e3f] hover:bg-[#164a31] text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                      title="Test UPI Intent"
+                    >
+                      <ExternalLink size={13} />
+                      <span>Test Intent</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Grid 2: Custom Order QR Generator & Shareable Concierge Template */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              {/* Custom Order QR Generator (6 cols) */}
+              <div className="lg:col-span-6 bg-white rounded-3xl border border-[#e4ded5] p-6 sm:p-7 shadow-xs space-y-5">
+                <div className="border-b border-[#f0ede6] pb-3">
+                  <div className="flex items-center gap-2">
+                    <Sparkles size={16} className="text-[#1b5e3f]" />
+                    <h3 className="font-display text-xl text-[#111111]">
+                      Instant Order Payment QR Generator
+                    </h3>
+                  </div>
+                  <p className="text-xs text-[#666666] font-light mt-0.5">
+                    Generate an instant dynamic UPI QR code with a pre-set amount and order reference for any patron.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-[#444444] mb-1">
+                      Payment Amount (₹)
+                    </label>
+                    <input
+                      type="number"
+                      value={paymentCustomAmount}
+                      onChange={(e) => setPaymentCustomAmount(Number(e.target.value) || 0)}
+                      placeholder="4999"
+                      className="w-full text-xs font-mono px-3.5 py-2.5 rounded-xl border border-[#d8d2c5] bg-[#faf8f5] text-[#222222] focus:outline-none focus:border-[#1b5e3f]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-[#444444] mb-1">
+                      Order Reference / Formulation
+                    </label>
+                    <input
+                      type="text"
+                      value={paymentCustomRef}
+                      onChange={(e) => setPaymentCustomRef(e.target.value)}
+                      placeholder="e.g. Order #1042"
+                      className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-[#d8d2c5] bg-[#faf8f5] text-[#222222] focus:outline-none focus:border-[#1b5e3f]"
+                    />
+                  </div>
+                </div>
+
+                {/* Generated QR Box */}
+                <div className="p-4 rounded-2xl bg-[#f4f9f6] border border-[#1b5e3f]/25 flex flex-col sm:flex-row items-center gap-5">
+                  <img
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(
+                      `upi://pay?pa=kulsw98202980@barodampay&pn=KULSWAMI%20ESSENCE%20OIL%20MANUFACTURING%20COMPANY&am=${paymentCustomAmount}&tn=${encodeURIComponent(
+                        paymentCustomRef
+                      )}&cu=INR`
+                    )}`}
+                    alt="Dynamic Payment QR"
+                    className="w-32 h-32 rounded-xl bg-white p-2 border border-[#d5cfc2] shadow-2xs"
+                  />
+                  <div className="flex-1 space-y-2 text-xs">
+                    <div>
+                      <span className="text-[10px] uppercase font-bold text-[#1b5e3f]">Dynamic Intent</span>
+                      <div className="font-mono font-bold text-sm text-[#111111]">
+                        ₹{paymentCustomAmount.toLocaleString("en-IN")}
+                      </div>
+                      <div className="text-[11px] text-[#666666] truncate">{paymentCustomRef}</div>
+                    </div>
+
+                    <div className="pt-1 flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const uri = `upi://pay?pa=kulsw98202980@barodampay&pn=KULSWAMI%20ESSENCE%20OIL%20MANUFACTURING%20COMPANY&am=${paymentCustomAmount}&tn=${encodeURIComponent(
+                            paymentCustomRef
+                          )}&cu=INR`;
+                          copyPaymentField(uri, "UPI Payment URI");
+                        }}
+                        className="px-3 py-1.5 rounded-lg bg-white border border-[#d5cfc2] hover:border-[#1b5e3f] text-[#1b5e3f] font-semibold text-xs shadow-2xs"
+                      >
+                        Copy UPI Link
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const msg = `✦ Artisan Scent Haute Parfumerie Payment Request ✦\n\nPayable: ₹${paymentCustomAmount.toLocaleString(
+                            "en-IN"
+                          )}\nReference: ${paymentCustomRef}\n\nOfficial UPI ID: kulsw98202980@barodampay\nBeneficiary: KULSWAMI ESSENCE OIL MANUFACTURING COMPANY\nBank: Bank of Baroda (A/C: 32020200001980, IFSC: BARB0AIROLI)\n\nScan QR or pay via GPay/PhonePe/Paytm. Once transferred, kindly share the UTR reference for instant formulation dispatch.`;
+                          copyPaymentField(msg, "Payment Request Message");
+                        }}
+                        className="px-3 py-1.5 rounded-lg bg-[#1b5e3f] hover:bg-[#14472f] text-white font-semibold text-xs shadow-2xs flex items-center gap-1"
+                      >
+                        <Copy size={12} />
+                        <span>Copy WhatsApp Message</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Shareable Concierge Payment Template (6 cols) */}
+              <div className="lg:col-span-6 bg-white rounded-3xl border border-[#e4ded5] p-6 sm:p-7 shadow-xs space-y-4">
+                <div className="border-b border-[#f0ede6] pb-3 flex items-center justify-between">
+                  <div>
+                    <h3 className="font-display text-xl text-[#111111]">
+                      Concierge Payment Dispatch Block
+                    </h3>
+                    <p className="text-xs text-[#666666] font-light mt-0.5">
+                      Standard official credentials template formatted for invoices, WhatsApp, and emails.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const msg = `✦ Artisan Scent Haute Parfumerie Official Banking ✦\n\nBeneficiary: KULSWAMI ESSENCE OIL MANUFACTURING COMPANY\nBank: Bank of Baroda\nBranch: Airoli Branch, Navi Mumbai - 400708\nA/C No: 32020200001980\nAccount Type: Current Account\nIFSC Code: BARB0AIROLI\nMICR Code: 400012125\n\nOfficial UPI ID: kulsw98202980@barodampay\n(Scan & Pay supported across all UPI apps)`;
+                      copyPaymentField(msg, "Official Banking Block");
+                    }}
+                    className="px-3 py-1.5 rounded-lg bg-[#faf8f5] border border-[#d5cfc2] hover:border-[#1b5e3f] text-[#1b5e3f] text-xs font-semibold flex items-center gap-1 shadow-2xs"
+                  >
+                    <Copy size={12} />
+                    <span>Copy Block</span>
+                  </button>
+                </div>
+
+                <div className="bg-[#05170e] text-[#e0deda] p-4 rounded-2xl font-mono text-xs leading-relaxed border border-[#2d8659]/40 select-all">
+                  <div className="text-[#86efac] font-bold pb-2 border-b border-[#1b5e3f]/60 mb-2">
+                    ✦ ARTISAN SCENT &amp; KEOMC OFFICIAL SETTLEMENT DETAILS ✦
+                  </div>
+                  <div><span className="text-[#999999]">Beneficiary:</span> <strong className="text-white">KULSWAMI ESSENCE OIL MANUFACTURING COMPANY</strong></div>
+                  <div><span className="text-[#999999]">Bank Name:</span> Bank of Baroda (Airoli Branch)</div>
+                  <div><span className="text-[#999999]">Account No:</span> <strong className="text-[#86efac]">32020200001980</strong></div>
+                  <div><span className="text-[#999999]">Account Type:</span> Current Account (CBS)</div>
+                  <div><span className="text-[#999999]">IFSC Code:</span> <strong className="text-[#86efac]">BARB0AIROLI</strong></div>
+                  <div><span className="text-[#999999]">MICR Code:</span> 400012125</div>
+                  <div className="pt-2 mt-2 border-t border-[#1b5e3f]/60"><span className="text-[#999999]">UPI ID / VPA:</span> <strong className="text-[#86efac]">kulsw98202980@barodampay</strong></div>
+                </div>
+
+                <div className="p-3 rounded-xl bg-amber-50 border border-amber-200/80 text-[11px] text-amber-900 leading-relaxed">
+                  <strong>Notice for Customers:</strong> Remind patrons to verify that the beneficiary name displays as <strong>KULSWAMI ESSENCE OIL MANUFACTURING COMPANY</strong> when completing UPI transfers on PhonePe/GPay for their security.
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
 
       {/* ======================= ADD / EDIT PRODUCT MODAL ======================= */}
@@ -2082,6 +2575,64 @@ export function AdminHubPage() {
                 </Button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* ======================= BANK CHEQUE PREVIEW MODAL ======================= */}
+      {isChequeModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-3xl border border-[#dcd6cb] max-w-4xl w-full p-6 sm:p-8 shadow-2xl relative my-8 max-h-[92vh] overflow-y-auto animate-in zoom-in-95 duration-200">
+            <button
+              onClick={() => setIsChequeModalOpen(false)}
+              className="absolute top-5 right-5 text-[#888888] hover:text-[#111111] p-2 rounded-full bg-[#f5f4f0]"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="mb-5">
+              <div className="text-[10px] uppercase tracking-[0.25em] text-[#1b5e3f] font-semibold">
+                LEGAL BANK VERIFICATION PROOF
+              </div>
+              <h2 className="font-display text-2xl text-[#111111] font-normal mt-0.5">
+                Bank of Baroda Verified Current Account Cheque
+              </h2>
+              <p className="text-xs text-[#666666] font-light">
+                Official cheque leaf for KULSWAMI ESSENCE OIL MANUFACTURING COMPANY (A/C: 32020200001980 | IFSC: BARB0AIROLI).
+              </p>
+            </div>
+
+            <div className="rounded-2xl border-2 border-[#1b5e3f]/30 overflow-hidden shadow-lg bg-neutral-900 p-2">
+              <img
+                src="/assets/payment/bob_cheque.jpg"
+                alt="Bank of Baroda Cheque"
+                className="w-full h-auto rounded-xl object-contain max-h-[65vh] mx-auto"
+              />
+            </div>
+
+            <div className="mt-5 flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#f0ede6] text-xs">
+              <div className="font-mono text-[#555555]">
+                CTS-2010 · AIROLI BRANCH · NAVI MUMBAI - 400708
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href="/assets/payment/bob_cheque.jpg"
+                  download="bob_cheque_verification.jpg"
+                  className="px-4 py-2 rounded-full bg-[#1b5e3f] hover:bg-[#164a31] text-white text-xs font-medium flex items-center gap-1.5 shadow-xs"
+                >
+                  <Download size={13} />
+                  <span>Download Document</span>
+                </a>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setIsChequeModalOpen(false)}
+                  className="rounded-full border-[#dcd6cb]"
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       )}

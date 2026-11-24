@@ -20,6 +20,11 @@ import {
   QrCode,
   Package,
   CreditCard,
+  Copy,
+  Check,
+  Building2,
+  Smartphone,
+  ExternalLink,
 } from "lucide-react";
 
 export const Route = createFileRoute("/checkout")({
@@ -83,6 +88,16 @@ function CheckoutPage() {
 
   // Card 3: Payment Method
   const [paymentMethod, setPaymentMethod] = useState<"upi" | "cod" | "card">("upi");
+  const [upiRef, setUpiRef] = useState("");
+  const [copiedText, setCopiedText] = useState<string | null>(null);
+
+  const copyToClipboard = (text: string, label: string) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setCopiedText(label);
+      setTimeout(() => setCopiedText(null), 2200);
+    }
+  };
 
   // Coupon / Promo
   const [couponCode, setCouponCode] = useState("");
@@ -165,6 +180,7 @@ function CheckoutPage() {
       bespokeNote.trim() ? `Olfactory / Bespoke Note: ${bespokeNote.trim()}` : "",
       `Address: ${fullDeliveryAddress}`,
       `Payment Method: ${paymentMethod.toUpperCase()}`,
+      upiRef.trim() ? `Patron UPI UTR / Ref: ${upiRef.trim()}` : "",
       discountPercent > 0 ? `Coupon Privilege: ${discountPercent}%` : "",
     ]
       .filter(Boolean)
@@ -190,6 +206,7 @@ function CheckoutPage() {
       items: itemsSummary,
       total: total,
       paymentMethod,
+      upiRef: upiRef.trim(),
       bespokeNote: bespokeNote.trim(),
     };
 
@@ -205,7 +222,14 @@ function CheckoutPage() {
         ? "Cash on Delivery (Doorstep COD)"
         : "Credit / Debit Card or Net Banking";
 
-    const whatsappMsg = `✦ Artisan Scent Haute Parfumerie Order Confirmation ✦\n\nReference: ${newOrder.id}\nPatron: ${fullName.trim()}\nContact: ${phone.trim()}${email.trim() ? `\nEmail: ${email.trim()}` : ""}\n\nDelivery Address:\n${fullDeliveryAddress}\n\nOrder Items:\n${itemsSummary}\n\nSubtotal: ${money(cartSubtotal)}${totalSavings > 0 ? `\nSavings: -${money(totalSavings)}` : ""}\nExpress Pan-India Delivery: FREE\nOlfactory Sample: FREE\nTotal Payable: ${money(total)}\nPayment Method: ${paymentLabel}${bespokeNote.trim() ? `\n\nOlfactory Gifting Note: ${bespokeNote.trim()}` : ""}\n\nPlease confirm availability and dispatch schedule.`;
+    const paymentBankInfo =
+      paymentMethod === "upi"
+        ? `\nOfficial UPI ID: kulsw98202980@barodampay\nBeneficiary: KULSWAMI ESSENCE OIL MANUFACTURING COMPANY (Bank of Baroda)${upiRef.trim() ? `\nClient UTR / Reference: ${upiRef.trim()}` : ""}`
+        : paymentMethod === "card"
+        ? `\nBank: Bank of Baroda\nBeneficiary: KULSWAMI ESSENCE OIL MANUFACTURING COMPANY\nA/C No: 32020200001980\nIFSC: BARB0AIROLI (Airoli Branch)`
+        : "";
+
+    const whatsappMsg = `✦ Artisan Scent Haute Parfumerie Order Confirmation ✦\n\nReference: ${newOrder.id}\nPatron: ${fullName.trim()}\nContact: ${phone.trim()}${email.trim() ? `\nEmail: ${email.trim()}` : ""}\n\nDelivery Address:\n${fullDeliveryAddress}\n\nOrder Items:\n${itemsSummary}\n\nSubtotal: ${money(cartSubtotal)}${totalSavings > 0 ? `\nSavings: -${money(totalSavings)}` : ""}\nExpress Pan-India Delivery: FREE\nOlfactory Sample: FREE\nTotal Payable: ${money(total)}\nPayment Method: ${paymentLabel}${paymentBankInfo}${bespokeNote.trim() ? `\n\nOlfactory Gifting Note: ${bespokeNote.trim()}` : ""}\n\nPlease confirm availability and dispatch schedule.`;
 
     // Open WhatsApp in new tab for direct patron assistance
     const whatsappUrl = `https://wa.me/919820252868?text=${encodeURIComponent(whatsappMsg)}`;
@@ -273,7 +297,63 @@ function CheckoutPage() {
                   <span className="text-[#777777]">Total Payable:</span>
                   <span className="font-mono font-bold text-base text-[#1b5e3f]">{money(orderConfirmed.total)}</span>
                 </div>
+                {orderConfirmed.upiRef && (
+                  <div className="flex justify-between pt-1 border-t border-[#e8e2d8]">
+                    <span className="text-[#777777]">UPI UTR / Reference:</span>
+                    <span className="font-mono text-[#072416] font-semibold">{orderConfirmed.upiRef}</span>
+                  </div>
+                )}
               </div>
+
+              {/* Bank of Baroda & UPI Payment Receipt Box */}
+              {orderConfirmed.paymentMethod === "upi" && (
+                <div className="mb-8 p-5 rounded-2xl bg-[#f4f9f6] border border-[#1b5e3f]/30 text-left space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#072416]">
+                    <QrCode size={16} className="text-[#1b5e3f]" />
+                    <span>Official bob World UPI Scan &amp; Pay</span>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-center gap-4 bg-white p-3.5 rounded-xl border border-[#d8e7dd]">
+                    <img
+                      src="/assets/payment/bob_upi_qr.png"
+                      alt="Bank of Baroda UPI QR"
+                      className="w-28 sm:w-32 h-auto rounded-lg border border-[#e0d9cd] shadow-2xs"
+                    />
+                    <div className="space-y-1.5 text-xs">
+                      <div className="text-[10px] text-[#777777] uppercase font-bold tracking-wider">
+                        Official Merchant VPA
+                      </div>
+                      <div className="font-mono font-bold text-sm text-[#072416]">
+                        kulsw98202980@barodampay
+                      </div>
+                      <div className="text-[11px] text-[#555555]">
+                        KULSWAMI ESSENCE OIL MANUFACTURING COMPANY
+                      </div>
+                      <div className="text-[10px] text-[#1b5e3f] font-semibold">
+                        Bank of Baroda · Airoli Branch
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-[#555555] font-light leading-relaxed">
+                    If payment is pending, scan the QR code above or transfer to <code className="font-mono font-semibold">kulsw98202980@barodampay</code>. Our team will verify and dispatch your order.
+                  </p>
+                </div>
+              )}
+
+              {orderConfirmed.paymentMethod === "card" && (
+                <div className="mb-8 p-5 rounded-2xl bg-[#f4f9f6] border border-[#1b5e3f]/30 text-left space-y-3 text-xs">
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#072416]">
+                    <Building2 size={16} className="text-[#1b5e3f]" />
+                    <span>Official Bank of Baroda Transfer Details</span>
+                  </div>
+                  <div className="bg-white p-3.5 rounded-xl border border-[#d8e7dd] space-y-1.5 font-mono text-[11px]">
+                    <div><span className="text-[#777777] font-sans">Beneficiary:</span> <strong>KULSWAMI ESSENCE OIL MANUFACTURING COMPANY</strong></div>
+                    <div><span className="text-[#777777] font-sans">Bank:</span> Bank of Baroda (Airoli Branch - 400708)</div>
+                    <div><span className="text-[#777777] font-sans">A/C No:</span> <strong className="text-[#1b5e3f] text-xs">32020200001980</strong> (Current Account)</div>
+                    <div><span className="text-[#777777] font-sans">IFSC Code:</span> <strong className="text-[#1b5e3f] text-xs">BARB0AIROLI</strong></div>
+                  </div>
+                </div>
+              )}
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <Button
@@ -535,14 +615,14 @@ function CheckoutPage() {
                           <div>
                             <div className="flex items-center gap-2 flex-wrap">
                               <span className="text-xs sm:text-sm font-bold text-[#111111]">
-                                UPI / QR (GPay, PhonePe, Paytm)
+                                UPI / QR (GPay, PhonePe, Paytm, BHIM)
                               </span>
                               <span className="bg-[#1b5e3f] text-white text-[9px] font-extrabold px-2 py-0.5 rounded tracking-wide uppercase">
                                 FLAT ₹500 CASHBACK
                               </span>
                             </div>
                             <p className="text-[11px] text-[#666666] mt-1 font-light leading-relaxed">
-                              Instant payment via QR code or UPI app with fastest priority dispatch.
+                              Scan official Bank of Baroda QR or pay via any UPI app with priority dispatch.
                             </p>
                           </div>
                         </div>
@@ -560,6 +640,101 @@ function CheckoutPage() {
                           </span>
                         </div>
                       </div>
+
+                      {/* Expanded UPI Details when selected */}
+                      {paymentMethod === "upi" && (
+                        <div
+                          onClick={(e) => e.stopPropagation()}
+                          className="mt-4 pt-4 border-t border-[#d8e7dd] bg-white rounded-xl p-4 border space-y-4"
+                        >
+                          <div className="flex flex-col sm:flex-row items-center gap-5">
+                            {/* QR Standee image */}
+                            <div className="shrink-0 text-center">
+                              <div className="relative group inline-block">
+                                <img
+                                  src="/assets/payment/bob_upi_qr.png"
+                                  alt="Bank of Baroda bob World UPI QR"
+                                  className="w-36 sm:w-40 h-auto rounded-xl border-2 border-[#1b5e3f]/30 shadow-md object-contain bg-white"
+                                />
+                                <div className="text-[10px] text-[#555555] font-semibold mt-1">
+                                  Scan to Pay {money(total)}
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Merchant & UPI ID */}
+                            <div className="flex-1 space-y-2.5 text-left w-full">
+                              <div>
+                                <span className="text-[10px] font-bold tracking-wider uppercase text-[#1b5e3f] block">
+                                  Verified Merchant
+                                </span>
+                                <div className="text-xs font-bold text-[#111111]">
+                                  KULSWAMI ESSENCE OIL MANUFACTURING COMPANY
+                                </div>
+                                <div className="text-[11px] text-[#666666]">
+                                  Bank of Baroda · bob World Merchant
+                                </div>
+                              </div>
+
+                              <div className="bg-[#faf8f5] border border-[#e5dfd5] rounded-xl p-2.5">
+                                <div className="text-[10px] text-[#777777] uppercase font-bold tracking-wider">
+                                  Official UPI ID / VPA
+                                </div>
+                                <div className="flex items-center justify-between gap-2 mt-0.5">
+                                  <span className="font-mono text-xs font-bold text-[#072416] select-all">
+                                    kulsw98202980@barodampay
+                                  </span>
+                                  <button
+                                    type="button"
+                                    onClick={() => copyToClipboard("kulsw98202980@barodampay", "upi")}
+                                    className="px-2.5 py-1 text-[11px] bg-white border border-[#d5cfc2] hover:border-[#1b5e3f] rounded-lg text-[#1b5e3f] font-semibold transition-all flex items-center gap-1 shadow-2xs"
+                                  >
+                                    {copiedText === "upi" ? (
+                                      <>
+                                        <Check size={12} className="text-emerald-600" />
+                                        <span>Copied!</span>
+                                      </>
+                                    ) : (
+                                      <>
+                                        <Copy size={12} />
+                                        <span>Copy</span>
+                                      </>
+                                    )}
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Mobile direct UPI intent button */}
+                              <div className="pt-1">
+                                <a
+                                  href={`upi://pay?pa=kulsw98202980@barodampay&pn=KULSWAMI%20ESSENCE%20OIL%20MANUFACTURING%20COMPANY&am=${total}&cu=INR`}
+                                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 bg-[#1b5e3f] hover:bg-[#14472f] text-white rounded-xl text-xs font-semibold shadow-xs transition-colors"
+                                >
+                                  <Smartphone size={13} />
+                                  <span>Pay via UPI App Directly</span>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Optional Transaction UTR */}
+                          <div className="pt-2 border-t border-[#f0ece4]">
+                            <label className="block text-[11px] font-medium text-[#444444] mb-1">
+                              UPI Transaction ID / 12-digit UTR (Optional)
+                            </label>
+                            <input
+                              type="text"
+                              value={upiRef}
+                              onChange={(e) => setUpiRef(e.target.value)}
+                              placeholder="e.g. 432198765432"
+                              className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-[#d8d2c5] bg-[#faf8f5] text-[#222222] font-mono placeholder:text-[#999999] focus:outline-none focus:border-[#1b5e3f] focus:bg-white transition-colors"
+                            />
+                            <p className="text-[10px] text-[#777777] mt-1 font-light">
+                              Enter after completing the transaction in your UPI app for instant concierge reconciliation.
+                            </p>
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     {/* Method 2: Cash on Delivery (COD) */}
@@ -595,7 +770,7 @@ function CheckoutPage() {
                       </div>
                     </div>
 
-                    {/* Method 3: Credit / Debit Card or Net Banking */}
+                    {/* Method 3: Credit / Debit Card or Direct Bank Transfer */}
                     <div
                       onClick={() => setPaymentMethod("card")}
                       className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer ${
@@ -613,14 +788,80 @@ function CheckoutPage() {
                           className="mt-1 accent-[#1b5e3f] cursor-pointer"
                         />
                         <div>
-                          <span className="text-xs sm:text-sm font-bold text-[#111111]">
-                            Credit / Debit Card or Net Banking
-                          </span>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-xs sm:text-sm font-bold text-[#111111]">
+                              Direct Bank Transfer / Net Banking (RTGS / NEFT / IMPS)
+                            </span>
+                          </div>
                           <p className="text-[11px] text-[#666666] mt-1 font-light leading-relaxed">
-                            Visa, MasterCard, RuPay &amp; all major Indian banks supported.
+                            Transfer directly to official Bank of Baroda current account or pay via Net Banking.
                           </p>
                         </div>
                       </div>
+
+                      {/* Expanded Bank Transfer Details */}
+                      {paymentMethod === "card" && (
+                        <div
+                          onClick={(e) => e.stopPropagation()}
+                          className="mt-4 pt-4 border-t border-[#d8e7dd] bg-white rounded-xl p-4 border space-y-3"
+                        >
+                          <div className="flex items-center gap-2 text-xs font-bold text-[#072416]">
+                            <Building2 size={16} className="text-[#1b5e3f]" />
+                            <span>Official Bank of Baroda Account Details</span>
+                          </div>
+
+                          <div className="space-y-2 text-xs bg-[#faf8f5] border border-[#e5dfd5] rounded-xl p-3">
+                            <div className="flex justify-between items-center py-1 border-b border-[#ece6db]">
+                              <span className="text-[#777777]">Beneficiary Name:</span>
+                              <span className="font-bold text-[#111111] text-right">
+                                KULSWAMI ESSENCE OIL MANUFACTURING COMPANY
+                              </span>
+                            </div>
+                            <div className="flex justify-between items-center py-1 border-b border-[#ece6db]">
+                              <span className="text-[#777777]">Bank &amp; Branch:</span>
+                              <span className="font-medium text-[#111111] text-right">
+                                Bank of Baroda, Airoli Branch (Navi Mumbai - 400708)
+                              </span>
+                            </div>
+                            <div className="flex justify-between items-center py-1 border-b border-[#ece6db]">
+                              <span className="text-[#777777]">Account Number:</span>
+                              <div className="flex items-center gap-2">
+                                <span className="font-mono font-bold text-[#072416] text-sm select-all">
+                                  32020200001980
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => copyToClipboard("32020200001980", "acc")}
+                                  className="px-2 py-0.5 text-[10px] bg-white border border-[#d5cfc2] hover:border-[#1b5e3f] rounded text-[#1b5e3f] font-semibold transition-all flex items-center gap-1"
+                                >
+                                  {copiedText === "acc" ? <Check size={11} /> : <Copy size={11} />}
+                                  <span>{copiedText === "acc" ? "Copied" : "Copy"}</span>
+                                </button>
+                              </div>
+                            </div>
+                            <div className="flex justify-between items-center py-1 border-b border-[#ece6db]">
+                              <span className="text-[#777777]">IFSC Code:</span>
+                              <div className="flex items-center gap-2">
+                                <span className="font-mono font-bold text-[#072416] select-all">
+                                  BARB0AIROLI
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => copyToClipboard("BARB0AIROLI", "ifsc")}
+                                  className="px-2 py-0.5 text-[10px] bg-white border border-[#d5cfc2] hover:border-[#1b5e3f] rounded text-[#1b5e3f] font-semibold transition-all flex items-center gap-1"
+                                >
+                                  {copiedText === "ifsc" ? <Check size={11} /> : <Copy size={11} />}
+                                  <span>{copiedText === "ifsc" ? "Copied" : "Copy"}</span>
+                                </button>
+                              </div>
+                            </div>
+                            <div className="flex justify-between items-center pt-1">
+                              <span className="text-[#777777]">Account Type:</span>
+                              <span className="font-semibold text-[#111111]">Current Account (CBS)</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
