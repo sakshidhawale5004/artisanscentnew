@@ -22,20 +22,6 @@ import { OperationsAuditHub } from "@/components/OperationsAuditHub";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
-    links: [
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Jost:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css",
-      },
-      {
-        rel: "stylesheet",
-        href: "/assets/crm.css",
-      },
-    ],
     meta: [
       { title: "Artisan Scent Haute Parfumerie · Staff CRM & Commerce Admin Hub" },
       {
@@ -126,7 +112,9 @@ const tabTitles: Record<AdminTab, string> = {
   settings: "Store Settings & Security",
 };
 
-export function AdminHubPage() {
+function AdminHubPage() {
+  const [mounted, setMounted] = useState<boolean>(false);
+
   // Authentication State
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [authUsername, setAuthUsername] = useState<string>("admin");
@@ -261,6 +249,7 @@ export function AdminHubPage() {
 
   // Check login & theme on mount
   useEffect(() => {
+    setMounted(true);
     const isLogged = localStorage.getItem("artisanscent_admin_logged");
     if (isLogged === "true") {
       setIsAuthenticated(true);
@@ -611,6 +600,18 @@ export function AdminHubPage() {
     setOrdersList((prev) => [mockOrder, ...prev]);
     showFeedback(`Simulated new luxury order ${mockOrder.id} successfully!`);
   };
+
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-[#071910] text-[#c5a880] flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-10 h-10 border-2 border-[#c5a880] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <p className="text-xs tracking-widest uppercase">Loading Artisan Admin...</p>
+        </div>
+      </div>
+    );
+  }
 
   // =========================================================================
   // VIEW: AUTHENTICATION GATE (SPLIT SCREEN HERO)
