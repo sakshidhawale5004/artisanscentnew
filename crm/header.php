@@ -91,6 +91,12 @@ $flash = get_flash();
         >
           Payment Gateway
         </a>
+        <a
+          href="audit.php"
+          class="px-4 py-1.5 rounded-full text-xs font-medium transition-all <?php echo $currentPage === 'audit' ? 'bg-[#1b5e3f] text-white shadow-xs' : 'text-[#a3b8ac] hover:text-white'; ?>"
+        >
+          Operations &amp; Audit (12)
+        </a>
       </nav>
 
       <!-- Right Controls -->
@@ -119,6 +125,7 @@ $flash = get_flash();
       <a href="customers.php" class="px-3 py-1 rounded-full text-[11px] whitespace-nowrap <?php echo $currentPage === 'customers' ? 'bg-[#1b5e3f] text-white' : 'text-[#a3b8ac]'; ?>">Customers CRM</a>
       <a href="inquiries.php" class="px-3 py-1 rounded-full text-[11px] whitespace-nowrap <?php echo $currentPage === 'inquiries' ? 'bg-[#1b5e3f] text-white' : 'text-[#a3b8ac]'; ?>">Inquiries</a>
       <a href="payments.php" class="px-3 py-1 rounded-full text-[11px] whitespace-nowrap <?php echo $currentPage === 'payments' ? 'bg-[#1b5e3f] text-white' : 'text-[#a3b8ac]'; ?>">Payment Gateway</a>
+      <a href="audit.php" class="px-3 py-1 rounded-full text-[11px] whitespace-nowrap <?php echo $currentPage === 'audit' ? 'bg-[#1b5e3f] text-white' : 'text-[#a3b8ac]'; ?>">Operations &amp; Audit</a>
     </div>
   </header>
 

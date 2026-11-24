@@ -33,6 +33,7 @@ import {
   Copy,
   Check,
   Building2,
+  Workflow,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -53,6 +54,7 @@ import {
   addOrderToCRM,
   ORDERS_UPDATED_EVENT,
 } from "@/lib/store";
+import { OperationsAuditHub } from "@/components/OperationsAuditHub";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -101,7 +103,7 @@ export function AdminHubPage() {
   const [authError, setAuthError] = useState<string>("");
 
   // Navigation View Tab
-  const [activeTab, setActiveTab] = useState<"dashboard" | "products" | "orders" | "customers" | "inquiries" | "payments">("dashboard");
+  const [activeTab, setActiveTab] = useState<"dashboard" | "products" | "orders" | "customers" | "inquiries" | "payments" | "audit">("dashboard");
 
   // Payment Gateway Custom QR Generator & Cheque Modal State
   const [paymentCustomAmount, setPaymentCustomAmount] = useState<number>(4999);
@@ -813,6 +815,14 @@ export function AdminHubPage() {
             >
               Payment Gateway
             </button>
+            <button
+              onClick={() => setActiveTab("audit")}
+              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
+                activeTab === "audit" ? "bg-[#1b5e3f] text-white shadow-xs" : "text-[#a3b8ac] hover:text-white"
+              }`}
+            >
+              Operations &amp; Audit (12)
+            </button>
           </nav>
 
           {/* Right Action: Storefront Link & Logout */}
@@ -838,7 +848,7 @@ export function AdminHubPage() {
 
         {/* Mobile Navigation bar */}
         <div className="flex md:hidden items-center gap-1 mt-3 pt-3 border-t border-[#1b5e3f]/40 overflow-x-auto no-scrollbar">
-          {(["dashboard", "products", "orders", "customers", "inquiries", "payments"] as const).map((tab) => (
+          {(["dashboard", "products", "orders", "customers", "inquiries", "payments", "audit"] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -846,7 +856,7 @@ export function AdminHubPage() {
                 activeTab === tab ? "bg-[#1b5e3f] text-white" : "text-[#a3b8ac]"
               }`}
             >
-              {tab === "payments" ? "Payment Gateway" : tab}
+              {tab === "payments" ? "Payment Gateway" : tab === "audit" ? "Operations & Audit" : tab}
             </button>
           ))}
         </div>
@@ -988,6 +998,41 @@ export function AdminHubPage() {
                     <span>Open Payment Hub &amp; QR Generator</span>
                   </Button>
                 </div>
+              </div>
+            </div>
+
+            {/* E-Commerce Operations & Handover QA Matrix Strip */}
+            <div className="rounded-2xl bg-white border border-[#e4ded5] p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#f4f9f6] border border-[#1b5e3f]/25 text-[#1b5e3f] flex items-center justify-center shrink-0">
+                  <ShieldCheck size={24} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] uppercase font-bold tracking-widest text-[#1b5e3f]">
+                      E-Commerce Operations &amp; QA Audit
+                    </span>
+                    <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-[#e8f5f0] text-[#1b5e3f] border border-[#1b5e3f]/20">
+                      108 / 108 VERIFIED (100%)
+                    </span>
+                  </div>
+                  <h3 className="font-display text-lg text-[#111111] font-normal mt-0.5">
+                    Pre-Handover Verification Matrix (12 Horizontal Modules)
+                  </h3>
+                  <p className="text-xs text-[#666666] font-light mt-0.5">
+                    Orders, Bank of Baroda payment gateways, inventory depletions, courier logistics, and end-to-end simulations.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <Button
+                  onClick={() => setActiveTab("audit")}
+                  className="h-9 px-4 rounded-full bg-[#1b5e3f] hover:bg-[#164a31] text-white text-xs font-medium shadow-xs flex items-center gap-1.5"
+                >
+                  <Workflow size={14} />
+                  <span>Open Horizontal Audit Matrix</span>
+                </Button>
               </div>
             </div>
 
@@ -2183,6 +2228,11 @@ export function AdminHubPage() {
               </div>
             </div>
           </div>
+        )}
+
+        {/* ======================= OPERATIONS & AUDIT TAB ======================= */}
+        {activeTab === "audit" && (
+          <OperationsAuditHub />
         )}
       </main>
 
