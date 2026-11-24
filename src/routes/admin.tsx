@@ -81,7 +81,6 @@ type ExtendedProduct = Product & {
 
 type AdminTab =
   | "overview"
-  | "marketing"
   | "products"
   | "customers"
   | "orders"
@@ -97,7 +96,6 @@ type AdminTab =
 
 const tabTitles: Record<AdminTab, string> = {
   overview: "Dashboard & Telemetry",
-  marketing: "Marketing & Campaigns",
   products: "Product Catalog Management",
   customers: "Patrons & Customer Directory",
   orders: "Orders Fulfillment Queue",
@@ -115,10 +113,10 @@ const tabTitles: Record<AdminTab, string> = {
 function AdminHubPage() {
   const [mounted, setMounted] = useState<boolean>(false);
 
-  // Authentication State
+  // Authentication State (Empty initial values - no default disclosure)
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [authUsername, setAuthUsername] = useState<string>("admin");
-  const [authPassword, setAuthPassword] = useState<string>("artisan2026");
+  const [authUsername, setAuthUsername] = useState<string>("");
+  const [authPassword, setAuthPassword] = useState<string>("");
   const [showAuthPassword, setShowAuthPassword] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string>("");
 
@@ -134,58 +132,11 @@ function AdminHubPage() {
   const [ordersList, setOrdersList] = useState<Order[]>([]);
   const [customerList, setCustomerList] = useState<Customer[]>([]);
   const [inquiriesList, setInquiriesList] = useState<Inquiry[]>([]);
-  const [returnsList, setReturnsList] = useState<ReturnRecord[]>([
-    {
-      id: "RET-9041",
-      orderId: "ART-8201",
-      date: "2026-11-23",
-      customer: "Siddhesh Kulkarni",
-      phone: "+91 98201 12345",
-      item: "Ivory Amber Eau de Parfum (30 ml)",
-      reason: "Outer tamper seal damaged in transit",
-      status: "Pending Pickup",
-      reverseAwb: "BD-REV-49210",
-      refundAmount: 569,
-    },
-    {
-      id: "RET-9038",
-      orderId: "ART-8185",
-      date: "2026-11-21",
-      customer: "Pooja Deshmukh",
-      phone: "+91 98202 54321",
-      item: "Regal Oud Wooden Car Freshener",
-      reason: "Ordered variant exchange to Arctic Mist",
-      status: "Exchange Dispatched",
-      reverseAwb: "DEL-REV-88192",
-      refundAmount: 399,
-    },
-  ]);
-  const [couponsList, setCouponsList] = useState<CouponRecord[]>([
-    {
-      code: "ARTISAN15",
-      type: "percentage",
-      value: 15,
-      minOrder: 1500,
-      expiry: "2026-12-31",
-      description: "15% off inaugural atelier welcome discount",
-      redeemedCount: 38,
-      active: true,
-    },
-    {
-      code: "ROYAL250",
-      type: "fixed",
-      value: 250,
-      minOrder: 2500,
-      expiry: "2026-12-31",
-      description: "Flat ₹250 off on luxury gifting collections",
-      redeemedCount: 19,
-      active: true,
-    },
-  ]);
+  const [returnsList, setReturnsList] = useState<ReturnRecord[]>([]);
 
   // Payment Gateway Custom QR Generator & Cheque Modal State
-  const [paymentCustomAmount, setPaymentCustomAmount] = useState<number>(4999);
-  const [paymentCustomRef, setPaymentCustomRef] = useState<string>("Artisan Scent Order");
+  const [paymentCustomAmount, setPaymentCustomAmount] = useState<number>(0);
+  const [paymentCustomRef, setPaymentCustomRef] = useState<string>("");
   const [isChequeModalOpen, setIsChequeModalOpen] = useState<boolean>(false);
   const [paymentSubTab, setPaymentSubTab] = useState<"transactions" | "failed" | "refunds">("transactions");
 
@@ -202,23 +153,21 @@ function AdminHubPage() {
   const [shippingSearch, setShippingSearch] = useState<string>("");
   const [customerSearch, setCustomerSearch] = useState<string>("");
 
-  // Product Add / Edit Modal State
+  // Product Add / Edit Modal State (Clean empty initial values)
   const [isProductModalOpen, setIsProductModalOpen] = useState<boolean>(false);
   const [editingProduct, setEditingProduct] = useState<ExtendedProduct | null>(null);
   const [formName, setFormName] = useState<string>("");
   const [formCategory, setFormCategory] = useState<Product["category"]>("perfumes");
-  const [formPrice, setFormPrice] = useState<number>(569);
+  const [formPrice, setFormPrice] = useState<number>(0);
   const [formSalePrice, setFormSalePrice] = useState<number | undefined>(undefined);
-  const [formRating, setFormRating] = useState<number>(4.9);
-  const [formImage, setFormImage] = useState<string>("/assets/perfumes/Artisan Scent Ivory Amber Perfume.png");
-  const [formNotes, setFormNotes] = useState<string>("Amber · Sandalwood · Jasmine");
-  const [formFamily, setFormFamily] = useState<string>("Oriental Amber");
-  const [formSize, setFormSize] = useState<string>("30 ml");
-  const [formBadge, setFormBadge] = useState<string>("Bestseller");
-  const [formStock, setFormStock] = useState<number>(45);
-  const [formDescription, setFormDescription] = useState<string>(
-    "Handcrafted formulation distilled with rare botanicals in collaboration with KEOMC Botanical Labs."
-  );
+  const [formRating, setFormRating] = useState<number>(5);
+  const [formImage, setFormImage] = useState<string>("");
+  const [formNotes, setFormNotes] = useState<string>("");
+  const [formFamily, setFormFamily] = useState<string>("");
+  const [formSize, setFormSize] = useState<string>("");
+  const [formBadge, setFormBadge] = useState<string>("");
+  const [formStock, setFormStock] = useState<number>(0);
+  const [formDescription, setFormDescription] = useState<string>("");
 
   // Image Upload Control States
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -227,18 +176,11 @@ function AdminHubPage() {
   // Modals for Orders & Invoices
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [activeModal, setActiveModal] = useState<
-    "none" | "orderDetail" | "invoice" | "shippingLabel" | "packingSlip" | "refund" | "coupon"
+    "none" | "orderDetail" | "invoice" | "shippingLabel" | "packingSlip" | "refund"
   >("none");
   const [refundOrder, setRefundOrder] = useState<Order | null>(null);
   const [refundAmount, setRefundAmount] = useState<number>(0);
   const [refundReason, setRefundReason] = useState<string>("Customer request / Damaged box");
-
-  // New Coupon Form
-  const [newCouponCode, setNewCouponCode] = useState<string>("");
-  const [newCouponType, setNewCouponType] = useState<"percentage" | "fixed">("percentage");
-  const [newCouponValue, setNewCouponValue] = useState<number>(10);
-  const [newCouponMin, setNewCouponMin] = useState<number>(1000);
-  const [newCouponDesc, setNewCouponDesc] = useState<string>("");
 
   // Toast / Feedback message
   const [feedbackMsg, setFeedbackMsg] = useState<string | null>(null);
@@ -329,7 +271,7 @@ function AdminHubPage() {
       setAuthError("");
       showFeedback("Welcome, Administrator. Staff Commerce Hub active.");
     } else {
-      setAuthError("Invalid username or password. Default is admin / artisan2026.");
+      setAuthError("Invalid username or password. Please verify your credentials.");
     }
   };
 
@@ -383,21 +325,21 @@ function AdminHubPage() {
     reader.readAsDataURL(file);
   };
 
-  // Product modal handlers
+  // Product modal handlers (Clean blank inputs)
   const openAddProductModal = () => {
     setEditingProduct(null);
     setFormName("");
     setFormCategory("perfumes");
-    setFormPrice(569);
+    setFormPrice(0);
     setFormSalePrice(undefined);
-    setFormRating(4.9);
-    setFormImage("/assets/perfumes/Artisan Scent Ivory Amber Perfume.png");
-    setFormNotes("Amber · Sandalwood · Vanilla");
-    setFormFamily("Oriental Amber");
-    setFormSize("30 ml");
-    setFormBadge("Bestseller");
-    setFormStock(45);
-    setFormDescription("Handcrafted formulation distilled with rare botanicals in collaboration with KEOMC Botanical Labs.");
+    setFormRating(5);
+    setFormImage("");
+    setFormNotes("");
+    setFormFamily("");
+    setFormSize("");
+    setFormBadge("");
+    setFormStock(0);
+    setFormDescription("");
     setIsProductModalOpen(true);
   };
 
@@ -824,18 +766,6 @@ function AdminHubPage() {
           </button>
           <button
             type="button"
-            className={`tab-btn ${activeTab === "marketing" ? "active" : ""}`}
-            onClick={() => {
-              setActiveTab("marketing");
-              setIsSidebarOpen(false);
-            }}
-          >
-            <span className="tab-btn-content">
-              <i className="bi bi-megaphone"></i> <span>Marketing</span>
-            </span>
-          </button>
-          <button
-            type="button"
             className={`tab-btn ${activeTab === "products" ? "active" : ""}`}
             onClick={() => {
               setActiveTab("products");
@@ -1243,7 +1173,7 @@ function AdminHubPage() {
                         {ordersList.length === 0 && (
                           <tr>
                             <td colSpan={6} style={{ textAlign: "center", padding: "28px", color: "var(--muted)" }}>
-                              No orders received yet. Click "Simulate Order" below to test telemetry!
+                              No customer orders received yet. Storefront checkouts will appear here automatically.
                             </td>
                           </tr>
                         )}
@@ -1324,128 +1254,20 @@ function AdminHubPage() {
                         type="button"
                         className="btn-outline"
                         style={{ flex: 1, justifyContent: "center", padding: "8px" }}
-                        onClick={simulateNewOrder}
+                        onClick={() => {
+                          syncCloudOrders().then((merged) => {
+                            if (merged && Array.isArray(merged)) {
+                              setOrdersList(merged);
+                              showFeedback("Orders synced with cloud telemetry.");
+                            }
+                          });
+                        }}
                       >
-                        <i className="bi bi-play-circle"></i> Simulate Order
+                        <i className="bi bi-arrow-clockwise"></i> Refresh Orders
                       </button>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
-          )}
-
-          {/* ==================================================================
-               VIEW 2: MARKETING & PROMO COUPONS
-               ================================================================== */}
-          {activeTab === "marketing" && (
-            <section id="view-marketing" className="crm-view active">
-              <div className="recon-grid" style={{ marginBottom: "20px" }}>
-                <div className="recon-stat-card">
-                  <div className="recon-stat-title">Active Campaigns</div>
-                  <div className="recon-stat-val">3</div>
-                  <div className="recon-stat-sub">VIP Gifting & Festivities</div>
-                </div>
-                <div className="recon-stat-card">
-                  <div className="recon-stat-title">Active Promo Codes</div>
-                  <div className="recon-stat-val" style={{ color: "var(--accent)" }}>
-                    {couponsList.filter((c) => c.active).length}
-                  </div>
-                  <div className="recon-stat-sub">Live discount vouchers</div>
-                </div>
-                <div className="recon-stat-card">
-                  <div className="recon-stat-title">Campaign Reach</div>
-                  <div className="recon-stat-val" style={{ color: "var(--success)" }}>
-                    1,240
-                  </div>
-                  <div className="recon-stat-sub">Patrons notified</div>
-                </div>
-                <div className="recon-stat-card">
-                  <div className="recon-stat-title">Attributed Orders</div>
-                  <div className="recon-stat-val" style={{ color: "var(--info)" }}>
-                    {couponsList.reduce((s, c) => s + c.redeemedCount, 0)}
-                  </div>
-                  <div className="recon-stat-sub">Direct promo conversions</div>
-                </div>
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  gap: "12px",
-                  marginBottom: "18px",
-                  flexWrap: "wrap",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <div style={{ display: "flex", gap: "8px" }}>
-                  <button type="button" className="tab-btn active">
-                    <i className="bi bi-ticket-perforated"></i> Promo Codes & Coupons
-                  </button>
-                </div>
-                <button type="button" className="btn-primary" onClick={() => setActiveModal("coupon")}>
-                  <i className="bi bi-plus-circle"></i> Create Promo Coupon
-                </button>
-              </div>
-
-              <div className="table-container">
-                <table className="data-table">
-                  <thead>
-                    <tr>
-                      <th>Coupon Code</th>
-                      <th>Description</th>
-                      <th>Discount</th>
-                      <th>Min Order</th>
-                      <th>Redeemed</th>
-                      <th>Expiry</th>
-                      <th>Status</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {couponsList.map((c) => (
-                      <tr key={c.code}>
-                        <td>
-                          <b style={{ color: "var(--accent)", letterSpacing: "0.05em" }}>{c.code}</b>
-                        </td>
-                        <td>{c.description}</td>
-                        <td>
-                          <b>{c.type === "percentage" ? `${c.value}% OFF` : `₹${c.value} FLAT`}</b>
-                        </td>
-                        <td>₹{c.minOrder}</td>
-                        <td>{c.redeemedCount} orders</td>
-                        <td>{c.expiry}</td>
-                        <td>
-                          <span
-                            className="status-badge"
-                            style={{
-                              background: c.active ? "rgba(21,128,61,0.12)" : "rgba(100,116,139,0.15)",
-                              color: c.active ? "#15803d" : "#64748b",
-                            }}
-                          >
-                            {c.active ? "Active" : "Disabled"}
-                          </span>
-                        </td>
-                        <td>
-                          <button
-                            type="button"
-                            className="btn-outline"
-                            style={{ padding: "4px 8px", fontSize: "11px" }}
-                            onClick={() => {
-                              setCouponsList((prev) =>
-                                prev.map((x) => (x.code === c.code ? { ...x, active: !x.active } : x))
-                              );
-                              showFeedback(`Coupon ${c.code} status updated.`);
-                            }}
-                          >
-                            Toggle Status
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
               </div>
             </section>
           )}
@@ -1668,8 +1490,19 @@ function AdminHubPage() {
                   >
                     <i className="bi bi-download"></i> Export Orders CSV
                   </button>
-                  <button type="button" className="btn-primary" onClick={simulateNewOrder}>
-                    <i className="bi bi-plus-circle"></i> Simulate New Order
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={() => {
+                      syncCloudOrders().then((merged) => {
+                        if (merged && Array.isArray(merged)) {
+                          setOrdersList(merged);
+                          showFeedback("Orders refreshed from live telemetry.");
+                        }
+                      });
+                    }}
+                  >
+                    <i className="bi bi-arrow-clockwise"></i> Refresh Orders
                   </button>
                 </div>
               </div>
@@ -1696,7 +1529,7 @@ function AdminHubPage() {
                         <td>
                           <div>{ord.customerName}</div>
                           <div style={{ fontSize: "11px", color: "var(--muted)" }}>
-                            {ord.phone} · {ord.address?.city || "Mumbai"}
+                            {ord.phone || "Storefront patron"}{ord.address?.city ? ` · ${ord.address.city}` : ""}
                           </div>
                         </td>
                         <td>
@@ -1922,7 +1755,7 @@ function AdminHubPage() {
                 <div className="recon-stat-card">
                   <div className="recon-stat-title">Total Refunds Issued</div>
                   <div className="recon-stat-val" style={{ color: "#0d9488" }}>
-                    ₹968
+                    {money(returnsList.filter((r) => r.status === "Refund Processed").reduce((sum, r) => sum + r.refundAmount, 0))}
                   </div>
                   <div className="recon-stat-sub">Approved returns ledger</div>
                 </div>
@@ -2029,6 +1862,13 @@ function AdminHubPage() {
                         </td>
                       </tr>
                     ))}
+                    {ordersList.length === 0 && (
+                      <tr>
+                        <td colSpan={6} style={{ textAlign: "center", padding: "32px", color: "var(--muted)" }}>
+                          No payment transactions recorded yet.
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -2094,9 +1934,9 @@ function AdminHubPage() {
                         ordersList.map((o) => [
                           o.id,
                           o.customerName || "",
-                          o.address?.city || "Mumbai",
+                          o.address?.city || "",
                           o.courier || "BlueDart Express",
-                          o.awb || "BD-881920",
+                          o.awb || "Pending Allocation",
                           o.status,
                         ])
                       )
@@ -2129,8 +1969,11 @@ function AdminHubPage() {
                         <td>
                           <div>{o.customerName}</div>
                           <div style={{ fontSize: "11px", color: "var(--muted)" }}>
-                            {o.address?.line1 || "Cuffe Parade"}, {o.address?.city || "Mumbai"} -{" "}
-                            {o.address?.pincode || "400005"}
+                            {typeof o.address === "string"
+                              ? o.address
+                              : o.address?.line1
+                              ? `${o.address.line1}, ${o.address.city || ""} ${o.address.pincode || ""}`
+                              : "Storefront checkout destination"}
                           </div>
                         </td>
                         <td>
@@ -2139,7 +1982,7 @@ function AdminHubPage() {
                           </span>
                         </td>
                         <td>
-                          <b style={{ fontFamily: "monospace" }}>{o.awb || `BD-${o.id.replace("ART-", "99")}`}</b>
+                          <b style={{ fontFamily: "monospace" }}>{o.awb || "Pending Allocation"}</b>
                         </td>
                         <td>
                           <span
@@ -2177,6 +2020,13 @@ function AdminHubPage() {
                         </td>
                       </tr>
                     ))}
+                    {ordersList.length === 0 && (
+                      <tr>
+                        <td colSpan={6} style={{ textAlign: "center", padding: "32px", color: "var(--muted)" }}>
+                          No shipments currently scheduled for dispatch.
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -2192,7 +2042,7 @@ function AdminHubPage() {
                 <div className="recon-stat-card">
                   <div className="recon-stat-title">Total Units in Stock</div>
                   <div className="recon-stat-val">{totalInventoryUnits}</div>
-                  <div className="recon-stat-sub">Across all 38 luxury remedies</div>
+                  <div className="recon-stat-sub">{productList.length} catalog items</div>
                 </div>
                 <div className="recon-stat-card">
                   <div className="recon-stat-title">Inventory Valuation</div>
@@ -2478,6 +2328,13 @@ function AdminHubPage() {
                         </td>
                       </tr>
                     ))}
+                    {returnsList.length === 0 && (
+                      <tr>
+                        <td colSpan={6} style={{ textAlign: "center", padding: "32px", color: "var(--muted)" }}>
+                          No return or exchange requests recorded.
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -2565,25 +2422,31 @@ function AdminHubPage() {
                         whiteSpace: "pre-wrap",
                       }}
                     >
-                      {`✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨
+                      {selectedNotifOrder ? (
+                        `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨
 Dear ${ordersList.find((o) => o.id === selectedNotifOrder)?.customerName || "Valued Patron"},
 
-Your order *#${selectedNotifOrder || "ART-8201"}* for ${money(
-                        ordersList.find((o) => o.id === selectedNotifOrder)?.total || 1537
-                      )} is confirmed with our botanical atelier!
+Your order *#${selectedNotifOrder}* for ${money(
+                          ordersList.find((o) => o.id === selectedNotifOrder)?.total || 0
+                        )} is confirmed with our botanical atelier!
 
 📦 *Items:*
 ${ordersList
   .find((o) => o.id === selectedNotifOrder)
   ?.items?.map((it) => `• ${it.quantity}x ${it.name} (${it.size || "30 ml"})`)
-  .join("\n") || "• 1x Ivory Amber Eau de Parfum (30 ml)"}
+  .join("\n") || "• Line items detailed on invoice"}
 
 🏦 *Settlement:* Bank of Baroda Current Account / Verified UPI
-🚚 *Courier Partner:* BlueDart Express (AWB: ${
-                        ordersList.find((o) => o.id === selectedNotifOrder)?.awb || "BD-9820124"
-                      })
+🚚 *Courier Partner:* ${ordersList.find((o) => o.id === selectedNotifOrder)?.courier || "BlueDart Express"} (AWB: ${
+                          ordersList.find((o) => o.id === selectedNotifOrder)?.awb || "Pending Allocation"
+                        })
 
-Thank you for choosing Artisan Scent Haute Parfumerie.`}
+Thank you for choosing Artisan Scent Haute Parfumerie.`
+                      ) : (
+                        <span style={{ color: "var(--muted)", fontStyle: "italic" }}>
+                          No customer order selected. Select an order above to preview the multi-channel notification.
+                        </span>
+                      )}
                     </div>
 
                     <div style={{ marginTop: "16px", display: "flex", gap: "10px" }}>
@@ -2689,7 +2552,7 @@ Thank you for choosing Artisan Scent Haute Parfumerie.`}
                         <td>
                           <b>{money(c.totalSpend)}</b>
                         </td>
-                        <td>{c.lastOrder || "2026-11-20"}</td>
+                        <td>{c.lastOrder || "—"}</td>
                         <td>
                           <a
                             href={`https://wa.me/${c.phone.replace(/[^0-9]/g, "")}`}
@@ -2733,7 +2596,7 @@ Thank you for choosing Artisan Scent Haute Parfumerie.`}
                   <div className="recon-stat-val" style={{ color: "var(--success)" }}>
                     4.9 ★
                   </div>
-                  <div className="recon-stat-sub">Across 480+ reviews</div>
+                  <div className="recon-stat-sub">Verified customer feedback</div>
                 </div>
               </div>
 

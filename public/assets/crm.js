@@ -865,6 +865,18 @@
       saveData(STORAGE.CAMPAIGNS, state.campaigns);
     }
 
+    const seedTicketIds = new Set(["TKT-1041"]);
+    if (state.tickets.some(t => seedTicketIds.has(t.id))) {
+      state.tickets = state.tickets.filter(t => !seedTicketIds.has(t.id));
+      saveData(STORAGE.TICKETS, state.tickets);
+    }
+
+    const seedReviewIds = new Set(["REV-201", "REV-202"]);
+    if (state.reviews.some(r => seedReviewIds.has(r.id))) {
+      state.reviews = state.reviews.filter(r => !seedReviewIds.has(r.id));
+      saveData(STORAGE.REVIEWS, state.reviews);
+    }
+
     // Check if optional untracked window.BHAU_CONFIG exists locally
     if (window.BHAU_CONFIG) {
       if (!state.settings.razorpayKeyId && window.BHAU_CONFIG.razorpayKeyId) {
@@ -926,7 +938,7 @@
         const pass = document.getElementById("authPass").value.trim();
         const rem = document.getElementById("authRem").checked;
 
-        if ((user === "admin" && pass === "artisan2026") || (user === "bhaukorde" && pass === "masale1975") || (user.length > 2 && pass.length > 2)) {
+        if ((user === "admin" && pass === "artisan2026") || (user.length > 2 && pass.length > 2)) {
           const sessionData = JSON.stringify({ user, loggedAt: new Date().toISOString() });
           if (rem) {
             localStorage.setItem(STORAGE.SESSION, sessionData);
@@ -1036,6 +1048,7 @@
   }
 
   function switchTab(tabName) {
+    if (tabName === "marketing") tabName = "overview";
     state.activeTab = tabName;
     document.querySelectorAll("[data-crm-tab]").forEach((b) => {
       b.classList.toggle("active", b.dataset.crmTab === tabName);
@@ -1047,7 +1060,6 @@
     // Update Topbar View Title
     const titleMap = {
       overview: "Dashboard",
-      marketing: "Marketing & Campaigns",
       products: "Products & Services",
       customers: "Customers Management",
       orders: "Orders Management",
@@ -1764,42 +1776,42 @@
     "order_confirm": {
       name: "1. Order Confirmation (Email / WhatsApp)",
       subject: "Order Confirmed: Artisan Scent #{ORDER_ID}",
-      content: (o) => `Namaste ${o.customer}! 🌿\n\nThank you for ordering with *Artisan Scent* (Panvel).\n\n*Order ID:* ${o.id}\n*Total Amount:* ${rs(o.total)}\n*Payment Mode:* ${o.payment}\n\n*Items Ordered:*\n${o.items.map((i, n) => `${n + 1}. ${i.name} (${i.size || 'Standard'}) x${i.qty}`).join('\n')}\n\n*Delivery Address:* ${o.address}, ${o.city}\n\nOur artisan spice team is now preparing your fresh order. Thank you!\n_चवीने खाणार त्याला भाऊ देणार._`
+      content: (o) => `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${o.customer},\n\nThank you for ordering with *Artisan Scent*.\n\n*Order ID:* ${o.id}\n*Total Amount:* ${rs(o.total)}\n*Payment Mode:* ${o.payment}\n\n*Items Ordered:*\n${o.items.map((i, n) => `${n + 1}. ${i.name} (${i.size || '30 ml'}) x${i.qty}`).join('\n')}\n\n*Delivery Address:* ${o.address}, ${o.city}\n\nOur botanical atelier is now handcrafting and preparing your order. Thank you!\n_Artisan Scent Haute Parfumerie_`
     },
     "payment_receipt": {
       name: "2. Payment Receipt Notification",
       subject: "Payment Received: Artisan Scent #{ORDER_ID}",
-      content: (o) => `Namaste ${o.customer}! 🌿\n\nWe have received your online payment of *${rs(o.total)}* for order *${o.id}*.\n\n*Payment Ref / ID:* ${o.paymentId || 'Verified Online'}\n*Status:* PAID IN FULL\n\nYour invoice is being generated and the spices are moving to packing. Thank you!\n_Artisan Scent, Panvel_`
+      content: (o) => `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${o.customer},\n\nWe have received your online payment of *${rs(o.total)}* for order *${o.id}*.\n\n*Payment Ref / ID:* ${o.paymentId || 'Bank of Baroda Verified'}\n*Status:* PAID IN FULL\n\nYour luxury parcel is being carefully prepared for dispatch. Thank you!\n_Artisan Scent Haute Parfumerie_`
     },
     "order_processing": {
       name: "3. Order In Processing / Packing",
-      subject: "Spices Being Packed: #{ORDER_ID}",
-      content: (o) => `Namaste ${o.customer}! 🌿\n\nYour spice order *${o.id}* is currently being freshly packed with seal-lock aroma protection at our Panvel unit.\n\nTarget dispatch within 24 hours. Thank you!\n_Artisan Scent_`
+      subject: "Fragrance Being Prepared: #{ORDER_ID}",
+      content: (o) => `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${o.customer},\n\nYour fragrance order *${o.id}* is currently being bottled, inspected, and packed with velvet protection at our botanical atelier.\n\nTarget dispatch within 24 hours. Thank you!\n_Artisan Scent Haute Parfumerie_`
     },
     "order_shipped": {
       name: "4. Order Shipped & AWB Live Tracking",
       subject: "Dispatched: Artisan Scent #{ORDER_ID}",
-      content: (o) => `Namaste ${o.customer}! 🌿\n\nGreat news! Your handcrafted spice parcel *${o.id}* has been dispatched.\n\n*Courier Partner:* ${o.courier || 'Delhivery Express'}\n*AWB Tracking No:* ${o.awb || 'DELH-98421098'}\n*Track Live:* ${o.awb ? `https://www.delhivery.com/track/package/${o.awb}` : 'https://bhaukorde.in/track'}\n\nExpected delivery within 2-3 business days. Enjoy authentic cooking!\n_चवीने खाणार त्याला भाऊ देणार._`
+      content: (o) => `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${o.customer},\n\nGreat news! Your luxury parcel *${o.id}* has been dispatched.\n\n*Courier Partner:* ${o.courier || 'BlueDart Express'}\n*AWB Tracking No:* ${o.awb || 'Pending Allocation'}\n\nExpected delivery within 2-3 business days. Thank you for choosing Artisan Scent!\n_Artisan Scent Haute Parfumerie_`
     },
     "out_delivery": {
       name: "5. Out for Delivery Notification",
       subject: "Out for Delivery Today: #{ORDER_ID}",
-      content: (o) => `Namaste ${o.customer}! 🌿\n\nYour Artisan Scent parcel *${o.id}* is out for delivery today with the courier delivery partner. Please keep your phone available.\n\nThank you for choosing authentic Konkan spices!\n_Artisan Scent_`
+      content: (o) => `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${o.customer},\n\nYour Artisan Scent parcel *${o.id}* is out for delivery today with our courier partner. Please keep your phone reachable.\n\nThank you for choosing Artisan Scent Haute Parfumerie!`
     },
     "order_delivered": {
       name: "6. Order Delivered & Review Request",
       subject: "Delivered: Artisan Scent #{ORDER_ID}",
-      content: (o) => `Namaste ${o.customer}! 🌿\n\nYour order *${o.id}* has been successfully delivered. We hope you relish the authentic aroma and stone-ground taste of Artisan Scent!\n\nWe would love to hear your feedback:\n👉 Rate your experience: https://bhaukorde.in/review?id=${o.id}\n\n_चवीने खाणार त्याला भाऊ देणार._`
+      content: (o) => `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${o.customer},\n\nYour order *${o.id}* has been successfully delivered. We hope you cherish the exquisite olfactory notes of Artisan Scent!\n\nWe would love to receive your verified feedback:\n_Artisan Scent Haute Parfumerie_`
     },
     "order_cancelled": {
       name: "7. Order Cancellation & Refund Notice",
       subject: "Order Cancelled: #{ORDER_ID}",
-      content: (o) => `Namaste ${o.customer}! 🌿\n\nYour order *${o.id}* has been cancelled as requested. Any prepaid amount of *${rs(o.total)}* has been refunded to your original payment method.\n\nPlease let us know if you need assistance.\n_Artisan Scent, Panvel_`
+      content: (o) => `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${o.customer},\n\nYour order *${o.id}* has been cancelled as requested. Any prepaid amount of *${rs(o.total)}* has been refunded to your original payment method.\n\nPlease let us know if our concierge can be of further assistance.\n_Artisan Scent Haute Parfumerie_`
     },
     "return_update": {
       name: "8. Return / Exchange Request Update",
       subject: "Return Update: #{ORDER_ID}",
-      content: (o) => `Namaste ${o.customer}! 🌿\n\nYour return / exchange request for order *${o.id}* has been verified and approved. Our courier partner will initiate reverse pickup within 24-48 hours.\n\nThank you for your cooperation!\n_Artisan Scent_`
+      content: (o) => `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${o.customer},\n\nYour return / exchange request for order *${o.id}* has been verified and approved. Our courier partner will initiate reverse pickup within 24-48 hours.\n\nThank you for your cooperation!\n_Artisan Scent Haute Parfumerie_`
     }
   };
 
@@ -1870,90 +1882,56 @@
     const elResolved = document.getElementById("suppStatResolved");
     if (elResolved) elResolved.textContent = state.tickets.filter(t => t.status === "Resolved" || t.status === "Closed").length;
 
-    // Default Seed Tickets if empty
     if (!state.tickets.length) {
-      state.tickets = [
-        {
-          id: "TKT-1041",
-          date: formatDate(new Date()),
-          orderId: state.orders[0] ? state.orders[0].id : "BK-2026-001",
-          customer: "Pooja Patil",
-          phone: "9820011223",
-          category: "Order Tracking",
-          priority: "Normal",
-          status: "Resolved",
-          notes: "Customer inquired about estimated delivery date. Tracking link provided via WhatsApp."
-        }
-      ];
-      saveData(STORAGE.TICKETS, state.tickets);
+      listWrap.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--muted)">No customer support tickets registered.</td></tr>`;
+    } else {
+      listWrap.innerHTML = state.tickets.map(t => {
+        const priorityClass = t.priority === "Urgent" ? "urgent" : t.priority === "High" ? "high" : "normal";
+
+        return `
+          <tr>
+            <td><b>${esc(t.id)}</b><div style="font-size:11px;color:var(--muted)">${esc(t.date)}</div></td>
+            <td><b>${esc(t.customer)}</b><br><small style="color:var(--muted)"><i class="bi bi-telephone"></i> ${esc(t.phone)}</small></td>
+            <td><b>${esc(t.orderId || 'N/A')}</b></td>
+            <td><span class="category-tag blend" style="font-size:11px">${esc(t.category)}</span></td>
+            <td><span class="ticket-priority-pill ${priorityClass}">${esc(t.priority)}</span></td>
+            <td>
+              <select class="filter-select" style="font-size:12px;padding:3px 6px;" onchange="window.ARTISAN_CRM.updateTicketStatus('${esc(t.id)}', this.value)">
+                <option value="Open" ${t.status === "Open" ? "selected" : ""}>Open</option>
+                <option value="In Progress" ${t.status === "In Progress" ? "selected" : ""}>In Progress</option>
+                <option value="Resolved" ${t.status === "Resolved" ? "selected" : ""}>Resolved</option>
+                <option value="Closed" ${t.status === "Closed" ? "selected" : ""}>Closed</option>
+              </select>
+            </td>
+            <td>
+              <button class="btn-whatsapp" title="WhatsApp Customer" onclick="window.ARTISAN_CRM.sendCustomerWhatsApp('${esc(t.phone)}', '${esc(t.customer)}')">
+                <i class="bi bi-whatsapp"></i> Chat
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join("");
     }
-
-    listWrap.innerHTML = state.tickets.map(t => {
-      const priorityClass = t.priority === "Urgent" ? "urgent" : t.priority === "High" ? "high" : "normal";
-
-      return `
-        <tr>
-          <td><b>${esc(t.id)}</b><div style="font-size:11px;color:var(--muted)">${esc(t.date)}</div></td>
-          <td><b>${esc(t.customer)}</b><br><small style="color:var(--muted)"><i class="bi bi-telephone"></i> ${esc(t.phone)}</small></td>
-          <td><b>${esc(t.orderId || 'N/A')}</b></td>
-          <td><span class="category-tag blend" style="font-size:11px">${esc(t.category)}</span></td>
-          <td><span class="ticket-priority-pill ${priorityClass}">${esc(t.priority)}</span></td>
-          <td>
-            <select class="filter-select" style="font-size:12px;padding:3px 6px;" onchange="window.ARTISAN_CRM.updateTicketStatus('${esc(t.id)}', this.value)">
-              <option value="Open" ${t.status === "Open" ? "selected" : ""}>Open</option>
-              <option value="In Progress" ${t.status === "In Progress" ? "selected" : ""}>In Progress</option>
-              <option value="Resolved" ${t.status === "Resolved" ? "selected" : ""}>Resolved</option>
-              <option value="Closed" ${t.status === "Closed" ? "selected" : ""}>Closed</option>
-            </select>
-          </td>
-          <td>
-            <button class="btn-whatsapp" title="WhatsApp Customer" onclick="window.ARTISAN_CRM.sendCustomerWhatsApp('${esc(t.phone)}', '${esc(t.customer)}')">
-              <i class="bi bi-whatsapp"></i> Chat
-            </button>
-          </td>
-        </tr>
-      `;
-    }).join("");
 
     // Reviews Moderation Desk
     if (reviewsWrap) {
       if (!state.reviews.length) {
-        state.reviews = [
-          {
-            id: "REV-201",
-            product: "Special Malvani Masala",
-            reviewer: "Sunil Kadam",
-            rating: 5,
-            comment: "Best authentic Malvani masala in Navi Mumbai! Traditional Konkan aroma.",
-            date: "2026-11-20",
-            featured: true
-          },
-          {
-            id: "REV-202",
-            product: "Aamba Goad Lonche",
-            reviewer: "Meena Deshmukh",
-            rating: 5,
-            comment: "Sweet mango pickle exactly like grandmother made. Outstanding quality.",
-            date: "2026-11-21",
-            featured: true
-          }
-        ];
-        saveData(STORAGE.REVIEWS, state.reviews);
+        reviewsWrap.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--muted)">No customer reviews submitted yet.</td></tr>`;
+      } else {
+        reviewsWrap.innerHTML = state.reviews.map(r => `
+          <tr>
+            <td><b>${esc(r.product)}</b></td>
+            <td><b>${esc(r.reviewer)}</b><div style="font-size:11px;color:var(--muted)">${esc(r.date)}</div></td>
+            <td><span style="color:#d4952c;font-size:14px;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span></td>
+            <td style="font-size:12px;color:var(--fg-soft);">"${esc(r.comment)}"</td>
+            <td>
+              <button class="status-badge ${r.featured ? 'confirmed' : 'cancelled'}" style="border:none;cursor:pointer;" onclick="window.ARTISAN_CRM.toggleReviewFeatured('${esc(r.id)}')">
+                ${r.featured ? 'Featured on Site' : 'Hidden'}
+              </button>
+            </td>
+          </tr>
+        `).join("");
       }
-
-      reviewsWrap.innerHTML = state.reviews.map(r => `
-        <tr>
-          <td><b>${esc(r.product)}</b></td>
-          <td><b>${esc(r.reviewer)}</b><div style="font-size:11px;color:var(--muted)">${esc(r.date)}</div></td>
-          <td><span style="color:#d4952c;font-size:14px;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span></td>
-          <td style="font-size:12px;color:var(--fg-soft);">"${esc(r.comment)}"</td>
-          <td>
-            <button class="status-badge ${r.featured ? 'confirmed' : 'cancelled'}" style="border:none;cursor:pointer;" onclick="window.ARTISAN_CRM.toggleReviewFeatured('${esc(r.id)}')">
-              ${r.featured ? 'Featured on Site' : 'Hidden'}
-            </button>
-          </td>
-        </tr>
-      `).join("");
     }
   }
 
@@ -2376,200 +2354,16 @@
   }
 
   // ==========================================================================
-  // MODULE: MARKETING & PROMOTIONAL CAMPAIGNS
+  // MODULE: MARKETING & PROMOTIONAL CAMPAIGNS (Removed per user request)
   // ==========================================================================
-  function setMarketingSubTab(sub) {
-    state.marketingSubTab = sub;
-    const btnCoupons = document.getElementById("mktSubtabCoupons");
-    const btnCampaigns = document.getElementById("mktSubtabCampaigns");
-    const secCoupons = document.getElementById("marketingCouponsSection");
-    const secCampaigns = document.getElementById("marketingCampaignsSection");
-
-    if (btnCoupons) btnCoupons.classList.toggle("active", sub === "coupons");
-    if (btnCampaigns) btnCampaigns.classList.toggle("active", sub === "campaigns");
-    if (secCoupons) secCoupons.style.display = sub === "coupons" ? "block" : "none";
-    if (secCampaigns) secCampaigns.style.display = sub === "campaigns" ? "block" : "none";
-  }
-
-  function renderMarketing() {
-    // KPI Cards
-    const elCampCount = document.getElementById("marketingKpiCampaigns");
-    if (elCampCount) elCampCount.textContent = state.campaigns.length;
-
-    const elCpnCount = document.getElementById("marketingKpiCoupons");
-    if (elCpnCount) elCpnCount.textContent = state.coupons.filter(c => c.active).length;
-
-    const totalReach = state.campaigns.reduce((sum, c) => sum + (c.reach || 0), 0);
-    const elReach = document.getElementById("marketingKpiReach");
-    if (elReach) elReach.textContent = totalReach.toLocaleString("en-IN");
-
-    const totalOrders = state.campaigns.reduce((sum, c) => sum + (c.orders || 0), 0);
-    const elOrders = document.getElementById("marketingKpiOrders");
-    if (elOrders) elOrders.textContent = totalOrders.toLocaleString("en-IN");
-
-    // Render Coupons Table
-    const tbody = document.getElementById("couponsTableBody");
-    if (tbody) {
-      if (!state.coupons.length) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:28px;color:var(--muted)">No promo coupons created yet. Click "Create Promo Coupon" above.</td></tr>`;
-      } else {
-        tbody.innerHTML = state.coupons.map(cp => {
-          const disc = cp.discountType === "percentage" ? `${cp.discountValue}% OFF` : `₹${cp.discountValue} FLAT OFF`;
-          const statusBadge = cp.active 
-            ? `<span class="status-badge" style="background:rgba(21,128,61,0.12);color:#15803d;border:1px solid rgba(21,128,61,0.3)"><i class="bi bi-check-circle-fill"></i> Active</span>`
-            : `<span class="status-badge" style="background:rgba(185,28,28,0.12);color:#b91c1c;border:1px solid rgba(185,28,28,0.3)"><i class="bi bi-slash-circle"></i> Inactive</span>`;
-          return `
-            <tr>
-              <td>
-                <span class="coupon-tag">${esc(cp.code)}</span>
-              </td>
-              <td>${esc(cp.description || "Special promotional voucher")}</td>
-              <td><b style="color:var(--accent)">${disc}</b></td>
-              <td>₹${Number(cp.minOrder || 0).toLocaleString("en-IN")}</td>
-              <td><b>${cp.timesRedeemed || 0}</b> times</td>
-              <td>${esc(cp.expiryDate || "No Expiry")}</td>
-              <td>${statusBadge}</td>
-              <td>
-                <div style="display:flex;gap:6px;align-items:center;">
-                  <button type="button" class="btn-outline" style="font-size:11px;padding:4px 8px;" onclick="window.ARTISAN_CRM.copyCouponCode('${esc(cp.code)}')" title="Copy coupon code">
-                    <i class="bi bi-copy"></i> Copy
-                  </button>
-                  <button type="button" class="btn-outline" style="font-size:11px;padding:4px 8px;" onclick="window.ARTISAN_CRM.toggleCouponStatus('${esc(cp.code)}')" title="${cp.active ? 'Deactivate' : 'Activate'}">
-                    <i class="bi ${cp.active ? 'bi-toggle-on' : 'bi-toggle-off'}"></i> ${cp.active ? 'Disable' : 'Enable'}
-                  </button>
-                  <button type="button" class="btn-outline" style="font-size:11px;padding:4px 8px;color:var(--danger);border-color:var(--danger-border)" onclick="window.ARTISAN_CRM.deleteCoupon('${esc(cp.code)}')" title="Delete Coupon">
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          `;
-        }).join("");
-      }
-    }
-
-    // Render Campaigns Grid
-    const cGrid = document.getElementById("campaignsGrid");
-    if (cGrid) {
-      if (!state.campaigns.length) {
-        cGrid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--muted)">No broadcast campaigns configured yet.</div>`;
-      } else {
-        cGrid.innerHTML = state.campaigns.map(cmp => {
-          return `
-            <div class="campaign-card">
-              <div>
-                <div class="campaign-header">
-                  <div class="campaign-title">${esc(cmp.title)}</div>
-                  <span class="campaign-channel-badge"><i class="bi bi-whatsapp"></i> ${esc(cmp.channel)}</span>
-                </div>
-                <div style="font-size:11.5px;color:var(--muted);margin-bottom:8px;">
-                  Target Segment: <b style="color:var(--fg)">${esc(cmp.target)}</b>
-                </div>
-                <div class="campaign-bubble">${esc(cmp.message)}</div>
-                <div class="campaign-metrics">
-                  <div>Reach: <b>${(cmp.reach || 0).toLocaleString("en-IN")}</b></div>
-                  <div>Engaged: <b>${(cmp.clicks || 0).toLocaleString("en-IN")}</b></div>
-                  <div>Orders: <b>${(cmp.orders || 0).toLocaleString("en-IN")}</b></div>
-                </div>
-              </div>
-              <div style="display:flex;gap:8px;align-items:center;margin-top:10px;">
-                <button type="button" class="btn-primary" style="flex:1;justify-content:center;font-size:12px;background:#25D366;border-color:#25D366" onclick="window.ARTISAN_CRM.launchCampaignWhatsApp('${esc(cmp.id)}')">
-                  <i class="bi bi-whatsapp"></i> Launch WhatsApp Broadcast
-                </button>
-                <button type="button" class="btn-outline" style="font-size:12px;padding:6px 10px;" onclick="window.ARTISAN_CRM.copyCouponCode('${esc(cmp.message).replace(/'/g, "\\'")}')">
-                  <i class="bi bi-clipboard"></i>
-                </button>
-              </div>
-            </div>
-          `;
-        }).join("");
-      }
-    }
-  }
-
-  function openAddCouponModal() {
-    const m = document.getElementById("modalCoupon");
-    if (m) {
-      document.getElementById("couponForm").reset();
-      m.classList.add("active");
-    }
-  }
-
-  function saveCoupon(e) {
-    if (e) e.preventDefault();
-    const code = document.getElementById("couponFormCode").value.trim().toUpperCase();
-    const type = document.getElementById("couponFormType").value;
-    const val = parseFloat(document.getElementById("couponFormValue").value) || 0;
-    const minOrder = parseFloat(document.getElementById("couponFormMinOrder").value) || 0;
-    const expiry = document.getElementById("couponFormExpiry").value;
-    const desc = document.getElementById("couponFormDesc").value.trim();
-
-    if (!code) {
-      toast("Please specify a coupon code.", "error");
-      return;
-    }
-
-    const existingIdx = state.coupons.findIndex(c => c.code === code);
-    const couponObj = {
-      code,
-      description: desc || `${val}${type === "percentage" ? "%" : "₹"} promotional discount`,
-      discountType: type,
-      discountValue: val,
-      minOrder,
-      timesRedeemed: existingIdx >= 0 ? state.coupons[existingIdx].timesRedeemed : 0,
-      expiryDate: expiry || "2026-12-31",
-      active: true
-    };
-
-    if (existingIdx >= 0) {
-      state.coupons[existingIdx] = couponObj;
-      toast(`Coupon ${code} updated successfully!`);
-    } else {
-      state.coupons.unshift(couponObj);
-      toast(`Promo Coupon ${code} created successfully!`);
-    }
-
-    saveData(STORAGE.COUPONS, state.coupons);
-    renderMarketing();
-    const m = document.getElementById("modalCoupon");
-    if (m) m.classList.remove("active");
-  }
-
-  function toggleCouponStatus(code) {
-    const cp = state.coupons.find(c => c.code === code);
-    if (cp) {
-      cp.active = !cp.active;
-      saveData(STORAGE.COUPONS, state.coupons);
-      renderMarketing();
-      toast(`Coupon ${code} is now ${cp.active ? 'active' : 'inactive'}.`);
-    }
-  }
-
-  function copyCouponCode(code) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(code).then(() => {
-        toast(`Copied "${code}" to clipboard!`);
-      });
-    } else {
-      toast(`Code: ${code}`);
-    }
-  }
-
-  function deleteCoupon(code) {
-    if (!confirm(`Are you sure you want to delete promo coupon "${code}"?`)) return;
-    state.coupons = state.coupons.filter(c => c.code !== code);
-    saveData(STORAGE.COUPONS, state.coupons);
-    renderMarketing();
-    toast(`Coupon ${code} deleted.`);
-  }
-
-  function launchCampaignWhatsApp(campaignId) {
-    const cmp = state.campaigns.find(c => c.id === campaignId);
-    if (!cmp) return;
-    const url = `https://wa.me/?text=${encodeURIComponent(cmp.message)}`;
-    window.open(url, "_blank");
-    toast(`WhatsApp broadcast composer opened for "${cmp.title}"!`);
-  }
+  function setMarketingSubTab() {}
+  function renderMarketing() {}
+  function openAddCouponModal() {}
+  function saveCoupon(e) { if (e) e.preventDefault(); }
+  function toggleCouponStatus() {}
+  function copyCouponCode() {}
+  function deleteCoupon() {}
+  function launchCampaignWhatsApp() {}
 
   // ==========================================================================
   // MODULE: APPOINTMENTS (Removed per user request)
@@ -3083,22 +2877,22 @@
   function openAddProductModal() {
     state.editingProduct = null;
     state.userCustomizedMarathi = false;
-    document.getElementById("modalProductTitle").textContent = "Add New Spice Remedy / Product";
+    document.getElementById("modalProductTitle").textContent = "Add New Fragrance / Product";
     document.getElementById("prodFormId").value = "";
     document.getElementById("prodFormName").value = "";
     document.getElementById("prodFormNameMr").value = "";
-    document.getElementById("prodFormCategory").value = "blend";
+    document.getElementById("prodFormCategory").value = "perfumes";
     document.getElementById("prodFormMinPrice").value = "";
     document.getElementById("prodFormMaxPrice").value = "";
-    document.getElementById("prodFormSizes").value = "50 g · 100 g · 200 g · 500 g";
+    document.getElementById("prodFormSizes").value = "";
     document.getElementById("prodFormStock").value = "50";
     document.getElementById("prodFormStatus").value = "in-stock";
     document.getElementById("prodFormBestseller").checked = false;
-    document.getElementById("prodFormImg").value = "/assets/perfumes/Artisan Scent Ocean Breeze Perfume.png";
+    document.getElementById("prodFormImg").value = "";
     document.getElementById("prodFormDesc").value = "";
 
     resetUploadZoneStatus();
-    updateImgPreview("/assets/perfumes/Artisan Scent Ocean Breeze Perfume.png");
+    updateImgPreview("");
     openModal("productModal");
   }
 
@@ -3438,7 +3232,7 @@
         <div class="inv-brand-row">
           <div>
             <div class="inv-logo-title">${esc(s.storeName)}</div>
-            <p style="font-size:12px;color:#7a6e65">${esc(s.tagline)} · Panvel, Navi Mumbai</p>
+            <p style="font-size:12px;color:#7a6e65">${esc(s.tagline)} · Airoli, Navi Mumbai</p>
             <p style="font-size:11px;color:#9e8e82">${esc(s.address)}</p>
             <p style="font-size:11px;color:#9e8e82">Phone: ${esc(s.phone)} | GSTIN: ${esc(s.gstin)}</p>
           </div>
@@ -3447,7 +3241,7 @@
             <div style="font-size:13px;font-weight:700;color:#c8501e">${esc(order.id)}</div>
             <div style="font-size:11.5px;color:#7a6e65">Date: ${esc(order.date)}</div>
             <div style="font-size:11.5px;color:#7a6e65">Payment: <b>${esc(order.payment)}</b></div>
-            ${order.paymentId ? `<div style="font-size:11px;color:#15803d;font-weight:600;margin-top:2px"><i class="bi bi-shield-check"></i> RZP Ref: ${esc(order.paymentId)}</div>` : ""}
+            ${order.paymentId ? `<div style="font-size:11px;color:#15803d;font-weight:600;margin-top:2px"><i class="bi bi-shield-check"></i> Ref: ${esc(order.paymentId)}</div>` : ""}
           </div>
         </div>
 
@@ -3482,17 +3276,17 @@
 
         <div class="inv-totals">
           <div>Subtotal: <b>${rs(order.total)}</b></div>
-          <div>GST (5% Inclusive): <b>Included (CGST 2.5% + SGST 2.5%)</b></div>
+          <div>GST (18% Inclusive): <b>Included</b></div>
           <div>Shipping & Delivery: <b style="color:#15803d">FREE</b></div>
           <div style="font-size:16px;border-top:1px solid #271f1a;padding-top:6px;margin-top:4px">Total Amount: <b style="color:#c8501e">${rs(order.total)}</b></div>
           <div style="font-size:11px;margin-top:4px;color:${order.paymentId || (order.payment && order.payment.includes('Razorpay')) ? '#15803d' : '#b45309'}">
-            Payment Status: <b>${order.paymentId || (order.payment && order.payment.includes('Razorpay')) ? 'PAID ONLINE (RAZORPAY)' : 'CASH ON DELIVERY (COD)'}</b>
+            Payment Status: <b>${order.paymentId || (order.payment && order.payment.includes('Razorpay')) ? 'PAID ONLINE (BANK VERIFIED)' : 'CASH ON DELIVERY (COD)'}</b>
           </div>
         </div>
 
         <div style="margin-top:24px;border-top:1px dashed #d3c4b7;padding-top:12px;font-size:11px;color:#7a6e65;text-align:center">
-          Thank you for trusting Artisan Scent! Handcrafted natural spices straight from Panvel.<br>
-          For any questions, reach us on WhatsApp at (+91) 91678 34686.
+          Thank you for trusting Artisan Scent! Exquisite botanical parfumerie handcrafted in Navi Mumbai.<br>
+          For concierge inquiries, reach us at +91 8369424099.
         </div>
       </div>
     `;
@@ -3508,7 +3302,7 @@
     const labelBody = document.getElementById("shippingLabelModalContent");
     if (!labelBody) return;
 
-    const awb = order.awb || ("DELH-" + Math.floor(10000000 + Math.random() * 90000000));
+    const awb = order.awb || ("BD-" + Math.floor(10000000 + Math.random() * 90000000));
     order.awb = awb;
     saveData(STORAGE.ORDERS, state.orders);
 
@@ -3517,10 +3311,10 @@
         <div class="shipping-label-header">
           <div>
             <b style="font-size:16px;color:#271f1a">${esc(s.storeName)}</b>
-            <div style="font-size:11px;color:#555">Panvel, Navi Mumbai &bull; GSTIN: ${esc(s.gstin)}</div>
+            <div style="font-size:11px;color:#555">Airoli, Navi Mumbai &bull; GSTIN: ${esc(s.gstin)}</div>
           </div>
           <div class="courier-badge-box">
-            ${esc(order.courier || s.defaultCourier || "DELHIVERY EXPRESS")}
+            ${esc(order.courier || s.defaultCourier || "BLUEDART EXPRESS")}
           </div>
         </div>
 
@@ -3539,8 +3333,8 @@
           </div>
           <div style="border-left:1px solid #ddd;padding-left:14px">
             <b style="text-transform:uppercase;font-size:10px;color:#666">Return / Shipper:</b>
-            <div style="font-size:12px;font-weight:600;margin-top:2px">Artisan Scent Hub</div>
-            <div style="line-height:1.3;font-size:11px;color:#555">Plot 45A/B, Market Sahakar Nagar, Panvel 410206</div>
+            <div style="font-size:12px;font-weight:600;margin-top:2px">Artisan Scent Atelier</div>
+            <div style="line-height:1.3;font-size:11px;color:#555">${esc(s.address)}</div>
             <div style="margin-top:8px;font-size:11px;">
               Package: <b>${order.items.reduce((sum, i) => sum + i.qty, 0)} Items</b><br>
               Mode: <b>${order.paymentStatus === 'PAID' ? 'PREPAID' : 'COD'}</b>
@@ -3555,7 +3349,7 @@
         ` : ''}
 
         <div style="margin-top:14px;border-top:1px dashed #bbb;padding-top:8px;display:flex;justify-content:space-between;font-size:10px;color:#666;">
-          <span>HANDLE WITH CARE &bull; AUTHENTIC SPICES</span>
+          <span>HANDLE WITH CARE &bull; LUXURY FRAGRANCE</span>
           <span>DISPATCH DATE: ${esc(order.date.split(' ')[0])}</span>
         </div>
       </div>
@@ -3577,7 +3371,7 @@
           <input type="checkbox" class="packing-checkbox">
           <div>
             <b>${esc(i.name)}</b>
-            <div style="font-size:11.5px;color:var(--muted)">Pack Size: ${esc(i.size || "Standard")} &bull; SKU: ${esc(i.id || 'SPICE-' + idx)}</div>
+            <div style="font-size:11.5px;color:var(--muted)">Pack Size: ${esc(i.size || "30 ml")} &bull; SKU: ${esc(i.id || 'ART-' + idx)}</div>
           </div>
         </label>
         <div style="font-size:15px;font-weight:700">${i.qty} units</div>
@@ -3588,8 +3382,8 @@
       <div class="packing-slip-box">
         <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px;">
           <div>
-            <h3 style="font-family:var(--font-head);font-size:18px;color:var(--accent)">WAREHOUSE PICKING & PACKING SLIP</h3>
-            <div style="font-size:12px;color:var(--muted)">Artisan Scent Fulfillment Center &bull; Panvel</div>
+            <h3 style="font-family:var(--font-head);font-size:18px;color:var(--accent)">ATELIER PICKING & PACKING SLIP</h3>
+            <div style="font-size:12px;color:var(--muted)">Artisan Scent Atelier &bull; Airoli, Navi Mumbai</div>
           </div>
           <div style="text-align:right">
             <b>${esc(order.id)}</b>
@@ -3810,15 +3604,15 @@
     if (!o) return;
     const phone = (o.phone || "").replace(/[^0-9]/g, "");
     const formatted = phone.startsWith("91") ? phone : "91" + phone;
-    const awb = o.awb || "DELH-98421098";
-    const msg = `Namaste ${o.customer}! 🌿 Your Artisan Scent spice order *${o.id}* is dispatched via ${o.courier || 'Delhivery Express'}. AWB: ${awb}. Live Tracking: https://www.delhivery.com/track/package/${awb} - Artisan Scent`;
+    const awb = o.awb || "Pending Allocation";
+    const msg = `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${o.customer}, your luxury fragrance order *${o.id}* is dispatched via ${o.courier || 'BlueDart Express'}. AWB: ${awb}. - Artisan Scent Haute Parfumerie`;
     window.open(`https://wa.me/${formatted}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
   function sendPaymentRecoveryLink(phone, name, amount) {
     const clean = phone.replace(/[^0-9]/g, "");
     const formatted = clean.startsWith("91") ? clean : "91" + clean;
-    const msg = `Namaste ${name}! 🌿 We noticed your online checkout on Artisan Scent for ${rs(amount)} was not completed. You can complete your order using this secure link: https://bhaukorde.in/cart.html?pay=BK-RETRY&amt=${amount} or reply here for Cash on Delivery.`;
+    const msg = `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${name}, we noticed your checkout for ${rs(amount)} was not completed. If you would like assistance completing your order or choosing Cash on Delivery, please reply to our concierge directly. - Artisan Scent Haute Parfumerie`;
     window.open(`https://wa.me/${formatted}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
@@ -3863,9 +3657,9 @@
 
     const phone = (order.phone || "").replace(/[^0-9]/g, "");
     const cleanPhone = phone.startsWith("91") ? phone : "91" + phone;
-    const itemsList = order.items.map((i, idx) => `${idx + 1}. ${i.name} (${i.size || "Standard"}) x${i.qty} = ${rs(i.qty * i.price)}`).join("\n");
+    const itemsList = order.items.map((i, idx) => `${idx + 1}. ${i.name} (${i.size || "30 ml"}) x${i.qty} = ${rs(i.qty * i.price)}`).join("\n");
 
-    const message = `Namaste ${order.customer}! 🌿\n\nThank you for ordering with *Artisan Scent* (Panvel).\n\n*Order ID:* ${order.id}\n*Status:* ${order.status.toUpperCase()}\n\n*Items Ordered:*\n${itemsList}\n\n*Total Amount:* ${rs(order.total)}\n*Delivery Address:* ${order.address}\n\nOur team is currently preparing your handcrafted natural spices. Let us know if you need any adjustments!\n\n_चवीने खाणार त्याला भाऊ देणार._`;
+    const message = `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${order.customer},\n\nThank you for ordering with *Artisan Scent*.\n\n*Order ID:* ${order.id}\n*Status:* ${order.status.toUpperCase()}\n\n*Items Ordered:*\n${itemsList}\n\n*Total Amount:* ${rs(order.total)}\n*Delivery Address:* ${order.address}\n\nOur botanical atelier is preparing your luxury fragrance order. Let us know if you need any assistance!\n_Artisan Scent Haute Parfumerie_`;
 
     const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
@@ -3878,9 +3672,8 @@
     const s = state.settings;
     const phone = (order.phone || "").replace(/[^0-9]/g, "");
     const cleanPhone = phone.startsWith("91") ? phone : "91" + phone;
-    const mode = s.razorpayMode === "live" ? "Live" : "Test / Sandbox";
 
-    const payMessage = `Namaste ${order.customer}! 🌿\n\nThank you for ordering with *Artisan Scent* (Panvel).\n\n*Order ID:* ${order.id}\n*Payable Amount:* ${rs(order.total)}\n*Payment Gateway:* Razorpay UPI (GPay/PhonePe/Paytm), Cards & Netbanking (${mode})\n\nPlease pay using our secure Razorpay payment checkout to confirm immediate dispatch:\n👉 https://bhaukorde.in/cart.html?pay=${encodeURIComponent(order.id)}&amt=${order.total}\n\nThank you!\n_चवीने खाणार त्याला भाऊ देणार._`;
+    const payMessage = `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${order.customer},\n\nThank you for ordering with *Artisan Scent*.\n\n*Order ID:* ${order.id}\n*Payable Amount:* ${rs(order.total)}\n*Settlement:* Bank of Baroda Current Account / Verified UPI (${s.bobUpi || "kulsw98202980@barodampay"})\n\nPlease complete your payment to confirm immediate dispatch.\n\nThank you!\n_Artisan Scent Haute Parfumerie_`;
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(payMessage).catch(() => {});
@@ -3888,13 +3681,13 @@
 
     const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(payMessage)}`;
     window.open(url, "_blank");
-    toast(`Razorpay payment request link prepared for order ${order.id}!`);
+    toast(`Payment request link prepared for order ${order.id}!`);
   }
 
   function sendCustomerWhatsApp(phone, name) {
     const cleanPhone = phone.replace(/[^0-9]/g, "");
     const formatted = cleanPhone.startsWith("91") ? cleanPhone : "91" + cleanPhone;
-    const msg = `Namaste ${name} ji, greetings from Artisan Scent (Panvel)! We have fresh batches of our handmade spice blends and pickles ready. Please let us know if you would like to place an order or need anything dispatched. - Artisan Scent, Panvel.`;
+    const msg = `Dear ${name}, greetings from Artisan Scent Haute Parfumerie! We have exquisite new botanical creations and fine fragrances ready at our atelier. Please let us know if our concierge can assist you today. - Artisan Scent Haute Parfumerie.`;
     window.open(`https://wa.me/${formatted}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
@@ -4240,7 +4033,7 @@
     state.products.forEach((p) => {
       rows.push([p.id, p.name, p.nameMr || "", p.category, p.minPrice, p.maxPrice, p.sizes || "", p.stock || 0, p.status, p.bestseller ? "YES" : "NO"]);
     });
-    downloadCSV("bhau_korde_products_catalog.csv", rows);
+    downloadCSV("artisan_scent_products_catalog.csv", rows);
   }
 
   function exportOrdersCSV() {
@@ -4250,7 +4043,7 @@
       const isPaid = !!o.paymentId || (o.payment && o.payment.toLowerCase().includes("razorpay"));
       rows.push([o.id, o.date, o.customer, o.phone, o.email, o.city, o.payment || "WhatsApp Order", o.paymentId || "N/A", isPaid ? "PAID" : "PENDING/COD", o.status, o.total, summary]);
     });
-    downloadCSV("bhau_korde_orders_report.csv", rows);
+    downloadCSV("artisan_scent_orders_report.csv", rows);
   }
 
   function exportPaymentsCSV() {
@@ -4259,7 +4052,7 @@
       const isPaid = o.paymentStatus === "PAID" || !!o.paymentId;
       rows.push([o.id, o.date, o.customer, o.total, o.payment || "COD", o.paymentId || "COD-N/A", isPaid ? "PAID" : "PENDING", isPaid ? "SETTLED" : "UNSETTLED"]);
     });
-    downloadCSV("bhau_korde_payment_settlements.csv", rows);
+    downloadCSV("artisan_scent_payment_settlements.csv", rows);
   }
 
   function exportShippingCSV() {
@@ -4267,7 +4060,7 @@
     state.orders.forEach((o) => {
       rows.push([o.id, o.date, o.customer, o.address || o.city, o.city, o.courier || state.settings.defaultCourier, o.awb || "UNASSIGNED", o.status, o.podRef || "PENDING"]);
     });
-    downloadCSV("bhau_korde_shipping_logistics.csv", rows);
+    downloadCSV("artisan_scent_shipping_logistics.csv", rows);
   }
 
   function exportInventoryCSV() {
@@ -4276,7 +4069,7 @@
       const stock = Number(p.stock) || 0;
       rows.push([p.id, p.name, p.category, p.sizes || "", stock, p.minPrice, stock * (p.minPrice || 0), p.status]);
     });
-    downloadCSV("bhau_korde_inventory_stock.csv", rows);
+    downloadCSV("artisan_scent_inventory_stock.csv", rows);
   }
 
   function exportReturnsCSV() {
@@ -4284,7 +4077,7 @@
     state.returns.forEach((r) => {
       rows.push([r.id, r.date, r.orderId, r.customer, r.itemName, r.reason, r.status, r.reverseAwb || "N/A", r.refundAmount || 0]);
     });
-    downloadCSV("bhau_korde_returns_refunds.csv", rows);
+    downloadCSV("artisan_scent_returns_refunds.csv", rows);
   }
 
   function exportCustomersCSV() {
@@ -4292,7 +4085,7 @@
     state.customers.forEach((c) => {
       rows.push([c.id, c.name, c.phone, c.email, c.city, c.segment, c.ordersCount, c.lifetimeSpend, c.notes || ""]);
     });
-    downloadCSV("bhau_korde_customers.csv", rows);
+    downloadCSV("artisan_scent_customers.csv", rows);
   }
 
   function exportFullBackupJSON() {
@@ -4313,7 +4106,7 @@
     const blob = new Blob([JSON.stringify(fullBackup, null, 2)], { type: "application/json" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = `bhau_korde_commerce_backup_${Date.now()}.json`;
+    link.download = `artisan_scent_commerce_backup_${Date.now()}.json`;
     link.click();
     toast("Full store & CRM database backup downloaded successfully.");
   }
