@@ -920,7 +920,15 @@
 
   // Authentication Management
   function initAuth() {
-    const isAuth = sessionStorage.getItem(STORAGE.SESSION) || localStorage.getItem(STORAGE.SESSION);
+    const params = new URLSearchParams(window.location.search);
+    const forceLogin = params.has("login") || params.has("logout") || params.has("auth");
+    if (forceLogin) {
+      localStorage.removeItem(STORAGE.SESSION);
+      sessionStorage.removeItem(STORAGE.SESSION);
+      localStorage.removeItem("artisanscent_admin_logged");
+    }
+
+    const isAuth = !forceLogin && (sessionStorage.getItem(STORAGE.SESSION) || localStorage.getItem(STORAGE.SESSION));
     const gate = document.getElementById("authGate");
     if (!gate) return;
 
@@ -974,8 +982,9 @@
       logoutBtn.addEventListener("click", function () {
         localStorage.removeItem(STORAGE.SESSION);
         sessionStorage.removeItem(STORAGE.SESSION);
+        localStorage.removeItem("artisanscent_admin_logged");
         gate.style.display = "flex";
-        toast("Signed out successfully.");
+        toast("Signed out successfully. Sign in again to access.");
       });
     }
   }

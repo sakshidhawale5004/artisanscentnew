@@ -192,9 +192,18 @@ function AdminHubPage() {
   // Check login & theme on mount
   useEffect(() => {
     setMounted(true);
-    const isLogged = localStorage.getItem("artisanscent_admin_logged");
-    if (isLogged === "true") {
-      setIsAuthenticated(true);
+    const params = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+    const forceLogin = params ? params.has("login") || params.has("logout") || params.has("auth") : false;
+    if (forceLogin) {
+      localStorage.removeItem("artisanscent_admin_logged");
+      localStorage.removeItem("artisan_crm_session");
+      sessionStorage.removeItem("artisan_crm_session");
+      setIsAuthenticated(false);
+    } else {
+      const isLogged = localStorage.getItem("artisanscent_admin_logged");
+      if (isLogged === "true") {
+        setIsAuthenticated(true);
+      }
     }
     const savedTheme = (localStorage.getItem("artisanscent_theme") as "light" | "dark") || "light";
     setTheme(savedTheme);
@@ -278,6 +287,8 @@ function AdminHubPage() {
   const handleLogout = () => {
     setIsAuthenticated(false);
     localStorage.removeItem("artisanscent_admin_logged");
+    localStorage.removeItem("artisan_crm_session");
+    sessionStorage.removeItem("artisan_crm_session");
     showFeedback("Signed out from Admin Hub.");
   };
 
@@ -566,7 +577,9 @@ function AdminHubPage() {
           className="auth-banner-pane"
           style={{
             backgroundImage:
-              "linear-gradient(180deg, rgba(14, 9, 7, 0.65) 0%, rgba(9, 26, 17, 0.88) 100%), url('/assets/crafted-with.jpg')",
+              "linear-gradient(180deg, rgba(9, 26, 17, 0.45) 0%, rgba(14, 9, 7, 0.72) 100%), url('/assets/admin-hero-bg.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center center",
           }}
         >
           <div className="auth-banner-top">
@@ -995,12 +1008,21 @@ function AdminHubPage() {
               </button>
               <button
                 type="button"
-                className="icon-btn"
+                className="btn-outline"
+                style={{
+                  padding: "6px 14px",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                }}
                 onClick={handleLogout}
                 title="Sign Out of CRM"
                 aria-label="Sign Out"
               >
                 <i className="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
               </button>
             </div>
           </div>
