@@ -787,6 +787,61 @@
     });
   }
 
+  function safeOrderItems(raw) {
+    if (Array.isArray(raw)) {
+      return raw.map((it) => {
+        if (typeof it === "string") return { name: it.trim(), qty: 1, quantity: 1, price: 0, size: "30 ml" };
+        if (it && typeof it === "object") {
+          return {
+            id: it.id || "",
+            name: it.name || it.title || "Fragrance Item",
+            qty: Number(it.qty || it.quantity || 1),
+            quantity: Number(it.quantity || it.qty || 1),
+            price: Number(it.price || 0),
+            size: it.size || "30 ml"
+          };
+        }
+        return { name: "Fragrance Item", qty: 1, quantity: 1, price: 0, size: "30 ml" };
+      });
+    }
+    if (typeof raw === "string" && raw.trim()) {
+      if (raw.trim().startsWith("[") && raw.trim().endsWith("]")) {
+        try {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) return safeOrderItems(parsed);
+        } catch (e) {}
+      }
+      const parts = raw.split(/,|\n/).map((s) => s.trim()).filter(Boolean);
+      if (parts.length === 0) return [{ name: raw.trim(), qty: 1, quantity: 1, price: 0, size: "30 ml" }];
+      return parts.map((part) => {
+        const qtyMatch = part.match(/\b(?:x\s*(\d+)|(\d+)\s*x)\b/i);
+        const qty = qtyMatch ? parseInt(qtyMatch[1] || qtyMatch[2], 10) : 1;
+        const priceMatch = part.match(/₹\s*([\d,]+)/);
+        const price = priceMatch ? parseInt(priceMatch[1].replace(/,/g, ""), 10) : 0;
+        const sizeMatch = part.match(/\b(\d+\s*(?:ml|g|oz))\b/i);
+        const size = sizeMatch ? sizeMatch[1] : "30 ml";
+        const cleanName = part
+          .replace(/\b(?:x\s*\d+|\d+\s*x)\b/gi, "")
+          .replace(/\(₹\s*[\d,]+\)/g, "")
+          .replace(/\[₹\s*[\d,]+\]/g, "")
+          .replace(/-\s*₹\s*[\d,]+/g, "")
+          .replace(/\(\d+\s*(?:ml|g|oz)\)/gi, "")
+          .replace(/₹\s*[\d,]+/g, "")
+          .replace(/\s+/g, " ")
+          .replace(/^[-\s,()\[\]]+|[-\s,()\[\]]+$/g, "")
+          .trim();
+        return {
+          name: cleanName || part,
+          qty: qty,
+          quantity: qty,
+          price: price,
+          size: size
+        };
+      });
+    }
+    return [];
+  }
+
   function formatDate(d) {
     if (!d) return "";
     const dt = new Date(d);
@@ -830,7 +885,10 @@
   // Load / Save State
   function loadData() {
     try { state.products = JSON.parse(localStorage.getItem(STORAGE.PRODUCTS)) || DEFAULT_PRODUCTS; } catch (e) { state.products = DEFAULT_PRODUCTS; }
-    try { state.orders = JSON.parse(localStorage.getItem(STORAGE.ORDERS)) || []; } catch (e) { state.orders = []; }
+    try {
+      const rawOrders = JSON.parse(localStorage.getItem(STORAGE.ORDERS)) || [];
+      state.orders = Array.isArray(rawOrders) ? rawOrders.map(o => ({ ...o, items: safeOrderItems(o.items) })) : [];
+    } catch (e) { state.orders = []; }
     try { state.customers = JSON.parse(localStorage.getItem(STORAGE.CUSTOMERS)) || []; } catch (e) { state.customers = []; }
     try { state.inquiries = JSON.parse(localStorage.getItem(STORAGE.INQUIRIES)) || []; } catch (e) { state.inquiries = []; }
     try { state.settings = JSON.parse(localStorage.getItem(STORAGE.SETTINGS)) || DEFAULT_SETTINGS; } catch (e) { state.settings = DEFAULT_SETTINGS; }
@@ -1212,7 +1270,7 @@
               <div><b>${esc(o.customer)}</b></div>
               <small style="color:var(--muted)">${esc(o.phone)} · ${esc(o.city)}</small>
             </td>
-            <td><small>${esc(o.items.map((i) => i.name + " (" + (i.size || "Standard") + ") x" + i.qty).join(", "))}</small></td>
+            <td><small>${esc(safeOrderItems(o.items).map((i) => i.name + " (" + (i.size || "Standard") + ") x" + (i.qty || i.quantity || 1)).join(", "))}</small></td>
             <td><b>${rs(o.total)}</b></td>
             <td><span class="status-badge ${o.status}">${esc(o.status.toUpperCase())}</span></td>
             <td>
@@ -1300,7 +1358,7 @@
 
     listWrap.innerHTML = items
       .map((o) => {
-        const itemSummary = o.items.map((i) => `<b>${esc(i.name)}</b> <span style="color:var(--muted)">(${esc(i.size || "Standard")})</span> &times; ${i.qty} &bull; ${rs(i.price * i.qty)}`).join("<br>");
+        const itemSummary = safeOrderItems(o.items).map((i) => `<b>${esc(i.name)}</b> <span style="color:var(--muted)">(${esc(i.size || "Standard")})</span> &times; ${i.qty || i.quantity || 1} &bull; ${rs(i.price * (i.qty || i.quantity || 1))}`).join("<br>");
         const isPaid = o.paymentStatus === "PAID" || !!o.paymentId || (o.payment && o.payment.toLowerCase().includes("razorpay"));
         const courierText = o.courier || state.settings.defaultCourier || "Delhivery Express";
 
@@ -1785,7 +1843,7 @@
     "order_confirm": {
       name: "1. Order Confirmation (Email / WhatsApp)",
       subject: "Order Confirmed: Artisan Scent #{ORDER_ID}",
-      content: (o) => `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${o.customer},\n\nThank you for ordering with *Artisan Scent*.\n\n*Order ID:* ${o.id}\n*Total Amount:* ${rs(o.total)}\n*Payment Mode:* ${o.payment}\n\n*Items Ordered:*\n${o.items.map((i, n) => `${n + 1}. ${i.name} (${i.size || '30 ml'}) x${i.qty}`).join('\n')}\n\n*Delivery Address:* ${o.address}, ${o.city}\n\nOur botanical atelier is now handcrafting and preparing your order. Thank you!\n_Artisan Scent Haute Parfumerie_`
+      content: (o) => `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${o.customer},\n\nThank you for ordering with *Artisan Scent*.\n\n*Order ID:* ${o.id}\n*Total Amount:* ${rs(o.total)}\n*Payment Mode:* ${o.payment}\n\n*Items Ordered:*\n${safeOrderItems(o.items).map((i, n) => `${n + 1}. ${i.name} (${i.size || '30 ml'}) x${i.qty || i.quantity || 1}`).join('\n')}\n\n*Delivery Address:* ${o.address}, ${o.city}\n\nOur botanical atelier is now handcrafting and preparing your order. Thank you!\n_Artisan Scent Haute Parfumerie_`
     },
     "payment_receipt": {
       name: "2. Payment Receipt Notification",
@@ -3140,14 +3198,14 @@
     const modalBody = document.getElementById("orderDetailModalContent");
     if (!modalBody) return;
 
-    const rows = order.items.map((i, n) => `
+    const rows = safeOrderItems(order.items).map((i, n) => `
       <tr>
         <td>${n + 1}</td>
         <td><b>${esc(i.name)}</b></td>
         <td><span style="color:var(--muted)">${esc(i.size || "Standard")}</span></td>
-        <td>${i.qty}</td>
+        <td>${i.qty || i.quantity || 1}</td>
         <td>${rs(i.price)}</td>
-        <td><b>${rs(i.qty * i.price)}</b></td>
+        <td><b>${rs((i.qty || i.quantity || 1) * i.price)}</b></td>
       </tr>
     `).join("");
 
@@ -3345,7 +3403,7 @@
             <div style="font-size:12px;font-weight:600;margin-top:2px">Artisan Scent Atelier</div>
             <div style="line-height:1.3;font-size:11px;color:#555">${esc(s.address)}</div>
             <div style="margin-top:8px;font-size:11px;">
-              Package: <b>${order.items.reduce((sum, i) => sum + i.qty, 0)} Items</b><br>
+              Package: <b>${safeOrderItems(order.items).reduce((sum, i) => sum + (i.qty || i.quantity || 1), 0)} Items</b><br>
               Mode: <b>${order.paymentStatus === 'PAID' ? 'PREPAID' : 'COD'}</b>
             </div>
           </div>
@@ -3374,7 +3432,7 @@
     const slipBody = document.getElementById("packingSlipModalContent");
     if (!slipBody) return;
 
-    const itemsRows = order.items.map((i, idx) => `
+    const itemsRows = safeOrderItems(order.items).map((i, idx) => `
       <div class="packing-item-row">
         <label style="display:flex;align-items:center;gap:12px;cursor:pointer">
           <input type="checkbox" class="packing-checkbox">
@@ -3383,7 +3441,7 @@
             <div style="font-size:11.5px;color:var(--muted)">Pack Size: ${esc(i.size || "30 ml")} &bull; SKU: ${esc(i.id || 'ART-' + idx)}</div>
           </div>
         </label>
-        <div style="font-size:15px;font-weight:700">${i.qty} units</div>
+        <div style="font-size:15px;font-weight:700">${i.qty || i.quantity || 1} units</div>
       </div>
     `).join("");
 
@@ -3666,7 +3724,7 @@
 
     const phone = (order.phone || "").replace(/[^0-9]/g, "");
     const cleanPhone = phone.startsWith("91") ? phone : "91" + phone;
-    const itemsList = order.items.map((i, idx) => `${idx + 1}. ${i.name} (${i.size || "30 ml"}) x${i.qty} = ${rs(i.qty * i.price)}`).join("\n");
+    const itemsList = safeOrderItems(order.items).map((i, idx) => `${idx + 1}. ${i.name} (${i.size || "30 ml"}) x${i.qty || i.quantity || 1} = ${rs((i.qty || i.quantity || 1) * i.price)}`).join("\n");
 
     const message = `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨\nDear ${order.customer},\n\nThank you for ordering with *Artisan Scent*.\n\n*Order ID:* ${order.id}\n*Status:* ${order.status.toUpperCase()}\n\n*Items Ordered:*\n${itemsList}\n\n*Total Amount:* ${rs(order.total)}\n*Delivery Address:* ${order.address}\n\nOur botanical atelier is preparing your luxury fragrance order. Let us know if you need any assistance!\n_Artisan Scent Haute Parfumerie_`;
 
@@ -4048,7 +4106,7 @@
   function exportOrdersCSV() {
     const rows = [["Order ID", "Date", "Customer Name", "Phone", "Email", "City", "Payment Method", "Payment Reference ID", "Payment Status", "Order Status", "Total Amount (INR)", "Items Summary"]];
     state.orders.forEach((o) => {
-      const summary = o.items.map((i) => `${i.name} (${i.size}) x${i.qty}`).join(" | ");
+      const summary = safeOrderItems(o.items).map((i) => `${i.name} (${i.size || '30 ml'}) x${i.qty || i.quantity || 1}`).join(" | ");
       const isPaid = !!o.paymentId || (o.payment && o.payment.toLowerCase().includes("razorpay"));
       rows.push([o.id, o.date, o.customer, o.phone, o.email, o.city, o.payment || "WhatsApp Order", o.paymentId || "N/A", isPaid ? "PAID" : "PENDING/COD", o.status, o.total, summary]);
     });

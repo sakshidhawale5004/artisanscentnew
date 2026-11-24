@@ -259,19 +259,140 @@ export function addInquiryToCRM(data: Omit<Inquiry, "id" | "status" | "date" | "
   return newInquiry;
 }
 
+export type CRMOrderItem = {
+  id?: string;
+  name: string;
+  price: number;
+  quantity: number;
+  size?: string;
+};
+
 export type CRMOrder = {
   id: string;
   customer: string;
+  customerName?: string;
   email: string;
   phone?: string;
-  items: string;
+  items: CRMOrderItem[];
+  rawItems?: string;
   total: number;
-  status: "Completed" | "Processing" | "Shipped" | "Pending";
+  status: "Completed" | "Processing" | "Shipped" | "Pending" | "Confirmed" | "Delivered" | string;
   date: string;
   time?: string;
   note?: string;
   source?: string;
+  paymentMethod?: string;
+  courier?: string;
+  awb?: string;
+  address?: {
+    line1?: string;
+    city?: string;
+    state?: string;
+    pincode?: string;
+  } | string;
+  shippingAddress?: string;
 };
+
+export function normalizeOrderItems(raw: unknown): CRMOrderItem[] {
+  if (Array.isArray(raw)) {
+    return raw.map((it) => {
+      if (typeof it === "string") {
+        return { name: it.trim(), quantity: 1, price: 0, size: "30 ml" };
+      }
+      if (it && typeof it === "object") {
+        return {
+          id: (it as any).id || "",
+          name: (it as any).name || (it as any).title || "Artisan Perfume Item",
+          quantity: Number((it as any).quantity || (it as any).qty || 1),
+          price: Number((it as any).price || 0),
+          size: (it as any).size || "30 ml",
+        };
+      }
+      return { name: "Artisan Perfume Item", quantity: 1, price: 0, size: "30 ml" };
+    });
+  }
+  if (typeof raw === "string" && raw.trim()) {
+    if (raw.trim().startsWith("[") && raw.trim().endsWith("]")) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) return normalizeOrderItems(parsed);
+      } catch {}
+    }
+    const parts = raw.split(/,|\n/).map((s) => s.trim()).filter(Boolean);
+    if (parts.length === 0) {
+      return [{ name: raw.trim(), quantity: 1, price: 0, size: "30 ml" }];
+    }
+    return parts.map((part) => {
+      const qtyMatch = part.match(/\b(?:x\s*(\d+)|(\d+)\s*x)\b/i);
+      const quantity = qtyMatch ? parseInt(qtyMatch[1] || qtyMatch[2], 10) : 1;
+      const priceMatch = part.match(/₹\s*([\d,]+)/);
+      const price = priceMatch ? parseInt(priceMatch[1].replace(/,/g, ""), 10) : 0;
+      const sizeMatch = part.match(/\b(\d+\s*(?:ml|g|oz))\b/i);
+      const size = sizeMatch ? sizeMatch[1] : "30 ml";
+      const cleanName = part
+        .replace(/\b(?:x\s*\d+|\d+\s*x)\b/gi, "")
+        .replace(/\(₹\s*[\d,]+\)/g, "")
+        .replace(/\[₹\s*[\d,]+\]/g, "")
+        .replace(/-\s*₹\s*[\d,]+/g, "")
+        .replace(/\(\d+\s*(?:ml|g|oz)\)/gi, "")
+        .replace(/₹\s*[\d,]+/g, "")
+        .replace(/\s+/g, " ")
+        .replace(/^[-\s,()\[\]]+|[-\s,()\[\]]+$/g, "")
+        .trim();
+
+      return {
+        name: cleanName || part,
+        quantity,
+        price,
+        size,
+      };
+    });
+  }
+  return [];
+}
+
+export function normalizeCRMOrder(order: any): CRMOrder {
+  if (!order || typeof order !== "object") {
+    return {
+      id: `ORD-${Date.now()}`,
+      customer: "Valued Patron",
+      customerName: "Valued Patron",
+      email: "patron@artisanscent.com",
+      items: [],
+      total: 0,
+      status: "Pending",
+      date: new Date().toISOString().split("T")[0],
+    };
+  }
+  const normItems = normalizeOrderItems(order.items);
+  const cust = order.customerName || order.customer || "Valued Patron";
+  return {
+    ...order,
+    id: String(order.id || `ORD-${Date.now()}`),
+    customer: cust,
+    customerName: cust,
+    email: order.email || "patron@artisanscent.com",
+    phone: order.phone || "+91 (unspecified)",
+    items: normItems,
+    rawItems: typeof order.items === "string" ? order.items : undefined,
+    total: Number(order.total || 0),
+    status: (order.status || "Pending") as CRMOrder["status"],
+    date: order.date || new Date().toISOString().split("T")[0],
+    time: order.time || "",
+    note: order.note || "",
+    source: order.source || "Online Store",
+    paymentMethod: order.paymentMethod || "Bank of Baroda UPI (Verified)",
+    courier: order.courier || "BlueDart Express",
+    awb: order.awb || (order.id ? `BD-${String(order.id).replace(/[^0-9]/g, "") || "99820"}` : "BD-99820"),
+    address: order.address || {
+      line1: order.shippingAddress || (typeof order.address === "string" ? order.address : "Direct Atelier Delivery"),
+      city: "Mumbai",
+      state: "Maharashtra",
+      pincode: "400001",
+    },
+    shippingAddress: order.shippingAddress || (typeof order.address === "string" ? order.address : order.address?.line1 || "Direct Atelier Delivery"),
+  };
+}
 
 export const ORDERS_STORAGE_KEY = "artisanscent_crm_orders";
 export const ORDERS_UPDATED_EVENT = "artisanscent:orders-updated";
@@ -295,7 +416,7 @@ export function getStoredOrders(): CRMOrder[] {
     const raw = localStorage.getItem(ORDERS_STORAGE_KEY);
     if (!raw) return [];
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    return Array.isArray(parsed) ? parsed.map(normalizeCRMOrder) : [];
   } catch {
     return [];
   }
@@ -329,7 +450,7 @@ export async function fetchRemoteOrders(): Promise<CRMOrder[]> {
     if (!res.ok) return [];
     const json = await res.json();
     const remote = json?.data?.orders;
-    return Array.isArray(remote) ? remote : [];
+    return Array.isArray(remote) ? remote.map(normalizeCRMOrder) : [];
   } catch (err) {
     console.warn("Artisan Scent cloud telemetry pull bypassed:", err);
     return [];
@@ -340,17 +461,18 @@ export async function fetchRemoteOrders(): Promise<CRMOrder[]> {
 export function saveStoredOrders(orders: CRMOrder[], syncToRemote = true): void {
   if (typeof window === "undefined") return;
   try {
-    localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders));
-    window.dispatchEvent(new CustomEvent(ORDERS_UPDATED_EVENT, { detail: orders }));
+    const normalized = orders.map(normalizeCRMOrder);
+    localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(normalized));
+    window.dispatchEvent(new CustomEvent(ORDERS_UPDATED_EVENT, { detail: normalized }));
 
     const ch = getSyncChannel();
     if (ch) {
-      ch.postMessage({ type: "orders_updated", payload: orders });
+      ch.postMessage({ type: "orders_updated", payload: normalized });
       ch.close();
     }
 
     if (syncToRemote) {
-      syncOrdersToCloud(orders).catch(() => {});
+      syncOrdersToCloud(normalized).catch(() => {});
     }
   } catch (e) {
     console.error("Failed to save CRM orders", e);
@@ -359,8 +481,8 @@ export function saveStoredOrders(orders: CRMOrder[], syncToRemote = true): void 
 
 // Bidirectional sync: merges local & cloud orders
 export async function syncCloudOrders(): Promise<CRMOrder[]> {
-  const local = getStoredOrders();
-  const remote = await fetchRemoteOrders();
+  const local = getStoredOrders().map(normalizeCRMOrder);
+  const remote = (await fetchRemoteOrders()).map(normalizeCRMOrder);
 
   if (!remote || remote.length === 0) {
     if (local.length > 0) {
@@ -372,22 +494,24 @@ export async function syncCloudOrders(): Promise<CRMOrder[]> {
   // Merge local and remote, preserving newest by id
   const map = new Map<string, CRMOrder>();
   // Remote first
-  remote.forEach((o) => map.set(o.id, o));
+  remote.forEach((o) => map.set(o.id, normalizeCRMOrder(o)));
   // Local overrides if newer or present
   local.forEach((o) => {
     if (!map.has(o.id)) {
-      map.set(o.id, o);
+      map.set(o.id, normalizeCRMOrder(o));
     } else {
       // Keep whichever has status change or local edits
       const r = map.get(o.id)!;
-      map.set(o.id, { ...r, ...o });
+      map.set(o.id, normalizeCRMOrder({ ...r, ...o }));
     }
   });
 
-  const merged = Array.from(map.values()).sort((a, b) => {
-    // Sort descending by id or date
-    return b.id.localeCompare(a.id);
-  });
+  const merged = Array.from(map.values())
+    .map(normalizeCRMOrder)
+    .sort((a, b) => {
+      // Sort descending by id or date
+      return b.id.localeCompare(a.id);
+    });
 
   // Check if anything new was added
   const localIds = new Set(local.map((l) => l.id));
@@ -408,36 +532,58 @@ export async function syncCloudOrders(): Promise<CRMOrder[]> {
 }
 
 export function addOrderToCRM(data: {
+  id?: string;
   customer?: string;
+  customerName?: string;
   email?: string;
   phone?: string;
-  items: string;
+  items: string | CRMOrderItem[] | any;
   total: number;
+  status?: string;
+  date?: string;
+  time?: string;
   note?: string;
   source?: string;
+  paymentMethod?: string;
+  shippingAddress?: string;
+  address?: any;
+  awb?: string;
+  courier?: string;
 }): CRMOrder {
   const now = new Date();
   const dateStr = now.toISOString().split("T")[0] as string;
   const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-  const orderId = `ORD-${now.getFullYear()}${(now.getMonth() + 1).toString().padStart(2, "0")}-${Math.floor(1000 + Math.random() * 9000)}`;
+  const orderId =
+    data.id ||
+    `ORD-${now.getFullYear()}${(now.getMonth() + 1).toString().padStart(2, "0")}-${Math.floor(1000 + Math.random() * 9000)}`;
 
-  const customerName = data.customer?.trim() || "WhatsApp Concierge Client";
+  const customerName =
+    data.customerName?.trim() || data.customer?.trim() || "WhatsApp Concierge Client";
   const customerEmail = data.email?.trim() || "whatsapp.order@artisanscent.com";
   const customerPhone = data.phone?.trim() || "+91 98202 52868";
 
-  const newOrder: CRMOrder = {
+  const rawItemStr =
+    typeof data.items === "string"
+      ? data.items
+      : Array.isArray(data.items)
+      ? data.items.map((i: any) => `${i.quantity || i.qty || 1}x ${i.name || "Item"}`).join(", ")
+      : "Luxury Fragrance Item";
+
+  const newOrder: CRMOrder = normalizeCRMOrder({
+    ...data,
     id: orderId,
     customer: customerName,
+    customerName: customerName,
     email: customerEmail,
     phone: customerPhone,
     items: data.items,
     total: data.total,
-    status: "Pending",
-    date: dateStr,
-    time: timeStr,
+    status: data.status || "Pending",
+    date: data.date || dateStr,
+    time: data.time || timeStr,
     note: data.note,
     source: data.source || "WhatsApp Checkout",
-  };
+  });
 
   if (typeof window !== "undefined") {
     // 1. Record in CRM Orders list & broadcast
@@ -471,7 +617,7 @@ export function addOrderToCRM(data: {
           ordersCount: 1,
           totalSpend: data.total,
           lastOrder: dateStr,
-          inquiryInterest: data.items,
+          inquiryInterest: rawItemStr,
         });
       }
       localStorage.setItem(patronKey, JSON.stringify(patrons));
@@ -483,7 +629,7 @@ export function addOrderToCRM(data: {
         ch.close();
       }
     } catch (e) {
-      console.error("Failed to sync patron customer", e);
+      console.error("Failed to sync customer patron", e);
     }
 
     // 3. Also log as Inquiry in CRM so it shows up under Recent Activity on Dashboard
@@ -492,7 +638,7 @@ export function addOrderToCRM(data: {
       email: customerEmail,
       phone: customerPhone,
       interest: "WhatsApp Checkout Order",
-      message: `WhatsApp Checkout initiated for: ${data.items}. Total Value: ₹${data.total}${data.note ? ` | Note: ${data.note}` : ""}`,
+      message: `WhatsApp Checkout initiated for: ${rawItemStr}. Total Value: ₹${data.total}${data.note ? ` | Note: ${data.note}` : ""}`,
     });
   }
 

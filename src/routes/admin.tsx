@@ -12,10 +12,13 @@ import {
   getStoredInquiries,
   saveStoredInquiries,
   type CRMOrder,
+  type CRMOrderItem,
   getStoredOrders,
   saveStoredOrders,
   syncCloudOrders,
   addOrderToCRM,
+  normalizeOrderItems,
+  normalizeCRMOrder,
   ORDERS_UPDATED_EVENT,
 } from "@/lib/store";
 import { OperationsAuditHub } from "@/components/OperationsAuditHub";
@@ -34,7 +37,24 @@ export const Route = createFileRoute("/admin")({
   component: AdminHubPage,
 });
 
-export type Order = CRMOrder;
+export type OrderItem = CRMOrderItem;
+export type Order = CRMOrder & {
+  customerName?: string;
+  shippingAddress?: string;
+  paymentMethod?: string;
+  courier?: string;
+  awb?: string;
+  address?: {
+    line1?: string;
+    city?: string;
+    state?: string;
+    pincode?: string;
+  };
+};
+
+function safeItems(items: unknown): OrderItem[] {
+  return normalizeOrderItems(items);
+}
 
 export type Customer = {
   id: string;
@@ -221,7 +241,7 @@ function AdminHubPage() {
     );
 
     // Initial orders & telemetry pull
-    const localOrders = getStoredOrders();
+    const localOrders = getStoredOrders().map(normalizeCRMOrder);
     if (localOrders && localOrders.length > 0) {
       setOrdersList(localOrders);
       if (!selectedNotifOrder && localOrders[0]) {
@@ -239,13 +259,14 @@ function AdminHubPage() {
     // Sync cloud orders
     syncCloudOrders().then((merged) => {
       if (merged && Array.isArray(merged)) {
-        setOrdersList(merged);
-        if (merged[0]) setSelectedNotifOrder(merged[0].id);
+        const norm = merged.map(normalizeCRMOrder);
+        setOrdersList(norm);
+        if (norm[0]) setSelectedNotifOrder(norm[0].id);
       }
     });
 
     const handleSync = () => {
-      const freshOrders = getStoredOrders();
+      const freshOrders = getStoredOrders().map(normalizeCRMOrder);
       if (freshOrders) setOrdersList(freshOrders);
       setInquiriesList(getStoredInquiries());
     };
@@ -514,8 +535,9 @@ function AdminHubPage() {
   }, [ordersList, orderStatusFilter, orderSearch]);
 
   const simulateNewOrder = () => {
-    const mockOrder: Order = {
+    const mockOrder: Order = normalizeCRMOrder({
       id: `ART-${Math.floor(1000 + Math.random() * 9000)}`,
+      customer: "Radhika Merchant",
       customerName: "Radhika Merchant",
       email: "radhika.merchant@example.com",
       phone: "+91 98201 99880",
@@ -548,7 +570,7 @@ function AdminHubPage() {
       },
       awb: `BD-${Math.floor(10000000 + Math.random() * 90000000)}`,
       courier: "BlueDart Express",
-    };
+    });
     addOrderToCRM(mockOrder);
     setOrdersList((prev) => [mockOrder, ...prev]);
     showFeedback(`Simulated new luxury order ${mockOrder.id} successfully!`);
@@ -1155,10 +1177,10 @@ function AdminHubPage() {
                               <div style={{ fontSize: "11px", color: "var(--muted)" }}>{ord.date}</div>
                             </td>
                             <td>
-                              <div>{ord.customerName}</div>
-                              <div style={{ fontSize: "11px", color: "var(--muted)" }}>{ord.phone}</div>
+                              <div>{ord.customerName || (ord as any).customer || "Valued Patron"}</div>
+                              <div style={{ fontSize: "11px", color: "var(--muted)" }}>{ord.phone || "Storefront contact"}</div>
                             </td>
-                            <td>{ord.items?.length || 1} items</td>
+                            <td>{safeItems(ord.items).length || 1} items</td>
                             <td>
                               <b>{money(ord.total)}</b>
                             </td>
@@ -1549,13 +1571,13 @@ function AdminHubPage() {
                           <div style={{ fontSize: "11px", color: "var(--muted)" }}>{ord.date}</div>
                         </td>
                         <td>
-                          <div>{ord.customerName}</div>
+                          <div>{ord.customerName || (ord as any).customer || "Valued Patron"}</div>
                           <div style={{ fontSize: "11px", color: "var(--muted)" }}>
                             {ord.phone || "Storefront patron"}{ord.address?.city ? ` · ${ord.address.city}` : ""}
                           </div>
                         </td>
                         <td>
-                          {ord.items?.map((it, idx) => (
+                          {safeItems(ord.items).map((it, idx) => (
                             <div key={idx} style={{ fontSize: "12px" }}>
                               {it.quantity}x {it.name} ({it.size || "30 ml"})
                             </div>
@@ -1865,8 +1887,8 @@ function AdminHubPage() {
                           <div style={{ fontSize: "11px", color: "var(--muted)" }}>{ord.date}</div>
                         </td>
                         <td>
-                          <div>{ord.customerName}</div>
-                          <div style={{ fontSize: "11px", color: "var(--muted)" }}>{ord.phone}</div>
+                          <div>{ord.customerName || (ord as any).customer || "Valued Patron"}</div>
+                          <div style={{ fontSize: "11px", color: "var(--muted)" }}>{ord.phone || "Storefront contact"}</div>
                         </td>
                         <td>
                           <span style={{ fontFamily: "monospace", fontSize: "12px" }}>
@@ -1989,7 +2011,7 @@ function AdminHubPage() {
                           <div style={{ fontSize: "11px", color: "var(--muted)" }}>{o.date}</div>
                         </td>
                         <td>
-                          <div>{o.customerName}</div>
+                          <div>{o.customerName || (o as any).customer || "Valued Patron"}</div>
                           <div style={{ fontSize: "11px", color: "var(--muted)" }}>
                             {typeof o.address === "string"
                               ? o.address
@@ -2446,16 +2468,15 @@ function AdminHubPage() {
                     >
                       {selectedNotifOrder ? (
                         `✨ *ARTISAN SCENT HAUTE PARFUMERIE* ✨
-Dear ${ordersList.find((o) => o.id === selectedNotifOrder)?.customerName || "Valued Patron"},
+Dear ${ordersList.find((o) => o.id === selectedNotifOrder)?.customerName || (ordersList.find((o) => o.id === selectedNotifOrder) as any)?.customer || "Valued Patron"},
 
 Your order *#${selectedNotifOrder}* for ${money(
                           ordersList.find((o) => o.id === selectedNotifOrder)?.total || 0
                         )} is confirmed with our botanical atelier!
 
 📦 *Items:*
-${ordersList
-  .find((o) => o.id === selectedNotifOrder)
-  ?.items?.map((it) => `• ${it.quantity}x ${it.name} (${it.size || "30 ml"})`)
+${safeItems(ordersList.find((o) => o.id === selectedNotifOrder)?.items)
+  .map((it) => `• ${it.quantity}x ${it.name} (${it.size || "30 ml"})`)
   .join("\n") || "• Line items detailed on invoice"}
 
 🏦 *Settlement:* Bank of Baroda Current Account / Verified UPI
@@ -2782,7 +2803,7 @@ Thank you for choosing Artisan Scent Haute Parfumerie.`
                         exportCSV(
                           "artisanscent_orders_report",
                           ["OrderID", "Customer", "Total", "Status", "Date"],
-                          ordersList.map((o) => [o.id, o.customerName || "", o.total, o.status, o.date])
+                          ordersList.map((o) => [o.id, o.customerName || (o as any).customer || "Valued Patron", o.total, o.status, o.date])
                         )
                       }
                     >
@@ -2810,7 +2831,7 @@ Thank you for choosing Artisan Scent Haute Parfumerie.`
                         exportCSV(
                           "artisanscent_shipping_log",
                           ["OrderID", "Customer", "Courier", "AWB", "Status"],
-                          ordersList.map((o) => [o.id, o.customerName || "", o.courier || "BlueDart", o.awb || "", o.status])
+                          ordersList.map((o) => [o.id, o.customerName || (o as any).customer || "Valued Patron", o.courier || "BlueDart", o.awb || "", o.status])
                         )
                       }
                     >
@@ -3193,12 +3214,12 @@ Thank you for choosing Artisan Scent Haute Parfumerie.`
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "14px", marginBottom: "18px" }}>
                 <div style={{ background: "var(--surface-alt)", padding: "12px", borderRadius: "8px", border: "1px solid var(--line)" }}>
                   <div style={{ fontSize: "11px", color: "var(--muted)", textTransform: "uppercase" }}>Patron</div>
-                  <div style={{ fontWeight: 700, fontSize: "14px" }}>{selectedOrder.customerName}</div>
-                  <div style={{ fontSize: "12px", color: "var(--muted)" }}>{selectedOrder.phone} · {selectedOrder.email}</div>
+                  <div style={{ fontWeight: 700, fontSize: "14px" }}>{selectedOrder.customerName || (selectedOrder as any).customer || "Valued Patron"}</div>
+                  <div style={{ fontSize: "12px", color: "var(--muted)" }}>{selectedOrder.phone || "Storefront contact"} · {selectedOrder.email || "patron@artisanscent.com"}</div>
                 </div>
                 <div style={{ background: "var(--surface-alt)", padding: "12px", borderRadius: "8px", border: "1px solid var(--line)" }}>
                   <div style={{ fontSize: "11px", color: "var(--muted)", textTransform: "uppercase" }}>Destination Address</div>
-                  <div style={{ fontSize: "12px" }}>{selectedOrder.shippingAddress || `${selectedOrder.address?.line1}, ${selectedOrder.address?.city}`}</div>
+                  <div style={{ fontSize: "12px" }}>{selectedOrder.shippingAddress || (typeof selectedOrder.address === "string" ? selectedOrder.address : `${selectedOrder.address?.line1 || "Direct Delivery"}, ${selectedOrder.address?.city || ""}`)}</div>
                 </div>
                 <div style={{ background: "var(--surface-alt)", padding: "12px", borderRadius: "8px", border: "1px solid var(--line)" }}>
                   <div style={{ fontSize: "11px", color: "var(--muted)", textTransform: "uppercase" }}>Payment Mode</div>
@@ -3220,7 +3241,7 @@ Thank you for choosing Artisan Scent Haute Parfumerie.`
                     </tr>
                   </thead>
                   <tbody>
-                    {selectedOrder.items?.map((it, idx) => (
+                    {safeItems(selectedOrder.items).map((it, idx) => (
                       <tr key={idx}>
                         <td><b>{it.name}</b></td>
                         <td>{it.size || "30 ml"}</td>
@@ -3272,8 +3293,8 @@ Thank you for choosing Artisan Scent Haute Parfumerie.`
               </div>
 
               <div style={{ marginTop: "16px", marginBottom: "16px", fontSize: "12px" }}>
-                <b>Billed To:</b> {selectedOrder.customerName} | Phone: {selectedOrder.phone}<br />
-                <b>Address:</b> {selectedOrder.shippingAddress || selectedOrder.address?.line1}
+                <b>Billed To:</b> {selectedOrder.customerName || (selectedOrder as any).customer || "Valued Patron"} | Phone: {selectedOrder.phone || "Storefront contact"}<br />
+                <b>Address:</b> {selectedOrder.shippingAddress || (typeof selectedOrder.address === "string" ? selectedOrder.address : `${selectedOrder.address?.line1 || "Direct Delivery"}, ${selectedOrder.address?.city || ""}`)}
               </div>
 
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px", marginTop: "12px" }}>
@@ -3286,7 +3307,7 @@ Thank you for choosing Artisan Scent Haute Parfumerie.`
                   </tr>
                 </thead>
                 <tbody>
-                  {selectedOrder.items?.map((it, idx) => (
+                  {safeItems(selectedOrder.items).map((it, idx) => (
                     <tr key={idx} style={{ borderBottom: "1px solid #f0f0f0" }}>
                       <td style={{ padding: "8px 0" }}>{it.name} ({it.size || "30 ml"})</td>
                       <td style={{ padding: "8px 0" }}>{it.quantity}</td>
@@ -3334,9 +3355,9 @@ Thank you for choosing Artisan Scent Haute Parfumerie.`
               </div>
               <div style={{ marginTop: "12px", fontSize: "12px" }}>
                 <div style={{ fontSize: "10px", fontWeight: 700, textTransform: "uppercase" }}>Deliver To:</div>
-                <div style={{ fontSize: "14px", fontWeight: 700 }}>{selectedOrder.customerName}</div>
-                <div>{selectedOrder.shippingAddress || selectedOrder.address?.line1}</div>
-                <div>Phone: <b>{selectedOrder.phone}</b></div>
+                <div style={{ fontSize: "14px", fontWeight: 700 }}>{selectedOrder.customerName || (selectedOrder as any).customer || "Valued Patron"}</div>
+                <div>{selectedOrder.shippingAddress || (typeof selectedOrder.address === "string" ? selectedOrder.address : selectedOrder.address?.line1 || "Direct Atelier Delivery")}</div>
+                <div>Phone: <b>{selectedOrder.phone || "Storefront contact"}</b></div>
               </div>
               <div style={{ marginTop: "14px", borderTop: "1px solid #000", paddingTop: "8px", fontSize: "11px", display: "flex", justifyContent: "space-between" }}>
                 <span>Ref: #{selectedOrder.id}</span>
@@ -3375,7 +3396,7 @@ Thank you for choosing Artisan Scent Haute Parfumerie.`
               <div style={{ marginTop: "10px", fontSize: "12px" }}>
                 <b>Pick Items for Dispatch:</b>
                 <ul style={{ margin: "8px 0 0 16px", padding: 0 }}>
-                  {selectedOrder.items?.map((it, idx) => (
+                  {safeItems(selectedOrder.items).map((it, idx) => (
                     <li key={idx} style={{ marginBottom: "4px" }}>
                       [ ] <b>{it.quantity}x</b> {it.name} ({it.size || "30 ml"})
                     </li>
