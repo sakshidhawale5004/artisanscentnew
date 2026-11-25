@@ -64,7 +64,7 @@ function PerfumesPage() {
           {/* Background Image */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <img
-              src="/assets/shopimages/perfume sectionimage.png"
+              src="/herosectionimageofperfume.png"
               alt="Luxury Perfumes Background"
               className="w-full h-full object-cover scale-105"
             />
@@ -123,7 +123,7 @@ function PerfumesPage() {
             {/* Image Left */}
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <img
-                src="/assets/shopimages/perfume sectionimage.png"
+                src="/herosectionimageofperfume.png"
                 alt="Artisan Perfumes Collection"
                 className="w-full h-[420px] object-cover"
               />

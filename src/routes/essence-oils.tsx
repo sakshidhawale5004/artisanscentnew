@@ -64,7 +64,7 @@ function EssenceOilsPage() {
           {/* Background Image */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=2400&q=85"
+              src="/OILOILHEROSECTIONIMAGE.png"
               alt="Essential Oils Background"
               className="w-full h-full object-cover scale-105"
             />
@@ -124,7 +124,7 @@ function EssenceOilsPage() {
             {/* Image Left */}
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <img
-                src="/assets/shopimages/essenceoil section image.png"
+                src="/OILOILHEROSECTIONIMAGE.png"
                 alt="Artisan Essence Oils Collection"
                 className="w-full h-[420px] object-cover"
               />
