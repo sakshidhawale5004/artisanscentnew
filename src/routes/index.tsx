@@ -142,7 +142,7 @@ function Index() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#faf9f5]/80 via-transparent to-black/5 pointer-events-none" />
           </div>
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:pl-6 lg:pr-10 xl:pl-8 py-16 sm:py-20 lg:py-28">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 xl:px-20 py-16 sm:py-24 lg:py-32">
             <div className="max-w-2xl lg:max-w-3xl flex flex-col items-start text-left">
               {/* Luxury Haute Parfumerie Pill Badge */}
               <div className="reveal-fade inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1b5e3f]/25 backdrop-blur-sm text-[11px] uppercase tracking-[0.22em] text-[#1b5e3f] font-semibold mb-5 shadow-xs">
@@ -159,81 +159,17 @@ function Index() {
                 </em>
               </h1>
 
-              {/* Brand Philosophy Editorial Sub-copy */}
-              <p className="reveal-on-scroll reveal-delay-150 mt-5 text-sm sm:text-base lg:text-lg text-[#264534] font-light leading-relaxed max-w-xl drop-shadow-[0_1px_4px_rgba(255,255,255,0.9)]">
-                Masterfully crafted with rare botanical extracts and high-concentration essences in unison with KEOMC laboratories. Formulations designed to linger with distinction.
-              </p>
-
-              {/* Action Buttons: Primary Collection + Secondary Bespoke Gifting */}
-              <div className="reveal-on-scroll reveal-delay-200 mt-8 flex flex-wrap items-center gap-4">
-                <Button
-                  asChild
-                  className="h-12 sm:h-13 px-8 sm:px-9 bg-[#1b5e3f] hover:bg-[#14472f] text-white border border-[#2d8659]/80 rounded-full font-bold text-xs uppercase tracking-widest shadow-xl transition-all hover:scale-105 hover:shadow-[#1b5e3f]/30 cursor-pointer"
-                >
-                  <a href="/perfumes" className="flex items-center gap-2.5">
-                    <span>Explore Collection</span>
-                    <ArrowRight size={16} className="text-[#86efac]" />
-                  </a>
-                </Button>
-
+              {/* Premium Luxury Call-to-Action Button */}
+              <div className="reveal-on-scroll reveal-delay-200 mt-8 sm:mt-10 flex items-center">
                 <a
-                  href="/gifting"
-                  className="h-12 sm:h-13 px-7 sm:px-8 rounded-full border border-[#1b5e3f]/35 hover:border-[#1b5e3f] bg-white/80 hover:bg-white text-[#1b5e3f] text-xs font-bold uppercase tracking-widest backdrop-blur-sm transition-all hover:shadow-md flex items-center gap-2 cursor-pointer"
+                  href="/perfumes"
+                  className="group relative inline-flex items-center gap-3.5 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#072416] via-[#104a2d] to-[#072416] text-[#f7f5f0] text-xs font-semibold uppercase tracking-[0.22em] border border-[#d4af37]/70 shadow-[0_8px_24px_rgba(7,36,22,0.35)] hover:shadow-[0_12px_32px_rgba(27,94,63,0.4),0_0_20px_rgba(212,175,55,0.3)] hover:-translate-y-0.5 hover:border-[#d4af37] transition-all duration-300 cursor-pointer"
                 >
-                  <Gift size={15} className="text-[#d4af37]" />
-                  <span>Bespoke Gifting</span>
+                  <span>Explore Collection</span>
+                  <span className="w-6 h-6 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/60 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:bg-[#d4af37]">
+                    <ArrowRight size={13} className="text-[#d4af37] group-hover:text-[#072416] transition-colors" />
+                  </span>
                 </a>
-              </div>
-
-              {/* Integrated Trust & Assurance Pillars */}
-              <div className="reveal-on-scroll reveal-delay-250 mt-12 sm:mt-16 pt-7 sm:pt-8 border-t border-[#1b5e3f]/20 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-left w-full max-w-3xl">
-                <div className="flex items-center gap-2.5 sm:gap-3">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-[#1b5e3f]/25 text-[#1b5e3f] flex items-center justify-center shrink-0 shadow-xs">
-                    <ShieldCheck size={18} />
-                  </div>
-                  <div>
-                    <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
-                      Artisanal Purity
-                    </div>
-                    <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-medium">100% Rare Extracts</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2.5 sm:gap-3">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-[#1b5e3f]/25 text-[#1b5e3f] flex items-center justify-center shrink-0 shadow-xs">
-                    <Sparkles size={18} />
-                  </div>
-                  <div>
-                    <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
-                      Haute Sillage
-                    </div>
-                    <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-medium">Long-Lasting Extrait</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2.5 sm:gap-3">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-[#1b5e3f]/25 text-[#1b5e3f] flex items-center justify-center shrink-0 shadow-xs">
-                    <Truck size={18} />
-                  </div>
-                  <div>
-                    <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
-                      Pan-India Dispatch
-                    </div>
-                    <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-medium">Insured Delivery</div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2.5 sm:gap-3">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-[#1b5e3f]/25 text-[#1b5e3f] flex items-center justify-center shrink-0 shadow-xs">
-                    <Lock size={18} />
-                  </div>
-                  <div>
-                    <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
-                      Curated Sampling
-                    </div>
-                    <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-medium">Free Tester Included</div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
