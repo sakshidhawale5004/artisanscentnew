@@ -124,7 +124,7 @@ function Index() {
       />
       <main>
         {/* Luxury Hero Section */}
-        <section className="relative overflow-hidden text-[#0b3320] bg-[#faf9f5] border-b border-[#1b5e3f]/20 min-h-[600px] sm:min-h-[660px] lg:min-h-[740px] flex items-center">
+        <section className="relative overflow-hidden text-[#0b3320] bg-[#faf9f5] border-b border-[#1b5e3f]/20">
           {/* Video Background */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <video
@@ -135,50 +135,45 @@ function Index() {
               muted
               playsInline
               preload="auto"
-              className="w-full h-full object-cover object-[72%_center] sm:object-center"
+              className="w-full h-full object-cover scale-105"
             />
             {/* Soft Luminous Light Overlay: sheer gradient so background video is clearly visible while text has optimal dark-green contrast */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#faf9f5]/95 via-[#faf9f5]/70 sm:via-[#faf9f5]/40 to-transparent pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#faf9f5]/80 via-transparent to-black/5 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/65 via-white/20 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/45 via-transparent to-black/5 pointer-events-none" />
           </div>
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto pl-8 sm:pl-14 md:pl-20 lg:pl-24 xl:pl-32 pr-6 sm:pr-10 py-16 sm:py-24 lg:py-32">
-            <div className="max-w-2xl lg:max-w-3xl flex flex-col items-start text-left">
-              {/* Luxury Haute Parfumerie Pill Badge */}
-              <div className="reveal-fade inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/90 border border-[#1b5e3f]/25 backdrop-blur-md text-[11px] sm:text-xs uppercase tracking-[0.22em] text-[#1b5e3f] font-bold mb-6 shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-[#d4af37]" />
+          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-20 pb-16 lg:pt-28 lg:pb-24">
+            <div className="max-w-4xl flex flex-col items-start">
+              <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-bold mb-4 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
+                <span className="w-6 h-[1.5px] bg-[#d4af37]" />
                 <span>LUXURY PERFUMES &amp; BOTANICAL ESSENCES</span>
               </div>
 
-              {/* Headline */}
-              <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-normal leading-[1.06] tracking-tight text-[#072416] max-w-3xl drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
+              <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-6xl md:text-7xl font-normal leading-[1.08] tracking-tight text-[#072416] max-w-3xl drop-shadow-[0_2px_10px_rgba(255,255,255,0.95)]">
                 Timeless Elegance in
                 <br />
-                <em className="text-[#135d37] italic font-serif drop-shadow-[0_2px_14px_rgba(19,93,55,0.18)]">
+                <em className="text-[#135d37] italic font-serif drop-shadow-[0_2px_12px_rgba(19,93,55,0.15)]">
                   every Drop
                 </em>
               </h1>
 
-              {/* Premium Luxury Call-to-Action Button with Generous Padding & Pure White Text */}
-              <div className="reveal-on-scroll reveal-delay-200 mt-10 sm:mt-12 flex items-center">
-                <a
-                  href="/perfumes"
-                  className="group relative inline-flex items-center gap-4 px-10 sm:px-12 py-4 sm:py-5 rounded-full bg-gradient-to-r from-[#072416] via-[#104a2d] to-[#072416] text-white border border-[#d4af37]/80 shadow-[0_10px_28px_rgba(7,36,22,0.4)] hover:shadow-[0_14px_36px_rgba(27,94,63,0.45),0_0_22px_rgba(212,175,55,0.35)] hover:-translate-y-0.5 hover:border-[#d4af37] transition-all duration-300 cursor-pointer"
+              <div className="reveal-on-scroll reveal-delay-200 mt-8 flex flex-wrap items-center gap-4">
+                <Button
+                  asChild
+                  className="h-13 px-9 bg-[#1b5e3f] hover:bg-[#14472f] text-white border border-[#2d8659]/80 rounded-full font-bold text-xs uppercase tracking-widest shadow-xl transition-all hover:scale-105 hover:shadow-[#1b5e3f]/30 cursor-pointer"
                 >
-                  <span
-                    className="text-white font-bold text-xs sm:text-sm uppercase tracking-[0.22em] drop-shadow-sm"
-                    style={{ color: "#ffffff" }}
-                  >
-                    Explore Collection
-                  </span>
-                  <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#d4af37] text-[#072416] flex items-center justify-center shrink-0 shadow-md transition-transform duration-300 group-hover:translate-x-1.5">
-                    <ArrowRight size={14} strokeWidth={2.5} className="text-[#072416]" />
-                  </span>
-                </a>
+                  <a href="/perfumes" className="flex items-center gap-2.5 text-white">
+                    <span className="text-white">Explore Collection</span>
+                    <ArrowRight size={16} className="text-[#86efac]" />
+                  </a>
+                </Button>
               </div>
             </div>
           </div>
         </section>
+
+        {/* Value Assurance Trust Strip (Below Hero Section) */}
+        <ValueAssuranceStrip />
 
         <section id="collection" className="section">
           <div className="section-heading reveal-on-scroll">

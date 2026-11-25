@@ -209,9 +209,41 @@ function AdminHubPage() {
     setTimeout(() => setFeedbackMsg(null), 3500);
   };
 
-  // Check login & theme on mount
+  // Check login & theme on mount, and isolate CRM styles
   useEffect(() => {
     setMounted(true);
+
+    // Dynamically inject CRM styles & fonts exclusively for Admin Portal
+    const crmLinkId = "artisan-crm-css";
+    const fontLinkId = "artisan-crm-fonts";
+    const iconLinkId = "artisan-crm-icons";
+
+    if (!document.getElementById(crmLinkId)) {
+      const crmLink = document.createElement("link");
+      crmLink.id = crmLinkId;
+      crmLink.rel = "stylesheet";
+      crmLink.href = "/assets/crm.css";
+      document.head.appendChild(crmLink);
+    }
+
+    if (!document.getElementById(fontLinkId)) {
+      const fontLink = document.createElement("link");
+      fontLink.id = fontLinkId;
+      fontLink.rel = "stylesheet";
+      fontLink.href =
+        "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Jost:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap";
+      document.head.appendChild(fontLink);
+    }
+
+    if (!document.getElementById(iconLinkId)) {
+      const iconLink = document.createElement("link");
+      iconLink.id = iconLinkId;
+      iconLink.rel = "stylesheet";
+      iconLink.href =
+        "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css";
+      document.head.appendChild(iconLink);
+    }
+
     const params = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
     const forceLogin = params ? params.has("login") || params.has("logout") || params.has("auth") : false;
     if (forceLogin) {
@@ -228,6 +260,16 @@ function AdminHubPage() {
     const savedTheme = (localStorage.getItem("artisanscent_theme") as "light" | "dark") || "light";
     setTheme(savedTheme);
     document.documentElement.setAttribute("data-theme", savedTheme);
+
+    return () => {
+      document.getElementById(crmLinkId)?.remove();
+      document.getElementById(fontLinkId)?.remove();
+      document.getElementById(iconLinkId)?.remove();
+      document.documentElement.removeAttribute("data-theme");
+    };
+  }, []);
+
+  useEffect(() => {
 
     // Load central products catalog
     const loaded = getStoredProducts();
