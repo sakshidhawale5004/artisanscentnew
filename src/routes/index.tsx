@@ -124,7 +124,7 @@ function Index() {
       />
       <main>
         {/* Luxury Hero Section */}
-        <section className="relative overflow-hidden text-[#0b3320] bg-[#faf9f5] border-b border-[#1b5e3f]/20">
+        <section className="relative overflow-hidden text-[#0b3320] bg-[#faf9f5] border-b border-[#1b5e3f]/20 min-h-[560px] sm:min-h-[620px] lg:min-h-[700px] flex items-center">
           {/* Video Background */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <video
@@ -135,14 +135,14 @@ function Index() {
               muted
               playsInline
               preload="auto"
-              className="w-full h-full object-cover scale-105"
+              className="w-full h-full object-cover object-center"
             />
             {/* Soft Luminous Light Overlay: sheer gradient so background video is clearly visible while text has optimal dark-green contrast */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/65 via-white/20 to-transparent pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-white/45 via-transparent to-black/5 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/75 via-white/35 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-black/5 pointer-events-none" />
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-20 pb-16 lg:pt-28 lg:pb-24">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-24 lg:py-32">
             <div className="max-w-4xl flex flex-col items-start">
               <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-bold mb-4 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
                 <span className="w-6 h-[1.5px] bg-[#d4af37]" />
@@ -160,7 +160,7 @@ function Index() {
               <div className="reveal-on-scroll reveal-delay-200 mt-8 flex flex-wrap items-center gap-4">
                 <Button
                   asChild
-                  className="h-13 px-9 bg-[#1b5e3f] hover:bg-[#14472f] text-white border border-[#2d8659]/80 rounded-full font-bold text-xs uppercase tracking-widest shadow-xl transition-all hover:scale-105 hover:shadow-[#1b5e3f]/30 cursor-pointer"
+                  className="h-12 sm:h-13 px-8 sm:px-9 bg-[#1b5e3f] hover:bg-[#14472f] text-white border border-[#2d8659]/80 rounded-full font-bold text-xs uppercase tracking-widest shadow-xl transition-all hover:scale-105 hover:shadow-[#1b5e3f]/30 cursor-pointer"
                 >
                   <a href="/perfumes" className="flex items-center gap-2.5">
                     <span>Explore Collection</span>
