@@ -142,11 +142,11 @@ function Index() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#faf9f5]/80 via-transparent to-black/5 pointer-events-none" />
           </div>
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 xl:px-20 py-16 sm:py-24 lg:py-32">
+          <div className="relative z-10 w-full max-w-7xl mx-auto pl-8 sm:pl-14 md:pl-20 lg:pl-24 xl:pl-32 pr-6 sm:pr-10 py-16 sm:py-24 lg:py-32">
             <div className="max-w-2xl lg:max-w-3xl flex flex-col items-start text-left">
               {/* Luxury Haute Parfumerie Pill Badge */}
-              <div className="reveal-fade inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1b5e3f]/25 backdrop-blur-sm text-[11px] uppercase tracking-[0.22em] text-[#1b5e3f] font-semibold mb-5 shadow-xs">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37]" />
+              <div className="reveal-fade inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/90 border border-[#1b5e3f]/25 backdrop-blur-md text-[11px] sm:text-xs uppercase tracking-[0.22em] text-[#1b5e3f] font-bold mb-6 shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-[#d4af37]" />
                 <span>LUXURY PERFUMES &amp; BOTANICAL ESSENCES</span>
               </div>
 
@@ -159,15 +159,20 @@ function Index() {
                 </em>
               </h1>
 
-              {/* Premium Luxury Call-to-Action Button */}
-              <div className="reveal-on-scroll reveal-delay-200 mt-8 sm:mt-10 flex items-center">
+              {/* Premium Luxury Call-to-Action Button with Generous Padding & Pure White Text */}
+              <div className="reveal-on-scroll reveal-delay-200 mt-10 sm:mt-12 flex items-center">
                 <a
                   href="/perfumes"
-                  className="group relative inline-flex items-center gap-3.5 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#072416] via-[#104a2d] to-[#072416] text-[#f7f5f0] text-xs font-semibold uppercase tracking-[0.22em] border border-[#d4af37]/70 shadow-[0_8px_24px_rgba(7,36,22,0.35)] hover:shadow-[0_12px_32px_rgba(27,94,63,0.4),0_0_20px_rgba(212,175,55,0.3)] hover:-translate-y-0.5 hover:border-[#d4af37] transition-all duration-300 cursor-pointer"
+                  className="group relative inline-flex items-center gap-4 px-10 sm:px-12 py-4 sm:py-5 rounded-full bg-gradient-to-r from-[#072416] via-[#104a2d] to-[#072416] text-white border border-[#d4af37]/80 shadow-[0_10px_28px_rgba(7,36,22,0.4)] hover:shadow-[0_14px_36px_rgba(27,94,63,0.45),0_0_22px_rgba(212,175,55,0.35)] hover:-translate-y-0.5 hover:border-[#d4af37] transition-all duration-300 cursor-pointer"
                 >
-                  <span>Explore Collection</span>
-                  <span className="w-6 h-6 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/60 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:bg-[#d4af37]">
-                    <ArrowRight size={13} className="text-[#d4af37] group-hover:text-[#072416] transition-colors" />
+                  <span
+                    className="text-white font-bold text-xs sm:text-sm uppercase tracking-[0.22em] drop-shadow-sm"
+                    style={{ color: "#ffffff" }}
+                  >
+                    Explore Collection
+                  </span>
+                  <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#d4af37] text-[#072416] flex items-center justify-center shrink-0 shadow-md transition-transform duration-300 group-hover:translate-x-1.5">
+                    <ArrowRight size={14} strokeWidth={2.5} className="text-[#072416]" />
                   </span>
                 </a>
               </div>
