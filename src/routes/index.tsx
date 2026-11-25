@@ -142,8 +142,8 @@ function Index() {
             <div className="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-black/5 pointer-events-none" />
           </div>
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-24 lg:py-32">
-            <div className="max-w-4xl flex flex-col items-start">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:pl-6 lg:pr-10 xl:pl-8 py-20 sm:py-24 lg:py-32">
+            <div className="max-w-2xl lg:max-w-3xl flex flex-col items-start text-left">
               <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-bold mb-4 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
                 <span className="w-6 h-[1.5px] bg-[#d4af37]" />
                 <span>LUXURY PERFUMES &amp; BOTANICAL ESSENCES</span>
