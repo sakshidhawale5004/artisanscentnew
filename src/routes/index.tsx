@@ -124,7 +124,7 @@ function Index() {
       />
       <main>
         {/* Luxury Hero Section */}
-        <section className="relative overflow-hidden text-[#0b3320] bg-[#faf9f5] border-b border-[#1b5e3f]/20 min-h-[560px] sm:min-h-[620px] lg:min-h-[700px] flex items-center">
+        <section className="relative overflow-hidden text-[#0b3320] bg-[#faf9f5] border-b border-[#1b5e3f]/20 min-h-[600px] sm:min-h-[660px] lg:min-h-[740px] flex items-center">
           {/* Video Background */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <video
@@ -135,28 +135,36 @@ function Index() {
               muted
               playsInline
               preload="auto"
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover object-[72%_center] sm:object-center"
             />
             {/* Soft Luminous Light Overlay: sheer gradient so background video is clearly visible while text has optimal dark-green contrast */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/75 via-white/35 to-transparent pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-black/5 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#faf9f5]/95 via-[#faf9f5]/70 sm:via-[#faf9f5]/40 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#faf9f5]/80 via-transparent to-black/5 pointer-events-none" />
           </div>
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:pl-6 lg:pr-10 xl:pl-8 py-20 sm:py-24 lg:py-32">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:pl-6 lg:pr-10 xl:pl-8 py-16 sm:py-20 lg:py-28">
             <div className="max-w-2xl lg:max-w-3xl flex flex-col items-start text-left">
-              <div className="reveal-fade inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#1b5e3f] font-bold mb-4 drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
-                <span className="w-6 h-[1.5px] bg-[#d4af37]" />
+              {/* Luxury Haute Parfumerie Pill Badge */}
+              <div className="reveal-fade inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#1b5e3f]/25 backdrop-blur-sm text-[11px] uppercase tracking-[0.22em] text-[#1b5e3f] font-semibold mb-5 shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37]" />
                 <span>LUXURY PERFUMES &amp; BOTANICAL ESSENCES</span>
               </div>
 
-              <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-6xl md:text-7xl font-normal leading-[1.08] tracking-tight text-[#072416] max-w-3xl drop-shadow-[0_2px_10px_rgba(255,255,255,0.95)]">
+              {/* Headline */}
+              <h1 className="reveal-on-scroll reveal-delay-100 font-display text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-normal leading-[1.06] tracking-tight text-[#072416] max-w-3xl drop-shadow-[0_2px_12px_rgba(255,255,255,0.95)]">
                 Timeless Elegance in
                 <br />
-                <em className="text-[#135d37] italic font-serif drop-shadow-[0_2px_12px_rgba(19,93,55,0.15)]">
+                <em className="text-[#135d37] italic font-serif drop-shadow-[0_2px_14px_rgba(19,93,55,0.18)]">
                   every Drop
                 </em>
               </h1>
 
+              {/* Brand Philosophy Editorial Sub-copy */}
+              <p className="reveal-on-scroll reveal-delay-150 mt-5 text-sm sm:text-base lg:text-lg text-[#264534] font-light leading-relaxed max-w-xl drop-shadow-[0_1px_4px_rgba(255,255,255,0.9)]">
+                Masterfully crafted with rare botanical extracts and high-concentration essences in unison with KEOMC laboratories. Formulations designed to linger with distinction.
+              </p>
+
+              {/* Action Buttons: Primary Collection + Secondary Bespoke Gifting */}
               <div className="reveal-on-scroll reveal-delay-200 mt-8 flex flex-wrap items-center gap-4">
                 <Button
                   asChild
@@ -167,13 +175,69 @@ function Index() {
                     <ArrowRight size={16} className="text-[#86efac]" />
                   </a>
                 </Button>
+
+                <a
+                  href="/gifting"
+                  className="h-12 sm:h-13 px-7 sm:px-8 rounded-full border border-[#1b5e3f]/35 hover:border-[#1b5e3f] bg-white/80 hover:bg-white text-[#1b5e3f] text-xs font-bold uppercase tracking-widest backdrop-blur-sm transition-all hover:shadow-md flex items-center gap-2 cursor-pointer"
+                >
+                  <Gift size={15} className="text-[#d4af37]" />
+                  <span>Bespoke Gifting</span>
+                </a>
+              </div>
+
+              {/* Integrated Trust & Assurance Pillars */}
+              <div className="reveal-on-scroll reveal-delay-250 mt-12 sm:mt-16 pt-7 sm:pt-8 border-t border-[#1b5e3f]/20 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-left w-full max-w-3xl">
+                <div className="flex items-center gap-2.5 sm:gap-3">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-[#1b5e3f]/25 text-[#1b5e3f] flex items-center justify-center shrink-0 shadow-xs">
+                    <ShieldCheck size={18} />
+                  </div>
+                  <div>
+                    <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
+                      Artisanal Purity
+                    </div>
+                    <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-medium">100% Rare Extracts</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5 sm:gap-3">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-[#1b5e3f]/25 text-[#1b5e3f] flex items-center justify-center shrink-0 shadow-xs">
+                    <Sparkles size={18} />
+                  </div>
+                  <div>
+                    <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
+                      Haute Sillage
+                    </div>
+                    <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-medium">Long-Lasting Extrait</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5 sm:gap-3">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-[#1b5e3f]/25 text-[#1b5e3f] flex items-center justify-center shrink-0 shadow-xs">
+                    <Truck size={18} />
+                  </div>
+                  <div>
+                    <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
+                      Pan-India Dispatch
+                    </div>
+                    <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-medium">Insured Delivery</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5 sm:gap-3">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white border border-[#1b5e3f]/25 text-[#1b5e3f] flex items-center justify-center shrink-0 shadow-xs">
+                    <Lock size={18} />
+                  </div>
+                  <div>
+                    <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#072416] leading-tight">
+                      Curated Sampling
+                    </div>
+                    <div className="text-[10px] sm:text-[11px] text-[#1b5e3f] mt-0.5 leading-snug font-medium">Free Tester Included</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
-
-        {/* Value Assurance Trust Strip (Below Hero Section) */}
-        <ValueAssuranceStrip />
 
         <section id="collection" className="section">
           <div className="section-heading reveal-on-scroll">
